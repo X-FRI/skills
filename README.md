@@ -15,6 +15,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 - `excalidraw-diagram-generator/`: generates Excalidraw diagrams from natural language prompts.
 - `obsidian-daily-note-todo/`: finds an Obsidian vault and creates a todo in today's daily note.
 - `codex-daily-summary/`: builds an evidence-based daily work summary from Codex threads and inserts it below the todo section in today's Obsidian daily note.
+- `analyzing-codex-token-usage/`: builds local Codex token usage reports with exact period accounting from SQLite metadata and rollout token events.
 - `gh-cli/`: GitHub CLI operational reference skill.
 - `ui-ux-pro-max/`: UI/UX-focused skill with data and scripts.
 
@@ -66,6 +67,7 @@ Notes:
 - `excalidraw-diagram-generator`: turns natural language requests into Excalidraw-compatible diagrams such as flowcharts, architecture diagrams, sequence diagrams, and ER diagrams.
 - `obsidian-daily-note-todo`: locates an Obsidian vault, resolves today's daily note from vault settings, creates the note if missing, and appends a Tasks-compatible todo.
 - `codex-daily-summary`: gathers Codex threads created during the local day, extracts evidence from local thread records, detects the dominant language, and writes a timeline-style daily summary into today's Obsidian daily note.
+- `analyzing-codex-token-usage`: builds daily, weekly, and monthly Codex token usage reports from local state DB metadata plus rollout `token_count` deltas, with timezone-explicit windows and spike analysis.
 
 ## Commit
 
@@ -152,6 +154,28 @@ Related skills:
 
 - `obsidian-daily-note-todo`: resolves the vault and daily note path that this skill reuses
 - `find-docs` and `context7-cli`: useful when the daily summary itself depends on current documentation work
+
+## Analyzing Codex Token Usage
+
+`analyzing-codex-token-usage` is designed for requests like "show today's Codex token usage", "build a weekly token report", or "which threads consumed the most tokens this month".
+
+What it does:
+
+- Uses local Codex data only.
+- Discovers the current `state_*.sqlite` dynamically instead of hardcoding a DB filename.
+- Treats `threads.tokens_used` as a current per-thread snapshot, not as the exact answer for day/week/month usage.
+- Computes exact period totals by diffing adjacent rollout `token_count` cumulative totals.
+- Produces readable terminal reports with overview, trend buckets, top threads, and spike moments.
+
+Why it exists:
+
+- It prevents the common mistake of summing snapshot fields or last-step token values as if they were exact period usage.
+- It makes report windows explicit by timezone and absolute date bounds.
+- It helps distinguish "total tokens a thread has used so far" from "tokens consumed during a specific reporting window".
+
+Related skills:
+
+- `codex-daily-summary`: use this instead when the user wants a semantic work summary rather than token accounting
 
 ## Custom Skill Conventions
 

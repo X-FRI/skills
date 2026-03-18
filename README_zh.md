@@ -15,6 +15,7 @@
 - `excalidraw-diagram-generator/`：根据自然语言描述生成 Excalidraw 图表。
 - `obsidian-daily-note-todo/`：查找 Obsidian vault，并在当天 daily note 中创建待办。
 - `codex-daily-summary/`：从当天创建的 Codex thread 中提取证据，生成时间线式日报，并写入当天 Obsidian daily note 的待办区块下方。
+- `analyzing-codex-token-usage/`：基于本地 SQLite 元数据和 rollout token 事件生成 Codex token 用量报告，并保证统计口径准确。
 - `gh-cli/`：GitHub CLI 操作参考 skill。
 - `ui-ux-pro-max/`：UI/UX 设计与实现相关 skill，包含数据与脚本。
 
@@ -66,6 +67,7 @@
 - `excalidraw-diagram-generator`：将自然语言需求转换为 Excalidraw 图表，支持流程图、架构图、时序图、ER 图等。
 - `obsidian-daily-note-todo`：定位 Obsidian vault，依据 vault 配置解析当天 daily note，在笔记不存在时自动创建，并追加兼容 Obsidian Tasks 的待办。
 - `codex-daily-summary`：收集本地自然日内创建的 Codex thread，从本地 thread 记录中提取证据，判断主语言，并将时间线式日报写入当天 Obsidian daily note。
+- `analyzing-codex-token-usage`：基于本地 state DB 元数据与 rollout `token_count` 增量，生成按天、周、月统计的 Codex token 用量报告，并支持趋势与 spike 分析。
 
 ## Commit
 
@@ -152,6 +154,28 @@
 
 - `obsidian-daily-note-todo`：负责解析这个 skill 复用的 vault 与 daily note 路径
 - `find-docs` 与 `context7-cli`：当日报内容涉及当天的文档调研工作时可配合使用
+
+## Codex Token 用量分析
+
+`analyzing-codex-token-usage` 适用于“看看今天 Codex 用了多少 token”“帮我做一份本周 token 报告”或“这个月哪个 thread 最耗 token”这类请求。
+
+它的作用：
+
+- 只使用本地 Codex 数据完成统计，不依赖网络。
+- 动态发现当前 `state_*.sqlite`，而不是把数据库文件名写死。
+- 把 `threads.tokens_used` 视为线程当前累计快照，而不是日/周/月精确消耗值。
+- 通过 rollout 中相邻 `token_count` 事件的累计值做差，计算精确时间窗口内的 token 消耗。
+- 输出适合终端阅读的报告，包括总览、趋势分桶、Top threads 和 spike 时刻。
+
+它存在的价值：
+
+- 避免把快照字段或单步 token 值直接相加，导致统计失真。
+- 强制报告明确时区和绝对日期边界，避免“今天”“本周”这类模糊口径。
+- 帮助区分“某个 thread 到目前为止总共用了多少 token”和“某个自然时间窗口内实际消耗了多少 token”。
+
+相关 skill：
+
+- `codex-daily-summary`：如果用户要的是“做了什么工作的语义总结”，而不是 token 统计，应使用这个 skill
 
 ## 自定义 Skill 约定
 
