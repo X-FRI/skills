@@ -10,11 +10,12 @@
 - `find-skills/`：用于发现和安装更多 skills。
 - `find-docs/`：基于 Context7 的最新库与框架文档检索 skill。
 - `context7-cli/`：ctx7 CLI 参考 skill，覆盖文档查询、skill 管理与 MCP 配置。
+- `commit/`：用于生成并执行符合仓库约定的 Conventional Commit，并根据最近历史自动判定 commit message 语言。
+- `technical-proposal-writing/`：技术方案写作规范 skill，用于撰写更易读的 proposal、RFC、ADR 与迁移方案。
 - `excalidraw-diagram-generator/`：根据自然语言描述生成 Excalidraw 图表。
 - `obsidian-daily-note-todo/`：查找 Obsidian vault，并在当天 daily note 中创建待办。
 - `codex-daily-summary/`：从当天创建的 Codex thread 中提取证据，生成时间线式日报，并写入当天 Obsidian daily note 的待办区块下方。
 - `gh-cli/`：GitHub CLI 操作参考 skill。
-- `commit-prompt-english/`：将 `~/.codex/prompts/commit.md` 转为纯英文，同时保持提交语言判定策略不变。
 - `ui-ux-pro-max/`：UI/UX 设计与实现相关 skill，包含数据与脚本。
 
 ## 目录结构
@@ -22,12 +23,13 @@
 ```text
 .
 ├── context7-cli/
+├── commit/
 ├── excalidraw-diagram-generator/
 ├── find-docs/
 ├── find-skills/
 ├── gh-cli/
 ├── obsidian-daily-note-todo/
-├── commit-prompt-english/
+├── technical-proposal-writing/
 ├── superpowers/
 │   ├── <skill-name>/SKILL.md
 │   └── skills/<skill-name>/SKILL.md
@@ -52,16 +54,47 @@
 - 质量类：`test-driven-development`、`systematic-debugging`、`verification-before-completion`
 - 协作类：`requesting-code-review`、`receiving-code-review`、`dispatching-parallel-agents`、`subagent-driven-development`
 - 交付类：`finishing-a-development-branch`、`using-git-worktrees`
-- 文档与配置类：`find-docs`、`context7-cli`
-- 专项类：`gh-cli`、`ui-ux-pro-max`、`find-skills`、`excalidraw-diagram-generator`、`obsidian-daily-note-todo`、`commit-prompt-english`
+- 文档与配置类：`find-docs`、`context7-cli`、`technical-proposal-writing`
+- 专项类：`gh-cli`、`ui-ux-pro-max`、`find-skills`、`excalidraw-diagram-generator`、`obsidian-daily-note-todo`、`commit`
 
 ## 新增 Skills
 
 - `find-docs`：聚焦 Context7 文档查询流程，用于解析库 ID 并检索最新文档与代码示例。
 - `context7-cli`：更完整的 ctx7 CLI skill，覆盖文档访问、AI skill 的安装/搜索/生成，以及 Context7 MCP 配置。
+- `commit`：一个提交写作工作流，会检查当前 diff，选择单一主导的 Conventional Commit 类型，并在用户未显式指定时根据最近的仓库提交历史自动判定 commit message 语言。
+- `technical-proposal-writing`：语言无关的技术方案写作指南，强调直接结论、术语一致、段落驱动结构，避免模板化空话。
 - `excalidraw-diagram-generator`：将自然语言需求转换为 Excalidraw 图表，支持流程图、架构图、时序图、ER 图等。
 - `obsidian-daily-note-todo`：定位 Obsidian vault，依据 vault 配置解析当天 daily note，在笔记不存在时自动创建，并追加兼容 Obsidian Tasks 的待办。
 - `codex-daily-summary`：收集本地自然日内创建的 Codex thread，从本地 thread 记录中提取证据，判断主语言，并将时间线式日报写入当天 Obsidian daily note。
+
+## Commit
+
+`commit` 适用于“把这些改动提交掉”“根据当前 diff 生成 commit message”或“让提交语言跟仓库历史保持一致”这类请求。
+
+它的作用：
+
+- 按固定的 git 命令顺序检查本地改动，再生成提交信息
+- 选择一个主导的 Conventional Commit 类型，次要改动放到正文说明
+- 在用户没有显式指定语言时，根据最近 20 条 commit 自动判定提交信息语言
+- 强制多行提交使用 heredoc + `git commit -F -`
+
+## 技术方案写作
+
+`technical-proposal-writing` 适用于“写一份技术方案”“整理成 RFC”“输出 ADR”“准备迁移计划”这类请求。
+
+它重点约束：
+
+- 先给结论，再交代前提、约束和推导理由。
+- 控制句子长度，减少多层从句，让主语和谓语靠近。
+- 删除没有真实逻辑关系的连接词、套话和模板脚手架。
+- 保持术语稳定，同一个概念尽量只用一个词。
+- 当流程存在分支、回滚或多角色协作时，同时提供 Mermaid 流程图与编号步骤。
+
+它存在的价值：
+
+- 降低评审技术方案时的阅读负担。
+- 让方案文档在几个月后仍然容易维护和复查。
+- 让产出更像严肃工程文档，而不是模板化 AI 文案。
 
 ## Obsidian Daily Note Todo
 

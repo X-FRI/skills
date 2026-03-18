@@ -10,11 +10,12 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 - `find-skills/`: helps discover and install additional skills.
 - `find-docs/`: Context7-based lookup for current library and framework documentation.
 - `context7-cli/`: ctx7 CLI reference for docs queries, skill management, and MCP setup.
+- `commit/`: creates repository-consistent Conventional Commits and auto-detects commit-message language from recent history.
+- `technical-proposal-writing/`: style guide for writing technical proposals, RFCs, ADRs, and migration plans with lower cognitive load.
 - `excalidraw-diagram-generator/`: generates Excalidraw diagrams from natural language prompts.
 - `obsidian-daily-note-todo/`: finds an Obsidian vault and creates a todo in today's daily note.
 - `codex-daily-summary/`: builds an evidence-based daily work summary from Codex threads and inserts it below the todo section in today's Obsidian daily note.
 - `gh-cli/`: GitHub CLI operational reference skill.
-- `commit-prompt-english/`: translates `~/.codex/prompts/commit.md` to pure English while preserving language-selection policy.
 - `ui-ux-pro-max/`: UI/UX-focused skill with data and scripts.
 
 ## Repository Layout
@@ -22,12 +23,13 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 ```text
 .
 ├── context7-cli/
+├── commit/
 ├── excalidraw-diagram-generator/
 ├── find-docs/
 ├── find-skills/
 ├── gh-cli/
 ├── obsidian-daily-note-todo/
-├── commit-prompt-english/
+├── technical-proposal-writing/
 ├── superpowers/
 │   ├── <skill-name>/SKILL.md
 │   └── skills/<skill-name>/SKILL.md
@@ -52,16 +54,47 @@ Notes:
 - Quality: `test-driven-development`, `systematic-debugging`, `verification-before-completion`
 - Collaboration: `requesting-code-review`, `receiving-code-review`, `dispatching-parallel-agents`, `subagent-driven-development`
 - Delivery: `finishing-a-development-branch`, `using-git-worktrees`
-- Documentation and setup: `find-docs`, `context7-cli`
-- Domain-specific: `gh-cli`, `ui-ux-pro-max`, `find-skills`, `excalidraw-diagram-generator`, `obsidian-daily-note-todo`, `commit-prompt-english`
+- Documentation and setup: `find-docs`, `context7-cli`, `technical-proposal-writing`
+- Domain-specific: `gh-cli`, `ui-ux-pro-max`, `find-skills`, `excalidraw-diagram-generator`, `obsidian-daily-note-todo`, `commit`
 
 ## Newly Added Skills
 
 - `find-docs`: a focused Context7 workflow for resolving library IDs and querying up-to-date docs and code examples.
 - `context7-cli`: a broader ctx7 CLI skill covering documentation access, AI skill install/search/generation, and Context7 MCP setup.
+- `commit`: a commit-writing workflow that inspects the current diff, selects one dominant Conventional Commit type, and keeps commit-message language aligned with recent repository history unless the user overrides it.
+- `technical-proposal-writing`: a language-agnostic writing guide for technical proposals that favors direct claims, consistent terminology, and paragraph-driven structure over template boilerplate.
 - `excalidraw-diagram-generator`: turns natural language requests into Excalidraw-compatible diagrams such as flowcharts, architecture diagrams, sequence diagrams, and ER diagrams.
 - `obsidian-daily-note-todo`: locates an Obsidian vault, resolves today's daily note from vault settings, creates the note if missing, and appends a Tasks-compatible todo.
 - `codex-daily-summary`: gathers Codex threads created during the local day, extracts evidence from local thread records, detects the dominant language, and writes a timeline-style daily summary into today's Obsidian daily note.
+
+## Commit
+
+`commit` is designed for requests like "commit these changes", "write a commit message from the current diff", or "keep this commit consistent with the repository's commit language".
+
+What it does:
+
+- reviews local changes in a fixed git command order before writing the message
+- selects one dominant Conventional Commit type and explains secondary work in the body when needed
+- infers commit-message language from the recent 20 commits unless the user gives an explicit language override
+- requires multiline commits to use heredoc plus `git commit -F -`
+
+## Technical Proposal Writing
+
+`technical-proposal-writing` is designed for requests such as "write an RFC", "draft an ADR", "prepare a migration plan", or "turn these decisions into a serious technical proposal".
+
+What it enforces:
+
+- Lead with the conclusion, then justify it with clear premises and constraints.
+- Keep sentences short, split nested clauses, and keep subject and verb close.
+- Remove filler transitions and template scaffolding that make engineering documents harder to scan.
+- Keep terminology stable so one concept maps to one term across the document.
+- Use Mermaid flowcharts plus numbered steps when process complexity makes prose alone hard to follow.
+
+Why it exists:
+
+- It reduces reader effort when reviewing design decisions.
+- It makes proposal documents easier to maintain months later.
+- It helps generated drafts read like engineering documents rather than generic AI output.
 
 ## Obsidian Daily Note Todo
 
