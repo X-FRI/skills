@@ -11,12 +11,14 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 - `find-docs/`: Context7-based lookup for current library and framework documentation.
 - `context7-cli/`: ctx7 CLI reference for docs queries, skill management, and MCP setup.
 - `commit/`: creates repository-consistent Conventional Commits and auto-detects commit-message language from recent history.
+- `discovering-project-context/`: builds a fast, evidence-grounded project brief for unfamiliar repositories.
 - `technical-proposal-writing/`: style guide for writing technical proposals, RFCs, ADRs, and migration plans with lower cognitive load.
 - `excalidraw-diagram-generator/`: generates Excalidraw diagrams from natural language prompts.
 - `obsidian-daily-note-todo/`: finds an Obsidian vault and creates a todo in today's daily note.
 - `codex-daily-summary/`: builds an evidence-based daily work summary from Codex threads and inserts it below the todo section in today's Obsidian daily note.
 - `analyzing-codex-token-usage/`: builds local Codex token usage reports with exact period accounting from SQLite metadata and rollout token events.
 - `gh-cli/`: GitHub CLI operational reference skill.
+- `personification/`: writing-style skill for more natural, less AI-sounding replies with automatic output-language detection.
 - `ui-ux-pro-max/`: UI/UX-focused skill with data and scripts.
 
 ## Repository Layout
@@ -25,6 +27,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 .
 ├── context7-cli/
 ├── commit/
+├── discovering-project-context/
 ├── excalidraw-diagram-generator/
 ├── find-docs/
 ├── find-skills/
@@ -56,18 +59,21 @@ Notes:
 - Collaboration: `requesting-code-review`, `receiving-code-review`, `dispatching-parallel-agents`, `subagent-driven-development`
 - Delivery: `finishing-a-development-branch`, `using-git-worktrees`
 - Documentation and setup: `find-docs`, `context7-cli`, `technical-proposal-writing`
-- Domain-specific: `gh-cli`, `ui-ux-pro-max`, `find-skills`, `excalidraw-diagram-generator`, `obsidian-daily-note-todo`, `commit`
+- Domain-specific: `gh-cli`, `ui-ux-pro-max`, `find-skills`, `excalidraw-diagram-generator`, `obsidian-daily-note-todo`, `discovering-project-context`, `commit`
+- Writing-style: `personification`
 
 ## Newly Added Skills
 
 - `find-docs`: a focused Context7 workflow for resolving library IDs and querying up-to-date docs and code examples.
 - `context7-cli`: a broader ctx7 CLI skill covering documentation access, AI skill install/search/generation, and Context7 MCP setup.
 - `commit`: a commit-writing workflow that inspects the current diff, selects one dominant Conventional Commit type, and keeps commit-message language aligned with recent repository history unless the user overrides it.
+- `discovering-project-context`: a repository discovery workflow that scans the highest-signal docs, manifests, runtime files, code directories, and recent git history to produce a fast but grounded project map.
 - `technical-proposal-writing`: a language-agnostic writing guide for technical proposals that favors direct claims, consistent terminology, and paragraph-driven structure over template boilerplate.
 - `excalidraw-diagram-generator`: turns natural language requests into Excalidraw-compatible diagrams such as flowcharts, architecture diagrams, sequence diagrams, and ER diagrams.
 - `obsidian-daily-note-todo`: locates an Obsidian vault, resolves today's daily note from vault settings, creates the note if missing, and appends a Tasks-compatible todo.
 - `codex-daily-summary`: gathers Codex threads created during the local day, extracts evidence from local thread records, detects the dominant language, and writes a timeline-style daily summary into today's Obsidian daily note.
 - `analyzing-codex-token-usage`: builds daily, weekly, and monthly Codex token usage reports from local state DB metadata plus rollout `token_count` deltas, with timezone-explicit windows and spike analysis.
+- `personification`: a writing-style skill that reduces templated assistant phrasing, preserves authorial voice, and auto-selects reply language from user context while keeping the skill file itself in English.
 
 ## Commit
 
@@ -79,6 +85,45 @@ What it does:
 - selects one dominant Conventional Commit type and explains secondary work in the body when needed
 - infers commit-message language from the recent 20 commits unless the user gives an explicit language override
 - requires multiline commits to use heredoc plus `git commit -F -`
+
+## Discovering Project Context
+
+`discovering-project-context` is designed for requests like "help me understand this repo", "give me a quick project overview", "what is the architecture here", or "before we change anything, map the codebase".
+
+What it does:
+
+- Prioritizes high-signal evidence instead of blindly reading every document in the repository.
+- Builds a compact working model of the project: repository type, purpose, runtime boundaries, top-level modules, entrypoints, and likely core workflow.
+- Uses recent git history to identify current engineering themes instead of dumping raw commit lists.
+- Forces explicit unknowns so the output separates confirmed facts from inference.
+- Ends with a practical "where to read next" guide for the next engineering step.
+
+How it works:
+
+- Starts from the root README and docs index, then checks manifests such as `package.json`, `pyproject.toml`, `go.mod`, or workspace files.
+- Reads runtime and delivery clues such as `Dockerfile`, compose files, CI configs, deploy configs, `Makefile`, `Taskfile`, and scripts.
+- Maps major code directories such as `src`, `app`, `server`, `services`, `packages`, `apps`, and `tests`.
+- Clusters the most recent 20 to 30 commits into a few workstreams such as feature delivery, bug fixing, refactoring, tooling, or test hardening.
+- Produces a fixed summary shape covering identity, stack, architecture, core workflow, operational clues, recent themes, risks, and recommended next files.
+
+Language behavior:
+
+- The `SKILL.md` stays in English.
+- The actual project summary follows the dominant language in the user's current request and nearby user-authored context.
+- If the signal is mixed, the skill still prefers user-authored language over assistant text or repository defaults.
+
+Why it exists:
+
+- It reduces the time needed for an LLM to form a reliable project mental model from an initial conversation.
+- It improves project discovery quality by enforcing source prioritization and evidence-backed summaries.
+- It avoids two common failure modes: shallow file listing and overconfident architectural guessing.
+
+Typical use cases:
+
+- onboard into an unfamiliar repository before implementation
+- prepare a concise architecture brief for another engineer
+- summarize what a monorepo contains before touching one package
+- identify which files matter most for the next change
 
 ## Technical Proposal Writing
 
@@ -176,6 +221,43 @@ Why it exists:
 Related skills:
 
 - `codex-daily-summary`: use this instead when the user wants a semantic work summary rather than token accounting
+
+## Personification
+
+`personification` is designed for requests like "write this in a more human way", "reduce the AI tone", "make the reply feel more natural", or "keep the answer personal without becoming roleplay".
+
+What it does:
+
+- Pushes writing away from stock assistant phrasing and toward prose that feels authored.
+- Suppresses common AI-writing artifacts such as formulaic openings, canned transitions, self-referential assistant language, and overly polished generic wording.
+- Prefers paragraph-driven flow, direct judgment, and natural rhetorical movement over rigid template structure.
+- Preserves analytical depth and factual clarity instead of trading substance for style.
+
+How it works:
+
+- The `SKILL.md` stays in English for maintenance and retrieval.
+- The actual output language is selected from user-authored context, using the current request first and nearby user messages as fallback evidence.
+- If language signals are mixed, the skill still prefers user-authored text over assistant-authored text.
+- If no stable signal exists, the skill falls back to English.
+
+Why it exists:
+
+- Many "sound more human" prompts are too vague to produce repeatable behavior.
+- This skill turns that vague request into concrete constraints on phrasing, structure, and rhetorical habits.
+- It improves readability by removing machine-like tone without requiring identity simulation or fake personal experience.
+
+Boundaries:
+
+- It is a writing-style skill, not a roleplay or identity skill.
+- It should not be used when output must remain rigidly structured, machine-readable, or compliance-constrained.
+- It does not permit fabricated biography, emotions, or personal memories.
+
+Typical use cases:
+
+- rewrite an answer to feel less templated
+- produce commentary or explanation with more voice
+- draft email-like or note-like prose
+- keep a response natural while still technically rigorous
 
 ## Custom Skill Conventions
 

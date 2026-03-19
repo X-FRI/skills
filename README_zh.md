@@ -11,12 +11,14 @@
 - `find-docs/`：基于 Context7 的最新库与框架文档检索 skill。
 - `context7-cli/`：ctx7 CLI 参考 skill，覆盖文档查询、skill 管理与 MCP 配置。
 - `commit/`：用于生成并执行符合仓库约定的 Conventional Commit，并根据最近历史自动判定 commit message 语言。
+- `discovering-project-context/`：用于在陌生仓库中快速建立基于证据的项目全局认知。
 - `technical-proposal-writing/`：技术方案写作规范 skill，用于撰写更易读的 proposal、RFC、ADR 与迁移方案。
 - `excalidraw-diagram-generator/`：根据自然语言描述生成 Excalidraw 图表。
 - `obsidian-daily-note-todo/`：查找 Obsidian vault，并在当天 daily note 中创建待办。
 - `codex-daily-summary/`：从当天创建的 Codex thread 中提取证据，生成时间线式日报，并写入当天 Obsidian daily note 的待办区块下方。
 - `analyzing-codex-token-usage/`：基于本地 SQLite 元数据和 rollout token 事件生成 Codex token 用量报告，并保证统计口径准确。
 - `gh-cli/`：GitHub CLI 操作参考 skill。
+- `personification/`：写作风格类 skill，用于生成更自然、更少 AI 腔、并支持自动识别输出语言的回复。
 - `ui-ux-pro-max/`：UI/UX 设计与实现相关 skill，包含数据与脚本。
 
 ## 目录结构
@@ -25,6 +27,7 @@
 .
 ├── context7-cli/
 ├── commit/
+├── discovering-project-context/
 ├── excalidraw-diagram-generator/
 ├── find-docs/
 ├── find-skills/
@@ -56,18 +59,21 @@
 - 协作类：`requesting-code-review`、`receiving-code-review`、`dispatching-parallel-agents`、`subagent-driven-development`
 - 交付类：`finishing-a-development-branch`、`using-git-worktrees`
 - 文档与配置类：`find-docs`、`context7-cli`、`technical-proposal-writing`
-- 专项类：`gh-cli`、`ui-ux-pro-max`、`find-skills`、`excalidraw-diagram-generator`、`obsidian-daily-note-todo`、`commit`
+- 专项类：`gh-cli`、`ui-ux-pro-max`、`find-skills`、`excalidraw-diagram-generator`、`obsidian-daily-note-todo`、`discovering-project-context`、`commit`
+- 写作风格类：`personification`
 
 ## 新增 Skills
 
 - `find-docs`：聚焦 Context7 文档查询流程，用于解析库 ID 并检索最新文档与代码示例。
 - `context7-cli`：更完整的 ctx7 CLI skill，覆盖文档访问、AI skill 的安装/搜索/生成，以及 Context7 MCP 配置。
 - `commit`：一个提交写作工作流，会检查当前 diff，选择单一主导的 Conventional Commit 类型，并在用户未显式指定时根据最近的仓库提交历史自动判定 commit message 语言。
+- `discovering-project-context`：一个项目发现工作流，会优先扫描高信号文档、项目清单、运行与交付配置、主代码目录以及最近 git 历史，快速生成有依据的项目地图。
 - `technical-proposal-writing`：语言无关的技术方案写作指南，强调直接结论、术语一致、段落驱动结构，避免模板化空话。
 - `excalidraw-diagram-generator`：将自然语言需求转换为 Excalidraw 图表，支持流程图、架构图、时序图、ER 图等。
 - `obsidian-daily-note-todo`：定位 Obsidian vault，依据 vault 配置解析当天 daily note，在笔记不存在时自动创建，并追加兼容 Obsidian Tasks 的待办。
 - `codex-daily-summary`：收集本地自然日内创建的 Codex thread，从本地 thread 记录中提取证据，判断主语言，并将时间线式日报写入当天 Obsidian daily note。
 - `analyzing-codex-token-usage`：基于本地 state DB 元数据与 rollout `token_count` 增量，生成按天、周、月统计的 Codex token 用量报告，并支持趋势与 spike 分析。
+- `personification`：一个写作风格 skill，用于减少模板化助手措辞、保留作者感，并在 `SKILL.md` 保持英文的同时根据用户上下文自动选择实际输出语言。
 
 ## Commit
 
@@ -79,6 +85,45 @@
 - 选择一个主导的 Conventional Commit 类型，次要改动放到正文说明
 - 在用户没有显式指定语言时，根据最近 20 条 commit 自动判定提交信息语言
 - 强制多行提交使用 heredoc + `git commit -F -`
+
+## 项目发现与上下文建立
+
+`discovering-project-context` 适用于“先帮我看懂这个仓库”“给我一个项目全貌”“这里的架构是怎样的”或“改代码之前先梳理一下代码库”这类请求。
+
+它的作用：
+
+- 不再盲目“把所有文档都读一遍”，而是优先读取信息密度最高的证据来源。
+- 快速建立一个紧凑但可靠的项目模型，包括仓库类型、项目定位、运行边界、顶层模块、入口位置以及可能的主流程。
+- 使用最近 git 历史归纳当前工程主题，而不是机械罗列 commit。
+- 强制区分已确认事实与未知项，避免把猜测写成架构结论。
+- 最终给出一个“下一步应该先读哪些文件”的接手建议。
+
+它的工作方式：
+
+- 从根目录 README 和 docs 索引开始，再检查 `package.json`、`pyproject.toml`、`go.mod`、workspace 文件等项目清单。
+- 继续读取 `Dockerfile`、compose 文件、CI 配置、部署配置、`Makefile`、`Taskfile` 和脚本，判断运行与交付方式。
+- 扫描 `src`、`app`、`server`、`services`、`packages`、`apps`、`tests` 等主代码目录，建立模块职责地图。
+- 把最近 20 到 30 条 commit 聚合成少数几个工作主题，例如功能交付、缺陷修复、重构、工具链维护或测试加固。
+- 按固定结构输出摘要，覆盖项目定位、技术栈、架构地图、核心流程、开发/测试/构建线索、近期方向、风险与推荐阅读路径。
+
+语言行为：
+
+- `SKILL.md` 本身保持英文。
+- 实际输出的项目摘要会跟随用户当前请求及附近用户消息中的主导自然语言。
+- 如果语言信号混杂，仍然优先采用用户文本，而不是 assistant 文本或仓库默认语言。
+
+它存在的价值：
+
+- 缩短 LLM 在初始对话中形成可靠项目心智模型的时间。
+- 通过“信息源排序 + 证据约束 + 固定输出结构”提高项目发现质量。
+- 避免两个常见问题：只做浅层文件罗列，或者在证据不足时过度自信地下架构结论。
+
+典型场景：
+
+- 在进入陌生仓库前先做一次工程级 onboarding
+- 给其他工程师整理一份简洁的项目架构导览
+- 在改动 monorepo 某个 package 前先弄清整体边界
+- 判断下一步最值得阅读和修改的文件
 
 ## 技术方案写作
 
@@ -176,6 +221,43 @@
 相关 skill：
 
 - `codex-daily-summary`：如果用户要的是“做了什么工作的语义总结”，而不是 token 统计，应使用这个 skill
+
+## Personification
+
+`personification` 适用于“把这段话写得更像真人”“降低 AI 腔”“让回复更自然一些”或“保留个人表达感，但不要变成角色扮演”这类请求。
+
+它的作用：
+
+- 把写作从标准助手模板往“有人认真写出来的文字”方向拉。
+- 压制常见 AI 文风痕迹，例如套话式开头、机械过渡、自我指涉助手口吻，以及过度光滑的泛化措辞。
+- 优先使用段落驱动的自然推进、直接判断和更自然的修辞节奏，而不是僵硬的模板结构。
+- 在调整文风的同时保留分析深度和事实清晰度，不拿内容质量去换“有人味”。
+
+它的工作方式：
+
+- `SKILL.md` 本身保持英文，便于维护和检索。
+- 实际输出语言根据用户文本上下文自动决定，优先看当前请求，再看附近用户消息。
+- 如果语言信号混杂，仍然优先采用用户文本，而不是 assistant 文本。
+- 如果没有稳定信号，则回退到英文。
+
+它存在的价值：
+
+- 很多“更像真人一点”的提示过于空泛，无法稳定产出可复用结果。
+- 这个 skill 把模糊要求落成了具体的措辞、结构和修辞约束。
+- 它通过去除机器感来提升可读性，但不依赖伪造身份、伪造经历或表演式人格。
+
+边界：
+
+- 它是写作风格 skill，不是 roleplay skill，也不是身份模拟 skill。
+- 不适合用于必须严格结构化、机器可读或受合规约束的输出。
+- 不允许虚构 biography、情绪状态或个人记忆。
+
+典型场景：
+
+- 把一段回答改写得不那么模板化
+- 输出更有观点和语气的评论或解释
+- 撰写更像邮件、备忘或短文的文本
+- 在保持技术严谨的前提下，让语言更自然
 
 ## 自定义 Skill 约定
 
