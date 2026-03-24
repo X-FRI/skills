@@ -17,6 +17,7 @@
 - `obsidian-daily-note-todo/`：查找 Obsidian vault，并在当天 daily note 中创建待办。
 - `codex-daily-summary/`：从当天创建的 Codex thread 中提取证据，生成时间线式日报，并写入当天 Obsidian daily note 的待办区块下方。
 - `analyzing-codex-token-usage/`：基于本地 SQLite 元数据和 rollout token 事件生成 Codex token 用量报告，并保证统计口径准确。
+- `asr-transcript-summary/`：将杂乱的 ASR 会议转写整理为结构化高管摘要，提取动作项、决策与按主题归纳的讨论结论。
 - `gh-cli/`：GitHub CLI 操作参考 skill。
 - `personification/`：写作风格类 skill，用于生成更自然、更少 AI 腔、并支持自动识别输出语言的回复。
 - `ui-ux-pro-max/`：UI/UX 设计与实现相关 skill，包含数据与脚本。
@@ -25,6 +26,8 @@
 
 ```text
 .
+├── analyzing-codex-token-usage/
+├── asr-transcript-summary/
 ├── context7-cli/
 ├── commit/
 ├── discovering-project-context/
@@ -59,7 +62,7 @@
 - 协作类：`requesting-code-review`、`receiving-code-review`、`dispatching-parallel-agents`、`subagent-driven-development`
 - 交付类：`finishing-a-development-branch`、`using-git-worktrees`
 - 文档与配置类：`find-docs`、`context7-cli`、`technical-proposal-writing`
-- 专项类：`gh-cli`、`ui-ux-pro-max`、`find-skills`、`excalidraw-diagram-generator`、`obsidian-daily-note-todo`、`discovering-project-context`、`commit`
+- 专项类：`gh-cli`、`ui-ux-pro-max`、`find-skills`、`excalidraw-diagram-generator`、`obsidian-daily-note-todo`、`discovering-project-context`、`commit`、`asr-transcript-summary`
 - 写作风格类：`personification`
 
 ## 新增 Skills
@@ -73,6 +76,7 @@
 - `obsidian-daily-note-todo`：定位 Obsidian vault，依据 vault 配置解析当天 daily note，在笔记不存在时自动创建，并追加兼容 Obsidian Tasks 的待办。
 - `codex-daily-summary`：收集本地自然日内创建的 Codex thread，从本地 thread 记录中提取证据，判断主语言，并将时间线式日报写入当天 Obsidian daily note。
 - `analyzing-codex-token-usage`：基于本地 state DB 元数据与 rollout `token_count` 增量，生成按天、周、月统计的 Codex token 用量报告，并支持趋势与 spike 分析。
+- `asr-transcript-summary`：将噪声较多的 ASR 会议转写整理为高管风格摘要，支持按语言输出、提取动作项、沉淀关键决策，并按主题重组讨论内容。
 - `personification`：一个写作风格 skill，用于减少模板化助手措辞、保留作者感，并在 `SKILL.md` 保持英文的同时根据用户上下文自动选择实际输出语言。
 
 ## Commit

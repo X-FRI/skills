@@ -17,6 +17,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 - `obsidian-daily-note-todo/`: finds an Obsidian vault and creates a todo in today's daily note.
 - `codex-daily-summary/`: builds an evidence-based daily work summary from Codex threads and inserts it below the todo section in today's Obsidian daily note.
 - `analyzing-codex-token-usage/`: builds local Codex token usage reports with exact period accounting from SQLite metadata and rollout token events.
+- `asr-transcript-summary/`: summarizes messy ASR meeting transcripts into structured executive notes with action items, decisions, and theme-based discussion review.
 - `gh-cli/`: GitHub CLI operational reference skill.
 - `personification/`: writing-style skill for more natural, less AI-sounding replies with automatic output-language detection.
 - `ui-ux-pro-max/`: UI/UX-focused skill with data and scripts.
@@ -25,6 +26,8 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 
 ```text
 .
+├── analyzing-codex-token-usage/
+├── asr-transcript-summary/
 ├── context7-cli/
 ├── commit/
 ├── discovering-project-context/
@@ -59,7 +62,7 @@ Notes:
 - Collaboration: `requesting-code-review`, `receiving-code-review`, `dispatching-parallel-agents`, `subagent-driven-development`
 - Delivery: `finishing-a-development-branch`, `using-git-worktrees`
 - Documentation and setup: `find-docs`, `context7-cli`, `technical-proposal-writing`
-- Domain-specific: `gh-cli`, `ui-ux-pro-max`, `find-skills`, `excalidraw-diagram-generator`, `obsidian-daily-note-todo`, `discovering-project-context`, `commit`
+- Domain-specific: `gh-cli`, `ui-ux-pro-max`, `find-skills`, `excalidraw-diagram-generator`, `obsidian-daily-note-todo`, `discovering-project-context`, `commit`, `asr-transcript-summary`
 - Writing-style: `personification`
 
 ## Newly Added Skills
@@ -73,6 +76,7 @@ Notes:
 - `obsidian-daily-note-todo`: locates an Obsidian vault, resolves today's daily note from vault settings, creates the note if missing, and appends a Tasks-compatible todo.
 - `codex-daily-summary`: gathers Codex threads created during the local day, extracts evidence from local thread records, detects the dominant language, and writes a timeline-style daily summary into today's Obsidian daily note.
 - `analyzing-codex-token-usage`: builds daily, weekly, and monthly Codex token usage reports from local state DB metadata plus rollout `token_count` deltas, with timezone-explicit windows and spike analysis.
+- `asr-transcript-summary`: turns noisy ASR meeting transcripts into executive-style summaries with language-aware output, action-item extraction, decision capture, and theme-based discussion regrouping.
 - `personification`: a writing-style skill that reduces templated assistant phrasing, preserves authorial voice, and auto-selects reply language from user context while keeping the skill file itself in English.
 
 ## Commit
