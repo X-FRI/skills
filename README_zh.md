@@ -40,13 +40,11 @@
 ├── requirements-architect-analyzer/
 ├── technical-proposal-writing/
 ├── superpowers/
-│   ├── <skill-name>/SKILL.md
-│   └── skills/<skill-name>/SKILL.md
+│   └── <skill-name>/SKILL.md
 └── ui-ux-pro-max/
 ```
 
 说明：
-- 许多 skill 同时存在于 `superpowers/<name>/` 与 `superpowers/skills/<name>/`，属于镜像副本。
 - 一个 skill 由 `SKILL.md` 定义，也可能包含 `scripts/`、`data/`、参考文档等辅助资源。
 
 ## Skills 使用方式

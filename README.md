@@ -40,13 +40,11 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 ├── requirements-architect-analyzer/
 ├── technical-proposal-writing/
 ├── superpowers/
-│   ├── <skill-name>/SKILL.md
-│   └── skills/<skill-name>/SKILL.md
+│   └── <skill-name>/SKILL.md
 └── ui-ux-pro-max/
 ```
 
 Notes:
-- Many skills appear in both `superpowers/<name>/` and `superpowers/skills/<name>/` as mirrored copies.
 - A skill is defined by its `SKILL.md` and may include helper assets such as `scripts/`, `data/`, or references.
 
 ## How Skills Are Used
