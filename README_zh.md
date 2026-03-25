@@ -6,7 +6,7 @@
 
 ## 仓库内容
 
-- `superpowers/`：核心流程与工程实践类 skills（如 brainstorming、debugging、planning、TDD、verification、code review）。
+- `superpowers/`：核心流程与工程实践类 skills（如 brainstorming、debugging、planning、TDD、verification、code review）。该目录持续与上游 `obra/superpowers` 的 skills 保持对齐。
 - `find-skills/`：用于发现和安装更多 skills。
 - `find-docs/`：基于 Context7 的最新库与框架文档检索 skill。
 - `context7-cli/`：ctx7 CLI 参考 skill，覆盖文档查询、skill 管理与 MCP 配置。
@@ -22,6 +22,7 @@
 - `gh-cli/`：GitHub CLI 操作参考 skill。
 - `personification/`：写作风格类 skill，用于生成更自然、更少 AI 腔、并支持自动识别输出语言的回复。
 - `ui-ux-pro-max/`：UI/UX 设计与实现相关 skill，包含数据与脚本。
+- `vendor/superpowers/`：通过 `git subtree` 跟踪的上游 `obra/superpowers` 仓库，用作本地 `superpowers/` 的同步来源。
 
 ## 目录结构
 
@@ -41,11 +42,31 @@
 ├── technical-proposal-writing/
 ├── superpowers/
 │   └── <skill-name>/SKILL.md
+├── vendor/
+│   └── superpowers/
 └── ui-ux-pro-max/
 ```
 
 说明：
 - 一个 skill 由 `SKILL.md` 定义，也可能包含 `scripts/`、`data/`、参考文档等辅助资源。
+- `superpowers/` 是对上游 `vendor/superpowers/skills/` 的本地镜像目录。
+
+## 跟踪上游 Superpowers
+
+这个仓库通过 `git subtree` 跟踪上游 `obra/superpowers`。
+
+之所以拆成两个目录：
+- `git subtree` 只能导入整个仓库，不能直接只跟踪上游的 `skills/` 子目录。
+- `vendor/superpowers/` 保存完整的上游仓库。
+- `superpowers/` 镜像 `vendor/superpowers/skills/`，这样本仓库其余部分可以继续沿用现有目录结构。
+
+同步上游时运行：
+
+```bash
+./scripts/sync-superpowers.sh
+```
+
+更完整的说明见 [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md)。
 
 ## Skills 使用方式
 

@@ -6,7 +6,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 
 ## What Is In This Repo
 
-- `superpowers/`: core process and engineering workflow skills (brainstorming, debugging, planning, TDD, verification, code review, etc.).
+- `superpowers/`: core process and engineering workflow skills (brainstorming, debugging, planning, TDD, verification, code review, etc.). This directory is kept aligned with upstream `obra/superpowers` skills.
 - `find-skills/`: helps discover and install additional skills.
 - `find-docs/`: Context7-based lookup for current library and framework documentation.
 - `context7-cli/`: ctx7 CLI reference for docs queries, skill management, and MCP setup.
@@ -22,6 +22,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 - `gh-cli/`: GitHub CLI operational reference skill.
 - `personification/`: writing-style skill for more natural, less AI-sounding replies with automatic output-language detection.
 - `ui-ux-pro-max/`: UI/UX-focused skill with data and scripts.
+- `vendor/superpowers/`: upstream `obra/superpowers` repository tracked via `git subtree` and used as the sync source for local `superpowers/`.
 
 ## Repository Layout
 
@@ -41,11 +42,31 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 ├── technical-proposal-writing/
 ├── superpowers/
 │   └── <skill-name>/SKILL.md
+├── vendor/
+│   └── superpowers/
 └── ui-ux-pro-max/
 ```
 
 Notes:
 - A skill is defined by its `SKILL.md` and may include helper assets such as `scripts/`, `data/`, or references.
+- `superpowers/` is the local working mirror of upstream `vendor/superpowers/skills/`.
+
+## Tracking Upstream Superpowers
+
+This repository tracks upstream `obra/superpowers` using `git subtree`.
+
+Why this is split into two directories:
+- `git subtree` can import an entire repository, but it cannot directly track only the upstream `skills/` subdirectory.
+- `vendor/superpowers/` stores the full upstream repository.
+- `superpowers/` mirrors `vendor/superpowers/skills/` so the rest of this repo can keep the existing folder shape.
+
+To sync with upstream:
+
+```bash
+./scripts/sync-superpowers.sh
+```
+
+More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
 
 ## How Skills Are Used
 
