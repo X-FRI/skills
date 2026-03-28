@@ -94,6 +94,7 @@ More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
 - `find-docs`: a focused Context7 workflow for resolving library IDs and querying up-to-date docs and code examples.
 - `context7-cli`: a broader ctx7 CLI skill covering documentation access, AI skill install/search/generation, and Context7 MCP setup.
 - `chart-visualization`: a chart-rendering workflow that selects a chart type from the user's data shape, fills the matching reference schema, and turns the result into a protocol-level HTTP request instead of depending on a local JavaScript runtime.
+  It also includes `chart-visualization/SKILL_MOBILE_VERSION.md`, a self-contained single-file variant for constrained or mobile runtimes.
 - `commit`: a commit-writing workflow that inspects the current diff, selects one dominant Conventional Commit type, and keeps commit-message language aligned with recent repository history unless the user overrides it.
 - `discovering-project-context`: a repository discovery workflow that scans the highest-signal docs, manifests, runtime files, code directories, and recent git history to produce a fast but grounded project map.
 - `technical-proposal-writing`: a language-agnostic writing guide for technical proposals that favors direct claims, consistent terminology, and paragraph-driven structure over template boilerplate.

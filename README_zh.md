@@ -94,6 +94,7 @@
 - `find-docs`：聚焦 Context7 文档查询流程，用于解析库 ID 并检索最新文档与代码示例。
 - `context7-cli`：更完整的 ctx7 CLI skill，覆盖文档访问、AI skill 的安装/搜索/生成，以及 Context7 MCP 配置。
 - `chart-visualization`：一个图表渲染工作流，会根据数据形态选择合适的图表类型，读取对应 reference 组织参数，并把结果转换为协议层 HTTP 请求，而不是依赖本地 JavaScript 运行时。
+  同目录还提供 `chart-visualization/SKILL_MOBILE_VERSION.md`，用于受限环境或移动端的单文件分发版本。
 - `commit`：一个提交写作工作流，会检查当前 diff，选择单一主导的 Conventional Commit 类型，并在用户未显式指定时根据最近的仓库提交历史自动判定 commit message 语言。
 - `discovering-project-context`：一个项目发现工作流，会优先扫描高信号文档、项目清单、运行与交付配置、主代码目录以及最近 git 历史，快速生成有依据的项目地图。
 - `technical-proposal-writing`：语言无关的技术方案写作指南，强调直接结论、术语一致、段落驱动结构，避免模板化空话。
