@@ -10,6 +10,7 @@
 - `find-skills/`：用于发现和安装更多 skills。
 - `find-docs/`：基于 Context7 的最新库与框架文档检索 skill。
 - `context7-cli/`：ctx7 CLI 参考 skill，覆盖文档查询、skill 管理与 MCP 配置。
+- `chart-visualization/`：面向协议的图表渲染 skill，用于选择图表类型、根据参考文档组织渲染参数，并说明图表与地图生成所需的 HTTP 请求契约。
 - `commit/`：用于生成并执行符合仓库约定的 Conventional Commit，并根据最近历史自动判定 commit message 语言。
 - `discovering-project-context/`：用于在陌生仓库中快速建立基于证据的项目全局认知。
 - `technical-proposal-writing/`：技术方案写作规范 skill，用于撰写更易读的 proposal、RFC、ADR 与迁移方案。
@@ -30,6 +31,7 @@
 .
 ├── analyzing-codex-token-usage/
 ├── asr-transcript-summary/
+├── chart-visualization/
 ├── context7-cli/
 ├── commit/
 ├── discovering-project-context/
@@ -84,12 +86,14 @@
 - 交付类：`finishing-a-development-branch`、`using-git-worktrees`
 - 文档与配置类：`find-docs`、`context7-cli`、`technical-proposal-writing`
 - 专项类：`gh-cli`、`ui-ux-pro-max`、`find-skills`、`excalidraw-diagram-generator`、`obsidian-daily-note-todo`、`discovering-project-context`、`commit`、`asr-transcript-summary`、`requirements-architect-analyzer`
+- 可视化类：`chart-visualization`
 - 写作风格类：`personification`
 
 ## 新增 Skills
 
 - `find-docs`：聚焦 Context7 文档查询流程，用于解析库 ID 并检索最新文档与代码示例。
 - `context7-cli`：更完整的 ctx7 CLI skill，覆盖文档访问、AI skill 的安装/搜索/生成，以及 Context7 MCP 配置。
+- `chart-visualization`：一个图表渲染工作流，会根据数据形态选择合适的图表类型，读取对应 reference 组织参数，并把结果转换为协议层 HTTP 请求，而不是依赖本地 JavaScript 运行时。
 - `commit`：一个提交写作工作流，会检查当前 diff，选择单一主导的 Conventional Commit 类型，并在用户未显式指定时根据最近的仓库提交历史自动判定 commit message 语言。
 - `discovering-project-context`：一个项目发现工作流，会优先扫描高信号文档、项目清单、运行与交付配置、主代码目录以及最近 git 历史，快速生成有依据的项目地图。
 - `technical-proposal-writing`：语言无关的技术方案写作指南，强调直接结论、术语一致、段落驱动结构，避免模板化空话。
@@ -111,6 +115,47 @@
 - 选择一个主导的 Conventional Commit 类型，次要改动放到正文说明
 - 在用户没有显式指定语言时，根据最近 20 条 commit 自动判定提交信息语言
 - 强制多行提交使用 heredoc + `git commit -F -`
+
+## Chart Visualization
+
+`chart-visualization` 适用于“把这组数据画成折线图”“把这些指标做成可视化”“为这些区域生成地图”或“把结构化数据转成图表图片”这类请求。
+
+它的作用：
+
+- 根据数据形态和展示目标选择最合适的图表 tool。
+- 读取 `chart-visualization/references/` 下对应的 reference 文件，确定 `args` 的必填和可选字段。
+- 先构建 `{ tool, args }` 形式的 render spec。
+- 再把 render spec 转换为图表服务的 HTTP POST 请求，而不是依赖 `node` 或本地 JS 脚本。
+
+它的使用方式：
+
+1. 先确定目标 tool，例如 `generate_line_chart`、`generate_bar_chart` 或 `generate_district_map`。
+2. 打开 `chart-visualization/references/` 下对应的 reference 文件，按 schema 组织 `args`。
+3. 构建 render spec：
+
+```json
+{
+  "tool": "generate_line_chart",
+  "args": {
+    "title": "Revenue Trend",
+    "data": [
+      { "time": "2026-01", "value": 120 },
+      { "time": "2026-02", "value": 135 }
+    ]
+  }
+}
+```
+
+4. 再把 spec 转成 HTTP 请求：
+   普通图表会把 `tool` 映射成 `line`、`bar`、`scatter`、`spreadsheet` 等服务端 `type`，然后发送 `{ type, source, ...args }`。
+5. 地图类 tool，例如 `generate_district_map`、`generate_pin_map`、`generate_path_map`，则保留原始 `tool` 名称，并发送 `{ serviceId?, tool, input: args, source }`。
+6. 最后解析 JSON 响应。普通图表通常会在 `resultObj` 中返回图片 URL；地图类可能返回结构化 `content[]`，需要提取其中可读的文本内容。
+
+为什么它现在是协议优先：
+
+- 只要环境能发 HTTP 请求就可以执行。
+- 不再强依赖 Node.js、QuickJS 适配层或本地文件系统能力。
+- 最终请求体更容易检查、复用和调试。
 
 ## 项目发现与上下文建立
 

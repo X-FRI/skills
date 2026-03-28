@@ -10,6 +10,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 - `find-skills/`: helps discover and install additional skills.
 - `find-docs/`: Context7-based lookup for current library and framework documentation.
 - `context7-cli/`: ctx7 CLI reference for docs queries, skill management, and MCP setup.
+- `chart-visualization/`: protocol-first chart rendering skill that selects chart types, shapes render specs from references, and documents the HTTP request contract for chart and map generation.
 - `commit/`: creates repository-consistent Conventional Commits and auto-detects commit-message language from recent history.
 - `discovering-project-context/`: builds a fast, evidence-grounded project brief for unfamiliar repositories.
 - `technical-proposal-writing/`: style guide for writing technical proposals, RFCs, ADRs, and migration plans with lower cognitive load.
@@ -30,6 +31,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 .
 ├── analyzing-codex-token-usage/
 ├── asr-transcript-summary/
+├── chart-visualization/
 ├── context7-cli/
 ├── commit/
 ├── discovering-project-context/
@@ -84,12 +86,14 @@ More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
 - Delivery: `finishing-a-development-branch`, `using-git-worktrees`
 - Documentation and setup: `find-docs`, `context7-cli`, `technical-proposal-writing`
 - Domain-specific: `gh-cli`, `ui-ux-pro-max`, `find-skills`, `excalidraw-diagram-generator`, `obsidian-daily-note-todo`, `discovering-project-context`, `commit`, `asr-transcript-summary`, `requirements-architect-analyzer`
+- Visualization: `chart-visualization`
 - Writing-style: `personification`
 
 ## Newly Added Skills
 
 - `find-docs`: a focused Context7 workflow for resolving library IDs and querying up-to-date docs and code examples.
 - `context7-cli`: a broader ctx7 CLI skill covering documentation access, AI skill install/search/generation, and Context7 MCP setup.
+- `chart-visualization`: a chart-rendering workflow that selects a chart type from the user's data shape, fills the matching reference schema, and turns the result into a protocol-level HTTP request instead of depending on a local JavaScript runtime.
 - `commit`: a commit-writing workflow that inspects the current diff, selects one dominant Conventional Commit type, and keeps commit-message language aligned with recent repository history unless the user overrides it.
 - `discovering-project-context`: a repository discovery workflow that scans the highest-signal docs, manifests, runtime files, code directories, and recent git history to produce a fast but grounded project map.
 - `technical-proposal-writing`: a language-agnostic writing guide for technical proposals that favors direct claims, consistent terminology, and paragraph-driven structure over template boilerplate.
@@ -111,6 +115,47 @@ What it does:
 - selects one dominant Conventional Commit type and explains secondary work in the body when needed
 - infers commit-message language from the recent 20 commits unless the user gives an explicit language override
 - requires multiline commits to use heredoc plus `git commit -F -`
+
+## Chart Visualization
+
+`chart-visualization` is designed for requests like "make a line chart from this data", "visualize these metrics", "generate a map for these regions", or "turn this structured dataset into a chart image".
+
+What it does:
+
+- Chooses the most suitable chart tool based on the data shape and visualization goal.
+- Reads the matching file in `chart-visualization/references/` to determine the required and optional `args`.
+- Builds a render spec in the form `{ tool, args }`.
+- Converts that spec into an HTTP POST request against the chart rendering service instead of requiring `node` or a local JS script.
+
+How to use it:
+
+1. Pick the target tool, such as `generate_line_chart`, `generate_bar_chart`, or `generate_district_map`.
+2. Open the matching reference file under `chart-visualization/references/` and shape the `args` payload to match that schema.
+3. Build a render spec:
+
+```json
+{
+  "tool": "generate_line_chart",
+  "args": {
+    "title": "Revenue Trend",
+    "data": [
+      { "time": "2026-01", "value": 120 },
+      { "time": "2026-02", "value": 135 }
+    ]
+  }
+}
+```
+
+4. Convert the spec into an HTTP request:
+   standard chart tools map `tool` to a service `type` such as `line`, `bar`, `scatter`, or `spreadsheet`, then send `{ type, source, ...args }`.
+5. For map tools such as `generate_district_map`, `generate_pin_map`, and `generate_path_map`, keep the original `tool` name and send `{ serviceId?, tool, input: args, source }`.
+6. Parse the JSON response. Standard charts usually return the rendered image URL in `resultObj`. Map tools may return structured `content[]` items that should be flattened into user-facing text.
+
+Why it is protocol-first:
+
+- It works in any environment that can issue HTTP requests.
+- It avoids a hard dependency on Node.js, QuickJS adapters, or local filesystem access.
+- It makes the final request body easy to inspect, replay, or debug when rendering fails.
 
 ## Discovering Project Context
 
