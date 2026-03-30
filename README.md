@@ -13,6 +13,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 - `chart-visualization/`: protocol-first chart rendering skill that selects chart types, shapes render specs from references, and documents the HTTP request contract for chart and map generation.
 - `commit/`: creates repository-consistent Conventional Commits and auto-detects commit-message language from recent history.
 - `discovering-project-context/`: builds a fast, evidence-grounded project brief for unfamiliar repositories.
+- `deep-research/`: runs explicit deep-research workflows for evidence-driven, multi-source synthesis with standard/fast modes and structured citations.
 - `technical-proposal-writing/`: style guide for writing technical proposals, RFCs, ADRs, and migration plans with lower cognitive load.
 - `excalidraw-diagram-generator/`: generates Excalidraw diagrams from natural language prompts.
 - `obsidian-daily-note-todo/`: finds an Obsidian vault and creates a todo in today's daily note.
@@ -35,6 +36,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 ├── context7-cli/
 ├── commit/
 ├── discovering-project-context/
+├── deep-research/
 ├── excalidraw-diagram-generator/
 ├── find-docs/
 ├── find-skills/
@@ -85,7 +87,7 @@ More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
 - Collaboration: `requesting-code-review`, `receiving-code-review`, `dispatching-parallel-agents`, `subagent-driven-development`
 - Delivery: `finishing-a-development-branch`, `using-git-worktrees`
 - Documentation and setup: `find-docs`, `context7-cli`, `technical-proposal-writing`
-- Domain-specific: `gh-cli`, `ui-ux-pro-max`, `find-skills`, `excalidraw-diagram-generator`, `obsidian-daily-note-todo`, `discovering-project-context`, `commit`, `asr-transcript-summary`, `requirements-architect-analyzer`
+- Domain-specific: `gh-cli`, `ui-ux-pro-max`, `find-skills`, `excalidraw-diagram-generator`, `obsidian-daily-note-todo`, `discovering-project-context`, `deep-research`, `commit`, `asr-transcript-summary`, `requirements-architect-analyzer`
 - Visualization: `chart-visualization`
 - Writing-style: `personification`
 
@@ -97,6 +99,7 @@ More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
   It also includes `chart-visualization/SKILL_MOBILE_VERSION.md`, a self-contained single-file variant for constrained or mobile runtimes.
 - `commit`: a commit-writing workflow that inspects the current diff, selects one dominant Conventional Commit type, and keeps commit-message language aligned with recent repository history unless the user overrides it.
 - `discovering-project-context`: a repository discovery workflow that scans the highest-signal docs, manifests, runtime files, code directories, and recent git history to produce a fast but grounded project map.
+- `deep-research`: an explicit deep-research workflow for multi-stage evidence collection, cross-checking, temporal validation, and citation-ready synthesis with standard and fast modes.
 - `technical-proposal-writing`: a language-agnostic writing guide for technical proposals that favors direct claims, consistent terminology, and paragraph-driven structure over template boilerplate.
 - `excalidraw-diagram-generator`: turns natural language requests into Excalidraw-compatible diagrams such as flowcharts, architecture diagrams, sequence diagrams, and ER diagrams.
 - `obsidian-daily-note-todo`: locates an Obsidian vault, resolves today's daily note from vault settings, creates the note if missing, and appends a Tasks-compatible todo.
@@ -116,6 +119,25 @@ What it does:
 - selects one dominant Conventional Commit type and explains secondary work in the body when needed
 - infers commit-message language from the recent 20 commits unless the user gives an explicit language override
 - requires multiline commits to use heredoc plus `git commit -F -`
+
+## Deep Research
+
+`deep-research` is designed for requests that explicitly ask for "deep research", "深入调研", or "深度研究" instead of a quick answer.
+
+What it does:
+
+- Runs a staged research workflow that separates framing, evidence collection, validation, synthesis, and output construction.
+- Supports two modes: standard deep research for broad coverage and fast deep research for narrower, lower-cost but still validated results.
+- Enforces temporal checks for time-sensitive claims such as latest versions, leadership roles, policies, and current events.
+- Requires structured citation fields on key findings, including at least source, date, and evidence strength.
+- Distinguishes facts, analysis, inference, consensus, disagreement, and uncertainty to avoid overconfident summaries.
+
+Typical use cases:
+
+- produce a decision memo from mixed and sometimes conflicting sources
+- build a citation-ready briefing with explicit evidence quality
+- compare competing approaches where tradeoffs and disagreements matter
+- quickly deliver a focused deep-research brief with fast mode when scope is narrow
 
 ## Chart Visualization
 

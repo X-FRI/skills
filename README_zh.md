@@ -13,6 +13,7 @@
 - `chart-visualization/`：面向协议的图表渲染 skill，用于选择图表类型、根据参考文档组织渲染参数，并说明图表与地图生成所需的 HTTP 请求契约。
 - `commit/`：用于生成并执行符合仓库约定的 Conventional Commit，并根据最近历史自动判定 commit message 语言。
 - `discovering-project-context/`：用于在陌生仓库中快速建立基于证据的项目全局认知。
+- `deep-research/`：用于执行显式深度研究流程，支持标准/快速模式，并输出带结构化引用字段的证据化结论。
 - `technical-proposal-writing/`：技术方案写作规范 skill，用于撰写更易读的 proposal、RFC、ADR 与迁移方案。
 - `excalidraw-diagram-generator/`：根据自然语言描述生成 Excalidraw 图表。
 - `obsidian-daily-note-todo/`：查找 Obsidian vault，并在当天 daily note 中创建待办。
@@ -35,6 +36,7 @@
 ├── context7-cli/
 ├── commit/
 ├── discovering-project-context/
+├── deep-research/
 ├── excalidraw-diagram-generator/
 ├── find-docs/
 ├── find-skills/
@@ -85,7 +87,7 @@
 - 协作类：`requesting-code-review`、`receiving-code-review`、`dispatching-parallel-agents`、`subagent-driven-development`
 - 交付类：`finishing-a-development-branch`、`using-git-worktrees`
 - 文档与配置类：`find-docs`、`context7-cli`、`technical-proposal-writing`
-- 专项类：`gh-cli`、`ui-ux-pro-max`、`find-skills`、`excalidraw-diagram-generator`、`obsidian-daily-note-todo`、`discovering-project-context`、`commit`、`asr-transcript-summary`、`requirements-architect-analyzer`
+- 专项类：`gh-cli`、`ui-ux-pro-max`、`find-skills`、`excalidraw-diagram-generator`、`obsidian-daily-note-todo`、`discovering-project-context`、`deep-research`、`commit`、`asr-transcript-summary`、`requirements-architect-analyzer`
 - 可视化类：`chart-visualization`
 - 写作风格类：`personification`
 
@@ -97,6 +99,7 @@
   同目录还提供 `chart-visualization/SKILL_MOBILE_VERSION.md`，用于受限环境或移动端的单文件分发版本。
 - `commit`：一个提交写作工作流，会检查当前 diff，选择单一主导的 Conventional Commit 类型，并在用户未显式指定时根据最近的仓库提交历史自动判定 commit message 语言。
 - `discovering-project-context`：一个项目发现工作流，会优先扫描高信号文档、项目清单、运行与交付配置、主代码目录以及最近 git 历史，快速生成有依据的项目地图。
+- `deep-research`：一个显式深度研究工作流，覆盖多阶段证据收集、交叉验证、时效校验与可引用综合输出，并支持标准模式与快速模式。
 - `technical-proposal-writing`：语言无关的技术方案写作指南，强调直接结论、术语一致、段落驱动结构，避免模板化空话。
 - `excalidraw-diagram-generator`：将自然语言需求转换为 Excalidraw 图表，支持流程图、架构图、时序图、ER 图等。
 - `obsidian-daily-note-todo`：定位 Obsidian vault，依据 vault 配置解析当天 daily note，在笔记不存在时自动创建，并追加兼容 Obsidian Tasks 的待办。
@@ -116,6 +119,25 @@
 - 选择一个主导的 Conventional Commit 类型，次要改动放到正文说明
 - 在用户没有显式指定语言时，根据最近 20 条 commit 自动判定提交信息语言
 - 强制多行提交使用 heredoc + `git commit -F -`
+
+## Deep Research
+
+`deep-research` 适用于用户明确提出“deep research / 深度研究 / 深入调研”这类请求，而不是普通快速问答。
+
+它的作用：
+
+- 采用分阶段研究流程，拆分为问题框定、证据收集、验证、综合与输出构建。
+- 提供两种模式：标准深度研究用于广覆盖多维分析；快速深度研究用于范围更窄、成本更低但仍保留验证环节的输出。
+- 对时效敏感信息执行显式校验，例如最新版本、职位变更、政策状态和近期事件。
+- 要求关键结论附带结构化引用字段，至少包含来源、日期与证据强度。
+- 显式区分事实、分析、推断、共识、分歧与不确定性，避免过度自信结论。
+
+典型场景：
+
+- 基于多来源且存在冲突的信息输出决策备忘录
+- 产出可追溯、可引用的研究简报
+- 比较多种方案并明确分歧点与取舍依据
+- 在范围较窄的问题上用快速模式交付聚焦版深度研究结果
 
 ## Chart Visualization
 
