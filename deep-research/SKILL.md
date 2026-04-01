@@ -222,7 +222,7 @@ Use **query families**, not isolated queries.
 
 ## Standard Deep Research Workflow
 
-## Phase 1: Frame the Research
+### Phase 1: Frame the Research
 1. restate the main question internally
 2. determine the user's likely purpose
 3. define scope boundaries
@@ -237,7 +237,7 @@ Deliverable:
 
 ---
 
-## Phase 2: Broad Exploration
+### Phase 2: Broad Exploration
 1. search the core topic broadly
 2. identify major themes, stakeholders, approaches, timelines, or schools of thought
 3. note recurring terms, entities, and source names
@@ -252,7 +252,7 @@ Deliverable:
 
 ---
 
-## Phase 3: Dimension Breakdown
+### Phase 3: Dimension Breakdown
 Break the topic into relevant dimensions such as:
 - definitions and background
 - history and evolution
@@ -271,7 +271,7 @@ Not every topic needs every dimension, but every important topic needs multiple 
 
 ---
 
-## Phase 4: Deep Dive by Dimension
+### Phase 4: Deep Dive by Dimension
 For each important dimension:
 1. run targeted searches
 2. try multiple phrasings and variants
@@ -285,7 +285,7 @@ Do not stop after finding one apparently good source.
 
 ---
 
-## Phase 5: Evidence Expansion
+### Phase 5: Evidence Expansion
 For important claims, gather multiple evidence types when relevant:
 - facts and definitions
 - statistics and data
@@ -300,7 +300,7 @@ A strong deep research result usually uses more than one evidence type.
 
 ---
 
-## Phase 6: Validation and Cross-Checking
+### Phase 6: Validation and Cross-Checking
 Before accepting important findings:
 1. cross-check key claims across independent sources
 2. verify numbers, dates, names, roles, versions, and quoted positions
@@ -314,7 +314,7 @@ Before accepting important findings:
 
 ---
 
-## Phase 7: Temporal Verification
+### Phase 7: Temporal Verification
 When time-sensitive information matters:
 1. verify freshness explicitly
 2. distinguish publication date, event date, data period, and effective/version date
@@ -323,7 +323,7 @@ When time-sensitive information matters:
 
 ---
 
-## Phase 8: Synthesis
+### Phase 8: Synthesis
 1. identify the strongest findings
 2. group evidence by theme
 3. identify consensus across credible sources
@@ -336,7 +336,7 @@ Do not merely list findings in the order collected.
 
 ---
 
-## Phase 9: Output Construction
+### Phase 9: Output Construction
 Produce a structured result that:
 - directly answers the main question
 - prioritizes what matters most
@@ -349,7 +349,7 @@ Produce a structured result that:
 
 Fast mode is a **three-phase compressed workflow**.
 
-## Phase 1: Frame
+### Phase 1: Frame
 1. define the main question
 2. infer the user's purpose
 3. narrow the scope aggressively
@@ -364,7 +364,7 @@ Rules:
 
 ---
 
-## Phase 2: Key Verification
+### Phase 2: Key Verification
 1. gather the strongest available sources for the key subquestions
 2. verify the facts that most affect the answer
 3. cross-check critical dates, figures, definitions, versions, and roles
@@ -378,7 +378,7 @@ Rules:
 
 ---
 
-## Phase 3: Deliver
+### Phase 3: Deliver
 Produce a concise research result with:
 - direct answer
 - 3–5 key findings
@@ -415,81 +415,156 @@ If these thresholds cannot be met, reduce certainty and say so.
 
 ---
 
-## Mandatory Citation Format
+## Output Structure and Style
 
-Deep research results must use **structured citations**, not vague references.
+The output follows an **academic paper structure** with **popular science language**—hierarchical headings support navigation while accessible language supports comprehension.
 
-### Rule for Key Findings
-Every key finding must include, at minimum:
-- **Source**
-- **Date**
-- **Evidence Strength**
+### Hierarchical Structure
 
-If the environment supports it, also include:
-- **URL or retrieval pointer**
+Use clear H2/H3 headings to organize content hierarchically:
 
-Do not present a key finding as settled if it lacks these fields.
+```markdown
+## Research Question
 
-### Inline Minimum Citation Template
-Use this minimum template for key findings:
+## Key Findings
 
-`[Source Title | Date | Evidence Strength]`
+### Finding 1: [Descriptive title]
 
-If links or retrieval pointers are supported:
+### Finding 2: [Descriptive title]
 
-`[Source Title | Date | Evidence Strength | URL or Pointer]`
+## Detailed Analysis
 
-### Full Evidence Record Template
-Internally, or in a source appendix when appropriate, track evidence in this format:
+### Background
 
-- **Claim**
-- **Source Title**
-- **Source Type**
-- **Date** (publication / effective / event / data coverage)
-- **URL or Retrieval Pointer**
-- **Evidence Strength**: strong / medium / weak
-- **Notes**: scope, limitations, assumptions, possible bias
+### Mechanism
 
-### Evidence Strength Rules
+### Evidence Quality
 
-**Strong**
-- primary or official source, or
-- multiple independent credible sources support the claim, and
-- evidence is direct and sufficiently current
+## Areas of Consensus
 
-**Medium**
-- one credible source supports the claim, but evidence is partial, indirect, or somewhat dated
+## Areas of Uncertainty
 
-**Weak**
-- evidence is indirect, weakly matched, outdated, unverified, or based on a single low-confidence source
+## Implications
 
-If major source disagreement exists, do not label a claim as **strong** unless the conflict has been examined and resolved.
+## References
+```
 
-### Date Rule
-Use the date most relevant to the claim:
-- publication date
-- effective date
-- event date
-- data coverage period
+This structure allows readers to scan, jump, and reference specific sections efficiently.
 
-If the date is unknown, say so explicitly rather than omitting it.
+### Accessible Language Guidelines
+
+**Explain from first principles.** Do not assume prior domain knowledge. Introduce concepts by building from what readers already understand.
+
+**Define technical terms on first use.** When a term appears for the first time, provide a brief explanation: *"This approach uses *reinforcement learning*—a method where AI systems learn by trial and error, receiving rewards for good outcomes."*
+
+**Use concrete analogies.** Explain abstract relationships through familiar comparisons: *"Think of DNA as a recipe book. Gene editing is like using a precise text editor to change a specific instruction."*
+
+**Avoid gatekeeping language.** Do not use phrases like "obviously," "as everyone knows," or "it goes without saying."
+
+**Lead with conclusions.** State the finding first, then explain how we know it.
+
+**Use active voice.** *"Researchers discovered"* is clearer than *"It was discovered by researchers."*
 
 ---
 
-## Evidence Model
+## Citation Format
 
-Track findings internally in this form:
+Use **Markdown footnote syntax** for all citations. This keeps the main text clean while preserving full traceability.
 
-- **Claim**
-- **Supporting source(s)**
-- **Source type**
-- **Date / recency**
-- **Evidence strength**
+### In-text Citation
+
+Insert superscript footnote markers at the point of claim:
+
+```markdown
+The intervention reduced adverse events by approximately 35%.[^1]
+
+Multiple independent studies have reached similar conclusions.[^2][^3]
+```
+
+### Footnote Content
+
+Place all footnotes at the end of the document under a `## References` section. Each footnote should include:
+
+```markdown
+## References
+
+[^1]: Smith, J., & Doe, A. (2024). "Title of the Study." *Journal Name*, 15(3), 123-145. https://doi.org/10.xxxx/xxxxx
+    - **Evidence quality**: This finding comes from a randomized controlled trial with 5,000 participants, double-blinded, conducted across three countries.
+    - **Limitations**: Study population was limited to adults aged 18-65; results may not generalize to other age groups.
+
+[^2]: Johnson et al. (2023). *Meta-analysis of similar interventions*. Nature Medicine. https://doi.org/...
+    - **Evidence quality**: Aggregated data from 12 independent studies (total n=45,000), showing consistent effect direction.
+
+[^3]: World Health Organization. (2024). *Technical Report on Treatment Guidelines*. https://www.who.int/...
+    - **Evidence quality**: Official guideline based on systematic review of available evidence.
+```
+
+### Evidence Quality Description
+
+Replace the `[Strong | Medium | Weak]` label system with **natural language descriptions** embedded in the footnote:
+
+| Instead of | Use |
+|------------|-----|
+| `[Strong]` | "This conclusion is supported by multiple independent randomized trials with consistent results." |
+| `[Medium]` | "Evidence comes from a single well-designed study, but replication is still pending." |
+| `[Weak]` | "Only preliminary data exists, based on a small pilot study with methodological limitations." |
+
+The description should answer: *How do we know this? How certain should we be?*
+
+---
+
+## Mathematical Notation
+
+**All mathematical expressions must use LaTeX syntax.** Never use Unicode mathematical symbols (like `×`, `÷`, `α`, `β`, `∑`, `∫`, `→`) in the main text.
+
+### Inline Math
+
+Use single dollar signs for inline expressions:
+
+```markdown
+The relationship is expressed as $E = mc^2$, where $E$ represents energy, $m$ represents mass, and $c$ is the speed of light.
+
+The probability follows $P(X) = \frac{1}{1 + e^{-x}}$, a sigmoid function that maps any real value to a range between 0 and 1.
+```
+
+### Display Math
+
+Use double dollar signs for standalone equations:
+
+```markdown
+The formula for calculating the area under a curve is:
+
+$$\int_{a}^{b} f(x)\,dx = F(b) - F(a)$$
+
+Where $F(x)$ is the antiderivative of $f(x)$.
+```
+
+### Explaining Equations
+
+When presenting an equation, explain what it means in plain language:
+
+```markdown
+The growth can be modeled by:
+
+$$N(t) = N_0 \cdot e^{rt}$$
+
+In words: the population size at time $t$ equals the starting population multiplied by Euler's number raised to the power of growth rate times time. This describes exponential growth—where the larger a population becomes, the faster it grows.
+```
+
+---
+
+## Evidence Model (Internal Tracking)
+
+Track findings internally using this structure (not shown to users unless requested):
+
+- **Claim**: the statement being evaluated
+- **Supporting source(s)**: list of citations
+- **Source type**: RCT / cohort study / meta-analysis / expert opinion / etc.
+- **Date / recency**: publication or data collection date
+- **Evidence description**: natural language quality assessment
 - **Confidence level**: high / medium / low
 - **Status**: consensus / disputed / tentative
 - **Notes**: assumptions, scope limits, possible bias, unresolved questions
-
-This model should guide the research even if it is not shown verbatim.
 
 ---
 
@@ -535,129 +610,20 @@ Treat information cautiously if:
 
 ---
 
-## Output Structure
-
-Unless the user requests a different format, default to the following structure:
-
-### Executive Summary
-- 2–5 sentence overview
-- direct answer to the main question
-- confidence level when relevant
-
-### Key Findings
-- 3–7 main findings in standard mode
-- 3–5 main findings in fast mode
-- each key finding must carry structured citation fields
-
-### Detailed Analysis
-- organized by topic or dimension
-- focuses on what matters, not source-by-source narration
-
-### Areas of Consensus
-- what multiple credible sources broadly agree on
-
-### Areas of Disagreement or Uncertainty
-- what remains contested, unclear, weakly evidenced, or time-sensitive
-
-### Implications / Recommendations
-- include only if useful to the user's purpose
-- keep recommendations tied to evidence
-
-### Limitations
-- what could not be fully verified
-- what may have changed
-- what should be checked further
-
-### Sources / References
-- provide citations or source lists in the best format supported by the environment
-
----
-
-## Final Output Language and Tone
-
-### Language Selection
-Use the user's dominant language for the final output.
-
-Determine language in this order:
-1. the user's current message
-2. recent substantive user messages in the thread
-3. the established language of the target artifact or document, if one exists
-4. default to English only if no clear signal exists
-
-Do not default to English when the user's language is reasonably clear.
-
-### Tone by Context
-Adapt tone to the output context.
-
-- For executive summaries, briefings, and discussion-oriented outputs:
-  use natural, human, low-friction prose.
-- For detailed analysis, evidence review, comparisons, and research findings:
-  use direct, neutral, information-dense language.
-- For rigid formats, schemas, formal templates, or structured artifacts:
-  preserve the required format and avoid stylistic embellishment.
-- For high-stakes precision domains:
-  prioritize clarity, restraint, and verifiability over personality.
-
-### Style Rules
-- reduce reader cognitive load without reducing information density
-- cut filler, throat-clearing, and performative language
-- lead with what the reader needs to know
-- avoid AI-tinged framing such as:
-  - "after careful analysis"
-  - "I have reviewed"
-  - "in conclusion"
-  - "it is worth noting"
-- prefer clear headings over empty transition phrases
-- short paragraphs are acceptable when they improve readability
-- do not let tone obscure uncertainty, limitations, evidence strength, or temporal precision
-
-### Non-Override Rule
-Natural tone must never override:
-- factual accuracy
-- evidence strength
-- uncertainty labeling
-- citation quality
-- temporal precision
-- required output format
-
----
-
-## Readability Rules
-
-The final answer should be easy to use.
-
-### Writing Rules
-- lead with conclusions
-- use clear headings
-- distinguish fact from analysis from inference
-- avoid jargon unless the audience expects it
-- include concrete examples where useful
-- keep citations attached to important claims
-- prefer synthesis over source-by-source narration
-
-### Distinguish these explicitly when useful
-- **Fact**: directly supported by source evidence
-- **Analysis**: synthesis of multiple sources
-- **Inference**: reasoned conclusion with some uncertainty
-
-### Readability Goal
-The answer should help the user act, decide, write, compare, or understand — not merely prove that research happened.
-
----
-
 ## Completeness Check
 
-Before finalizing, ask internally:
+Before finalizing, verify:
 
-- have I answered the main question directly?
-- have I covered enough important dimensions for the chosen mode?
-- have I used enough source diversity?
-- have I checked important claims for accuracy?
-- have I checked whether freshness matters?
-- have I attached structured citations to every key finding?
-- have I included strengths, limitations, and uncertainty?
-- have I distinguished consensus from disagreement?
-- is the result readable and useful for the user's purpose?
+- [ ] Have I answered the main question directly?
+- [ ] Is the hierarchical structure clear and navigable?
+- [ ] Are technical terms explained on first use?
+- [ ] Do key findings use accessible language while preserving accuracy?
+- [ ] Have I used LaTeX for all mathematical expressions?
+- [ ] Do all claims have footnote citations in the `[^n]` format?
+- [ ] Is evidence quality described in natural language in the footnotes?
+- [ ] Have I distinguished consensus from disagreement?
+- [ ] Are dates and recency verified for time-sensitive claims?
+- [ ] Is uncertainty clearly stated where appropriate?
 
 If several answers are "no", continue researching before finalizing.
 
@@ -679,7 +645,7 @@ Fast deep research is complete when most of the following are true:
 - the highest-priority subquestions are covered
 - 3–5 key findings are verified
 - recency-sensitive facts have been checked
-- each key finding includes structured citation fields
+- each key finding includes footnote citations
 - remaining uncertainty is clearly stated
 - the output is concise and usable
 
@@ -696,8 +662,8 @@ Fast deep research is complete when most of the following are true:
 - writing long but low-value background sections
 - collecting facts without synthesis
 - giving unsupported recommendations
-- omitting citation fields for key findings
-- labeling weak evidence as strong
+- omitting citations for key findings
+- using Unicode instead of LaTeX for math
 - using fast mode as an excuse for weak validation
 - overconfidently filling gaps from memory
 
@@ -705,15 +671,16 @@ Fast deep research is complete when most of the following are true:
 
 ## Deliverables
 
-A successful deep research run should usually produce:
+A successful deep research run should produce:
 
-1. a clear answer to the main question
-2. structured findings from multiple angles or from the highest-priority angles in fast mode
-3. evidence-backed claims
+1. a clear, hierarchical answer to the main question
+2. structured findings organized by topic/dimension
+3. evidence-backed claims with footnote citations
 4. explicit treatment of uncertainty and disagreement
 5. current and date-aware context where relevant
-6. readable, user-oriented synthesis
-7. structured citations attached to key findings
+6. accessible, readable synthesis without jargon gating
+7. LaTeX-formatted mathematical expressions
+8. complete reference list with evidence quality descriptions
 
 ---
 
@@ -724,7 +691,8 @@ Deep research succeeds only when the result is:
 - deep enough to be useful
 - validated enough to be trusted
 - current enough for the task
-- structured enough to be readable
+- structured enough to be navigable
+- accessible enough to be understood
 - traceable enough to be audited
 
 Do not confuse:
