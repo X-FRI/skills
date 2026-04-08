@@ -48,6 +48,7 @@ Skills are reusable task-specific workflows stored in `skills/` directory. Each 
 | [personification](./skills/personification/SKILL.md) | Human-tone writing adapter |
 | [caveman](./skills/caveman/SKILL.md) | Ultra-compressed communication, 6 intensity levels |
 | [technical-proposal-writing](./skills/technical-proposal-writing/SKILL.md) | Technical proposal style guide |
+| [ascii-art-diagrams](./skills/ascii-art-diagrams/SKILL.md) | Text diagram guide with ASCII-safe defaults and optional Unicode layout mode |
 
 ### MCP Server
 

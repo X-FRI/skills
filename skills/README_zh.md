@@ -11,6 +11,7 @@
 - `find-docs/`：基于 Context7 的最新库与框架文档检索 skill。
 - `context7-cli/`：ctx7 CLI 参考 skill，覆盖文档查询、skill 管理与 MCP 配置。
 - `chart-visualization/`：面向协议的图表渲染 skill，用于选择图表类型、根据参考文档组织渲染参数，并说明图表与地图生成所需的 HTTP 请求契约。
+- `ascii-art-diagrams/`：文本图表规范 skill，默认使用 ASCII-safe 流程图和树结构写法，只在受控渲染环境下使用 Unicode 盒线字符。
 - `commit/`：用于生成并执行符合仓库约定的 Conventional Commit，并根据最近历史自动判定 commit message 语言。
 - `discovering-project-context/`：用于在陌生仓库中快速建立基于证据的项目全局认知。
 - `deep-research/`：用于执行显式深度研究流程，支持标准/快速模式，并输出带结构化引用字段的证据化结论。
@@ -33,6 +34,7 @@
 .
 ├── analyzing-codex-token-usage/
 ├── asr-transcript-summary/
+├── ascii-art-diagrams/
 ├── chart-visualization/
 ├── context7-cli/
 ├── commit/
@@ -90,6 +92,7 @@
 - 文档与配置类：`find-docs`、`context7-cli`、`technical-proposal-writing`
 - 专项类：`gh-cli`、`ui-ux-pro-max`、`find-skills`、`excalidraw-diagram-generator`、`obsidian-daily-note-todo`、`discovering-project-context`、`deep-research`、`commit`、`asr-transcript-summary`、`requirements-architect-analyzer`
 - 可视化类：`chart-visualization`
+- 文本图表类：`ascii-art-diagrams`
 - 写作风格类：`personification`、`caveman`
 
 ## 新增 Skills
@@ -98,6 +101,7 @@
 - `context7-cli`：更完整的 ctx7 CLI skill，覆盖文档访问、AI skill 的安装/搜索/生成，以及 Context7 MCP 配置。
 - `chart-visualization`：一个图表渲染工作流，会根据数据形态选择合适的图表类型，读取对应 reference 组织参数，并把结果转换为协议层 HTTP 请求，而不是依赖本地 JavaScript 运行时。
   同目录还提供 `chart-visualization/SKILL_MOBILE_VERSION.md`，用于受限环境或移动端的单文件分发版本。
+- `ascii-art-diagrams`：一个文本图表规范，会把纯 ASCII 作为默认方案以保证可移植性，只有在已知使用等宽友好环境且确实需要边框分组时，才使用 Unicode 盒线字符。
 - `commit`：一个提交写作工作流，会检查当前 diff，选择单一主导的 Conventional Commit 类型，并在用户未显式指定时根据最近的仓库提交历史自动判定 commit message 语言。
 - `discovering-project-context`：一个项目发现工作流，会优先扫描高信号文档、项目清单、运行与交付配置、主代码目录以及最近 git 历史，快速生成有依据的项目地图。
 - `deep-research`：一个显式深度研究工作流，覆盖多阶段证据收集、交叉验证、时效校验与可引用综合输出，并支持标准模式与快速模式。
@@ -121,6 +125,17 @@
 - 选择一个主导的 Conventional Commit 类型，次要改动放到正文说明
 - 在用户没有显式指定语言时，根据最近 20 条 commit 自动判定提交信息语言
 - 强制多行提交使用 heredoc + `git commit -F -`
+
+## ASCII Art Diagrams
+
+`ascii-art-diagrams` 适用于“把这个流程画成文本图”“用 markdown 画一个决策树”或“生成适合终端展示的架构草图”这类请求。
+
+它的作用：
+
+- 默认使用 ASCII-safe 模式，采用 `[ ]`、`|`、`v` 和 `+-->` 等字符，保证输出能稳定显示在聊天窗口、GitHub 评论、代码评审、终端和窄视口中。
+- 把 Unicode 盒线字符降级为可选布局模式，主要用于提示框和确实需要边框分组的场景。
+- 将流程图、树结构和 box 规则分开处理，只有真正使用 box 时才要求严格的等宽校验。
+- 在目标渲染环境未知时，优先保证稳定性，而不是追求装饰性排版。
 
 ## Deep Research
 

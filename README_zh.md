@@ -48,6 +48,7 @@ AI 智能体的能力、技能和 MCP 服务的集中管理仓库。
 | [personification](./skills/personification/SKILL.md) | 人性化写作适配器 |
 | [caveman](./skills/caveman/SKILL.md) | 超压缩交流模式，6 种强度级别 |
 | [technical-proposal-writing](./skills/technical-proposal-writing/SKILL.md) | 技术提案风格指南 |
+| [ascii-art-diagrams](./skills/ascii-art-diagrams/SKILL.md) | 文本图表规范，默认使用 ASCII-safe 模式，Unicode 仅作增强排版 |
 
 ### MCP 服务
 

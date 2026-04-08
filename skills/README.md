@@ -11,6 +11,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 - `find-docs/`: Context7-based lookup for current library and framework documentation.
 - `context7-cli/`: ctx7 CLI reference for docs queries, skill management, and MCP setup.
 - `chart-visualization/`: protocol-first chart rendering skill that selects chart types, shapes render specs from references, and documents the HTTP request contract for chart and map generation.
+- `ascii-art-diagrams/`: text-diagram guide that defaults to ASCII-safe flow and tree patterns, with Unicode box-drawing reserved for controlled rendering contexts.
 - `commit/`: creates repository-consistent Conventional Commits and auto-detects commit-message language from recent history.
 - `discovering-project-context/`: builds a fast, evidence-grounded project brief for unfamiliar repositories.
 - `deep-research/`: runs explicit deep-research workflows for evidence-driven, multi-source synthesis with standard/fast modes and structured citations.
@@ -33,6 +34,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 .
 ├── analyzing-codex-token-usage/
 ├── asr-transcript-summary/
+├── ascii-art-diagrams/
 ├── chart-visualization/
 ├── context7-cli/
 ├── commit/
@@ -91,6 +93,7 @@ More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
 - Documentation and setup: `find-docs`, `context7-cli`, `technical-proposal-writing`
 - Domain-specific: `gh-cli`, `ui-ux-pro-max`, `find-skills`, `excalidraw-diagram-generator`, `obsidian-daily-note-todo`, `discovering-project-context`, `deep-research`, `commit`, `asr-transcript-summary`, `requirements-architect-analyzer`
 - Visualization: `chart-visualization`
+- Text diagrams: `ascii-art-diagrams`
 - Writing-style: `personification`, `caveman`
 
 ## Newly Added Skills
@@ -99,6 +102,7 @@ More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
 - `context7-cli`: a broader ctx7 CLI skill covering documentation access, AI skill install/search/generation, and Context7 MCP setup.
 - `chart-visualization`: a chart-rendering workflow that selects a chart type from the user's data shape, fills the matching reference schema, and turns the result into a protocol-level HTTP request instead of depending on a local JavaScript runtime.
   It also includes `chart-visualization/SKILL_MOBILE_VERSION.md`, a self-contained single-file variant for constrained or mobile runtimes.
+- `ascii-art-diagrams`: a text-diagram guide that treats plain ASCII as the default for portability and uses Unicode box-drawing only when box borders or visual grouping add real value in a known monospace-friendly environment.
 - `commit`: a commit-writing workflow that inspects the current diff, selects one dominant Conventional Commit type, and keeps commit-message language aligned with recent repository history unless the user overrides it.
 - `discovering-project-context`: a repository discovery workflow that scans the highest-signal docs, manifests, runtime files, code directories, and recent git history to produce a fast but grounded project map.
 - `deep-research`: an explicit deep-research workflow for multi-stage evidence collection, cross-checking, temporal validation, and citation-ready synthesis with standard and fast modes.
@@ -122,6 +126,17 @@ What it does:
 - selects one dominant Conventional Commit type and explains secondary work in the body when needed
 - infers commit-message language from the recent 20 commits unless the user gives an explicit language override
 - requires multiline commits to use heredoc plus `git commit -F -`
+
+## ASCII Art Diagrams
+
+`ascii-art-diagrams` is designed for requests like "show this flow as a text diagram", "draw a decision tree in markdown", or "make a terminal-safe architecture sketch".
+
+What it does:
+
+- Defaults to ASCII-safe mode with `[ ]`, `|`, `v`, and `+-->` so the output survives chat, GitHub comments, code review threads, terminals, and narrow viewports.
+- Treats Unicode box-drawing as an optional layout mode for note boxes and other cases where border-based grouping improves scanning.
+- Separates flow diagrams, trees, and boxes so strict width checks apply only when a box actually needs equal line length.
+- Prioritizes rendering stability over decorative formatting when the target environment is unknown.
 
 ## Deep Research
 
