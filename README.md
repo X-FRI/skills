@@ -46,6 +46,7 @@ Skills are reusable task-specific workflows stored in `skills/` directory. Each 
 | [codex-daily-summary](./skills/codex-daily-summary/SKILL.md) | Codex work logging |
 | [analyzing-codex-token-usage](./skills/analyzing-codex-token-usage/SKILL.md) | Token usage reports |
 | [personification](./skills/personification/SKILL.md) | Human-tone writing adapter |
+| [caveman](./skills/caveman/SKILL.md) | Ultra-compressed communication, 6 intensity levels |
 | [technical-proposal-writing](./skills/technical-proposal-writing/SKILL.md) | Technical proposal style guide |
 
 ### MCP Server

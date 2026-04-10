@@ -23,6 +23,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 - `requirements-architect-analyzer/`: turns fragmented interviews and product notes into developer-facing requirement reports with entities, state machines, priorities, and architecture constraints.
 - `gh-cli/`: GitHub CLI operational reference skill.
 - `personification/`: writing-style skill for more natural, less AI-sounding replies with automatic output-language detection.
+- `caveman/`: ultra-compressed communication mode with six intensity levels (lite/full/ultra/wenyan-lite/wenyan-full/wenyan-ultra) that cuts token usage ~75% while preserving technical accuracy.
 - `ui-ux-pro-max/`: UI/UX-focused skill with data and scripts.
 - `vendor/superpowers/`: upstream `obra/superpowers` repository tracked via `git subtree` and used as the sync source for local `superpowers/`.
 
@@ -35,6 +36,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 ├── chart-visualization/
 ├── context7-cli/
 ├── commit/
+├── caveman/
 ├── discovering-project-context/
 ├── deep-research/
 ├── excalidraw-diagram-generator/
@@ -89,7 +91,7 @@ More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
 - Documentation and setup: `find-docs`, `context7-cli`, `technical-proposal-writing`
 - Domain-specific: `gh-cli`, `ui-ux-pro-max`, `find-skills`, `excalidraw-diagram-generator`, `obsidian-daily-note-todo`, `discovering-project-context`, `deep-research`, `commit`, `asr-transcript-summary`, `requirements-architect-analyzer`
 - Visualization: `chart-visualization`
-- Writing-style: `personification`
+- Writing-style: `personification`, `caveman`
 
 ## Newly Added Skills
 
@@ -108,6 +110,7 @@ More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
 - `asr-transcript-summary`: turns noisy ASR meeting transcripts into executive-style summaries with language-aware output, action-item extraction, decision capture, and theme-based discussion regrouping.
 - `requirements-architect-analyzer`: converts scattered requirement notes and interview transcripts into structured requirement-and-architecture reports centered on business entities, state machines, module priorities, and explicit architecture constraints.
 - `personification`: a writing-style skill that reduces templated assistant phrasing, preserves authorial voice, and auto-selects reply language from user context while keeping the skill file itself in English.
+- `caveman`: an ultra-compressed communication mode that reduces token usage ~75% by stripping articles, filler, pleasantries, and hedging. Supports six intensity levels — `lite` (professional but tight), `full` (default, classic caveman fragments), `ultra` (abbreviated + causal arrows), `wenyan-lite` (semi-classical), `wenyan-full` (文言文 terseness), and `wenyan-ultra` (maximum compression with classical feel). Automatically drops caveman mode for security warnings and irreversible actions, then resumes after the critical part.
 
 ## Commit
 

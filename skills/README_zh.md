@@ -23,6 +23,7 @@
 - `requirements-architect-analyzer/`：将碎片化访谈和产品需求整理为面向开发者的需求与架构报告，突出核心实体、状态机、优先级和架构约束。
 - `gh-cli/`：GitHub CLI 操作参考 skill。
 - `personification/`：写作风格类 skill，用于生成更自然、更少 AI 腔、并支持自动识别输出语言的回复。
+- `caveman/`：超压缩交流模式 skill，支持 lite/full/ultra/wenyan-lite/wenyan-full/wenyan-ultra 六种强度，在保留技术准确性的同时将 token 使用量削减约 75%。
 - `ui-ux-pro-max/`：UI/UX 设计与实现相关 skill，包含数据与脚本。
 - `vendor/superpowers/`：通过 `git subtree` 跟踪的上游 `obra/superpowers` 仓库，用作本地 `superpowers/` 的同步来源。
 
@@ -89,7 +90,7 @@
 - 文档与配置类：`find-docs`、`context7-cli`、`technical-proposal-writing`
 - 专项类：`gh-cli`、`ui-ux-pro-max`、`find-skills`、`excalidraw-diagram-generator`、`obsidian-daily-note-todo`、`discovering-project-context`、`deep-research`、`commit`、`asr-transcript-summary`、`requirements-architect-analyzer`
 - 可视化类：`chart-visualization`
-- 写作风格类：`personification`
+- 写作风格类：`personification`、`caveman`
 
 ## 新增 Skills
 
@@ -108,6 +109,7 @@
 - `asr-transcript-summary`：将噪声较多的 ASR 会议转写整理为高管风格摘要，支持按语言输出、提取动作项、沉淀关键决策，并按主题重组讨论内容。
 - `requirements-architect-analyzer`：把分散的需求记录和访谈文本整理成结构化的需求与架构分析报告，聚焦业务核心、关键实体、状态机、模块优先级以及明确的架构约束。
 - `personification`：一个写作风格 skill，用于减少模板化助手措辞、保留作者感，并在 `SKILL.md` 保持英文的同时根据用户上下文自动选择实际输出语言。
+- `caveman`：超压缩交流模式，通过去除冠词、填充词、客套语和保守措辞将 token 使用量削减约 75%。支持六种强度级别——`lite`（专业精简）、`full`（默认，经典 caveman 风格）、`ultra`（缩写+因果箭头）、`wenyan-lite`（半文言）、`wenyan-full`（文言文极致精简）和 `wenyan-ultra`（古典感极限压缩）。安全警告和不可逆操作自动退出 caveman 模式，操作完成后恢复。
 
 ## Commit
 
