@@ -9,12 +9,18 @@
 - `superpowers/`：核心流程与工程实践类 skills（如 brainstorming、debugging、planning、TDD、verification、code review）。该目录持续与上游 `obra/superpowers` 的 skills 保持对齐。
 - `find-skills/`：用于发现和安装更多 skills。
 - `find-docs/`：基于 Context7 的最新库与框架文档检索 skill。
+- `biomedical-clinical-strategy-consultant/`：面向复杂医学、药理学和生物医学研究问题的循证咨询 skill。
 - `context7-cli/`：ctx7 CLI 参考 skill，覆盖文档查询、skill 管理与 MCP 配置。
 - `chart-visualization/`：面向协议的图表渲染 skill，用于选择图表类型、根据参考文档组织渲染参数，并说明图表与地图生成所需的 HTTP 请求契约。
 - `ascii-art-diagrams/`：文本图表规范 skill，默认使用 ASCII-safe 流程图和树结构写法，只在受控渲染环境下使用 Unicode 盒线字符。
 - `commit/`：用于生成并执行符合仓库约定的 Conventional Commit，并根据最近历史自动判定 commit message 语言。
 - `discovering-project-context/`：用于在陌生仓库中快速建立基于证据的项目全局认知。
 - `deep-research/`：用于执行显式深度研究流程，支持标准/快速模式，并输出带结构化引用字段的证据化结论。
+- `esl-coder/`：面向非母语开发者的英语结对编程辅导 skill，提供简洁英文改写与简单英语解释。
+- `financial-investment-strategy-consultant/`：面向宏观、估值、资产配置与风险管理问题的金融投资咨询 skill。
+- `minimax-docx/`：基于 OpenXML 的 DOCX 文档处理 skill，用于新建 Word 文档、编辑现有文件和应用模板格式。
+- `minimax-pdf/`：强调视觉质量与设计一致性的 PDF skill，用于创建精美 PDF、填写表单和重排版文档。
+- `minimax-xlsx/`：面向 Excel 与表格文件的 skill，支持读取、创建、编辑、修复与校验，并尽量保持原始格式不丢失。
 - `technical-proposal-writing/`：技术方案写作规范 skill，用于撰写更易读的 proposal、RFC、ADR 与迁移方案。
 - `excalidraw-diagram-generator/`：根据自然语言描述生成 Excalidraw 图表。
 - `obsidian-daily-note-todo/`：查找 Obsidian vault，并在当天 daily note 中创建待办。
@@ -23,6 +29,7 @@
 - `asr-transcript-summary/`：将杂乱的 ASR 会议转写整理为结构化高管摘要，提取动作项、决策与按主题归纳的讨论结论。
 - `requirements-architect-analyzer/`：将碎片化访谈和产品需求整理为面向开发者的需求与架构报告，突出核心实体、状态机、优先级和架构约束。
 - `gh-cli/`：GitHub CLI 操作参考 skill。
+- `philosophy-humanities-cognitive-architect/`：面向哲学、伦理、认知与跨学科思辨问题的人文认知咨询 skill。
 - `personification/`：写作风格类 skill，用于生成更自然、更少 AI 腔、并支持自动识别输出语言的回复。
 - `caveman/`：超压缩交流模式 skill，支持 lite/full/ultra/wenyan-lite/wenyan-full/wenyan-ultra 六种强度，在保留技术准确性的同时将 token 使用量削减约 75%。
 - `ui-ux-pro-max/`：UI/UX 设计与实现相关 skill，包含数据与脚本。
@@ -35,16 +42,25 @@
 ├── analyzing-codex-token-usage/
 ├── asr-transcript-summary/
 ├── ascii-art-diagrams/
+├── biomedical-clinical-strategy-consultant/
 ├── chart-visualization/
 ├── context7-cli/
 ├── commit/
+├── caveman/
 ├── discovering-project-context/
 ├── deep-research/
+├── esl-coder/
 ├── excalidraw-diagram-generator/
+├── financial-investment-strategy-consultant/
 ├── find-docs/
 ├── find-skills/
 ├── gh-cli/
+├── minimax-docx/
+├── minimax-pdf/
+├── minimax-xlsx/
 ├── obsidian-daily-note-todo/
+├── philosophy-humanities-cognitive-architect/
+├── pptx-generator/
 ├── requirements-architect-analyzer/
 ├── technical-proposal-writing/
 ├── superpowers/
@@ -90,14 +106,15 @@
 - 协作类：`requesting-code-review`、`receiving-code-review`、`dispatching-parallel-agents`、`subagent-driven-development`
 - 交付类：`finishing-a-development-branch`、`using-git-worktrees`
 - 文档与配置类：`find-docs`、`context7-cli`、`technical-proposal-writing`
-- 专项类：`gh-cli`、`ui-ux-pro-max`、`find-skills`、`excalidraw-diagram-generator`、`obsidian-daily-note-todo`、`discovering-project-context`、`deep-research`、`commit`、`asr-transcript-summary`、`requirements-architect-analyzer`
+- 专项类：`gh-cli`、`ui-ux-pro-max`、`find-skills`、`excalidraw-diagram-generator`、`obsidian-daily-note-todo`、`discovering-project-context`、`deep-research`、`commit`、`asr-transcript-summary`、`requirements-architect-analyzer`、`biomedical-clinical-strategy-consultant`、`financial-investment-strategy-consultant`、`philosophy-humanities-cognitive-architect`、`minimax-docx`、`minimax-pdf`、`minimax-xlsx`、`pptx-generator`
 - 可视化类：`chart-visualization`
 - 文本图表类：`ascii-art-diagrams`
-- 写作风格类：`personification`、`caveman`
+- 写作风格类：`personification`、`caveman`、`esl-coder`
 
 ## 新增 Skills
 
 - `find-docs`：聚焦 Context7 文档查询流程，用于解析库 ID 并检索最新文档与代码示例。
+- `biomedical-clinical-strategy-consultant`：一个面向复杂医学、药理学和生物医学研究问题的循证咨询 skill。它强调量化证据、脚注式溯源，以及面向临床决策支持或研究分析的段落化输出。
 - `context7-cli`：更完整的 ctx7 CLI skill，覆盖文档访问、AI skill 的安装/搜索/生成，以及 Context7 MCP 配置。
 - `chart-visualization`：一个图表渲染工作流，会根据数据形态选择合适的图表类型，读取对应 reference 组织参数，并把结果转换为协议层 HTTP 请求，而不是依赖本地 JavaScript 运行时。
   同目录还提供 `chart-visualization/SKILL_MOBILE_VERSION.md`，用于受限环境或移动端的单文件分发版本。
@@ -105,6 +122,11 @@
 - `commit`：一个提交写作工作流，会检查当前 diff，选择单一主导的 Conventional Commit 类型，并在用户未显式指定时根据最近的仓库提交历史自动判定 commit message 语言。
 - `discovering-project-context`：一个项目发现工作流，会优先扫描高信号文档、项目清单、运行与交付配置、主代码目录以及最近 git 历史，快速生成有依据的项目地图。
 - `deep-research`：一个显式深度研究工作流，覆盖多阶段证据收集、交叉验证、时效校验与可引用综合输出，并支持标准模式与快速模式。
+- `esl-coder`：一个面向非母语开发者的双语结对编程与英语辅导 skill。它会先给出一条更自然的英文表达，再用简单英语解释技术内容，并支持 `strict`、`bilingual`、`explain` 三种模式切换。
+- `financial-investment-strategy-consultant`：一个面向资产配置、宏观分析、估值和风险管理的金融咨询 skill。它要求模型量化风险收益、先检查 KYC 式关键变量，再用概率化框架输出建议，而不是给出空泛市场判断。
+- `minimax-docx`：一个基于 OpenXML 工作流的 DOCX 文档生产 skill。它将文档任务划分为创建、填充编辑和套模板三类流程，适合需要正式 Word 输出且不能破坏文档结构的场景。
+- `minimax-pdf`：一个以视觉质量和设计识别度为中心的 PDF 生成 skill。它支持从零生成、表单填写和文档重排版，并通过 token 化设计系统保持输出可打印、风格统一。
+- `minimax-xlsx`：一个面向 Excel 和表格文件的 spreadsheet skill。它覆盖读取分析、创建、编辑、修复和校验流程，并特别强调保留原始 sheet、公式和格式。
 - `technical-proposal-writing`：语言无关的技术方案写作指南，强调直接结论、术语一致、段落驱动结构，避免模板化空话。
 - `excalidraw-diagram-generator`：将自然语言需求转换为 Excalidraw 图表，支持流程图、架构图、时序图、ER 图等。
 - `obsidian-daily-note-todo`：定位 Obsidian vault，依据 vault 配置解析当天 daily note，在笔记不存在时自动创建，并追加兼容 Obsidian Tasks 的待办。
@@ -112,7 +134,9 @@
 - `analyzing-codex-token-usage`：基于本地 state DB 元数据与 rollout `token_count` 增量，生成按天、周、月统计的 Codex token 用量报告，并支持趋势与 spike 分析。
 - `asr-transcript-summary`：将噪声较多的 ASR 会议转写整理为高管风格摘要，支持按语言输出、提取动作项、沉淀关键决策，并按主题重组讨论内容。
 - `requirements-architect-analyzer`：把分散的需求记录和访谈文本整理成结构化的需求与架构分析报告，聚焦业务核心、关键实体、状态机、模块优先级以及明确的架构约束。
+- `philosophy-humanities-cognitive-architect`：一个用于哲学、伦理、认知与科学-人文综合推理的思辨 skill。它强调术语清洗、科学与哲学双重校验，以及高密度分析性散文，而不是依赖隐喻和抒情表达。
 - `personification`：一个写作风格 skill，用于减少模板化助手措辞、保留作者感，并在 `SKILL.md` 保持英文的同时根据用户上下文自动选择实际输出语言。
+- `pptx-generator`：一个 PowerPoint 工作流 skill，用于读取演示文稿、通过 XML 流程编辑模板化 deck，以及结合 PptxGenJS 和内建设计系统从零生成新 PPT。
 - `caveman`：超压缩交流模式，通过去除冠词、填充词、客套语和保守措辞将 token 使用量削减约 75%。支持六种强度级别——`lite`（专业精简）、`full`（默认，经典 caveman 风格）、`ultra`（缩写+因果箭头）、`wenyan-lite`（半文言）、`wenyan-full`（文言文极致精简）和 `wenyan-ultra`（古典感极限压缩）。安全警告和不可逆操作自动退出 caveman 模式，操作完成后恢复。
 
 ## Commit

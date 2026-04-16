@@ -9,12 +9,18 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 - `superpowers/`: core process and engineering workflow skills (brainstorming, debugging, planning, TDD, verification, code review, etc.). This directory is kept aligned with upstream `obra/superpowers` skills.
 - `find-skills/`: helps discover and install additional skills.
 - `find-docs/`: Context7-based lookup for current library and framework documentation.
+- `biomedical-clinical-strategy-consultant/`: evidence-first biomedical and clinical consulting skill for complex medical, pharmacological, and translational-research questions.
 - `context7-cli/`: ctx7 CLI reference for docs queries, skill management, and MCP setup.
 - `chart-visualization/`: protocol-first chart rendering skill that selects chart types, shapes render specs from references, and documents the HTTP request contract for chart and map generation.
 - `ascii-art-diagrams/`: text-diagram guide that defaults to ASCII-safe flow and tree patterns, with Unicode box-drawing reserved for controlled rendering contexts.
 - `commit/`: creates repository-consistent Conventional Commits and auto-detects commit-message language from recent history.
 - `discovering-project-context/`: builds a fast, evidence-grounded project brief for unfamiliar repositories.
 - `deep-research/`: runs explicit deep-research workflows for evidence-driven, multi-source synthesis with standard/fast modes and structured citations.
+- `esl-coder/`: pair-programmer and English-tutor skill for non-native speakers that adds concise phrasing correction and simple English explanations.
+- `financial-investment-strategy-consultant/`: quantitative finance and private-wealth consulting skill for macro, portfolio, valuation, and risk questions.
+- `minimax-docx/`: OpenXML-based DOCX skill for creating new Word documents, editing existing files, and applying structured template formatting.
+- `minimax-pdf/`: design-driven PDF skill for creating polished PDFs, filling form fields, and reformatting documents into print-ready layouts.
+- `minimax-xlsx/`: spreadsheet skill for reading, creating, editing, fixing, and validating Excel-compatible files with format preservation.
 - `technical-proposal-writing/`: style guide for writing technical proposals, RFCs, ADRs, and migration plans with lower cognitive load.
 - `excalidraw-diagram-generator/`: generates Excalidraw diagrams from natural language prompts.
 - `obsidian-daily-note-todo/`: finds an Obsidian vault and creates a todo in today's daily note.
@@ -23,7 +29,9 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 - `asr-transcript-summary/`: summarizes messy ASR meeting transcripts into structured executive notes with action items, decisions, and theme-based discussion review.
 - `requirements-architect-analyzer/`: turns fragmented interviews and product notes into developer-facing requirement reports with entities, state machines, priorities, and architecture constraints.
 - `gh-cli/`: GitHub CLI operational reference skill.
+- `philosophy-humanities-cognitive-architect/`: philosophy and humanities synthesis skill for deep conceptual, ethical, and interdisciplinary reasoning.
 - `personification/`: writing-style skill for more natural, less AI-sounding replies with automatic output-language detection.
+- `pptx-generator/`: PowerPoint skill for reading decks, editing template-based presentations, and generating slides from scratch with PptxGenJS.
 - `caveman/`: ultra-compressed communication mode with six intensity levels (lite/full/ultra/wenyan-lite/wenyan-full/wenyan-ultra) that cuts token usage ~75% while preserving technical accuracy.
 - `ui-ux-pro-max/`: UI/UX-focused skill with data and scripts.
 - `vendor/superpowers/`: upstream `obra/superpowers` repository tracked via `git subtree` and used as the sync source for local `superpowers/`.
@@ -35,17 +43,25 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 ├── analyzing-codex-token-usage/
 ├── asr-transcript-summary/
 ├── ascii-art-diagrams/
+├── biomedical-clinical-strategy-consultant/
 ├── chart-visualization/
 ├── context7-cli/
 ├── commit/
 ├── caveman/
 ├── discovering-project-context/
 ├── deep-research/
+├── esl-coder/
 ├── excalidraw-diagram-generator/
+├── financial-investment-strategy-consultant/
 ├── find-docs/
 ├── find-skills/
 ├── gh-cli/
+├── minimax-docx/
+├── minimax-pdf/
+├── minimax-xlsx/
 ├── obsidian-daily-note-todo/
+├── philosophy-humanities-cognitive-architect/
+├── pptx-generator/
 ├── requirements-architect-analyzer/
 ├── technical-proposal-writing/
 ├── superpowers/
@@ -91,14 +107,15 @@ More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
 - Collaboration: `requesting-code-review`, `receiving-code-review`, `dispatching-parallel-agents`, `subagent-driven-development`
 - Delivery: `finishing-a-development-branch`, `using-git-worktrees`
 - Documentation and setup: `find-docs`, `context7-cli`, `technical-proposal-writing`
-- Domain-specific: `gh-cli`, `ui-ux-pro-max`, `find-skills`, `excalidraw-diagram-generator`, `obsidian-daily-note-todo`, `discovering-project-context`, `deep-research`, `commit`, `asr-transcript-summary`, `requirements-architect-analyzer`
+- Domain-specific: `gh-cli`, `ui-ux-pro-max`, `find-skills`, `excalidraw-diagram-generator`, `obsidian-daily-note-todo`, `discovering-project-context`, `deep-research`, `commit`, `asr-transcript-summary`, `requirements-architect-analyzer`, `biomedical-clinical-strategy-consultant`, `financial-investment-strategy-consultant`, `philosophy-humanities-cognitive-architect`, `minimax-docx`, `minimax-pdf`, `minimax-xlsx`, `pptx-generator`
 - Visualization: `chart-visualization`
 - Text diagrams: `ascii-art-diagrams`
-- Writing-style: `personification`, `caveman`
+- Writing-style: `personification`, `caveman`, `esl-coder`
 
 ## Newly Added Skills
 
 - `find-docs`: a focused Context7 workflow for resolving library IDs and querying up-to-date docs and code examples.
+- `biomedical-clinical-strategy-consultant`: an evidence-first consulting skill for complex medical, pharmacological, and biomedical-research questions. It enforces quantified evidence, footnoted traceability, and paragraph-based output for clinical decision support or research analysis.
 - `context7-cli`: a broader ctx7 CLI skill covering documentation access, AI skill install/search/generation, and Context7 MCP setup.
 - `chart-visualization`: a chart-rendering workflow that selects a chart type from the user's data shape, fills the matching reference schema, and turns the result into a protocol-level HTTP request instead of depending on a local JavaScript runtime.
   It also includes `chart-visualization/SKILL_MOBILE_VERSION.md`, a self-contained single-file variant for constrained or mobile runtimes.
@@ -106,6 +123,11 @@ More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
 - `commit`: a commit-writing workflow that inspects the current diff, selects one dominant Conventional Commit type, and keeps commit-message language aligned with recent repository history unless the user overrides it.
 - `discovering-project-context`: a repository discovery workflow that scans the highest-signal docs, manifests, runtime files, code directories, and recent git history to produce a fast but grounded project map.
 - `deep-research`: an explicit deep-research workflow for multi-stage evidence collection, cross-checking, temporal validation, and citation-ready synthesis with standard and fast modes.
+- `esl-coder`: a bilingual pair-programming and English-tutoring skill for non-native speakers. It adds a single natural-English rewrite of the user's prompt, keeps technical explanations in simple English, and can switch between strict, bilingual, and explain modes.
+- `financial-investment-strategy-consultant`: a finance consulting skill for portfolio construction, macro analysis, valuation, and risk management. It pushes the model to quantify risk/return, check KYC-style missing variables, and frame advice through probabilistic reasoning instead of market fluff.
+- `minimax-docx`: a DOCX production skill built around OpenXML workflows. It routes document work into create, fill-edit, and format-apply pipelines so formal Word outputs can be generated or modified without losing document structure.
+- `minimax-pdf`: a PDF generation skill centered on visual quality and design identity. It supports scratch generation, form filling, and document reformatting through a token-based design system that keeps the output print-ready.
+- `minimax-xlsx`: a spreadsheet skill for Excel and tabular data files. It covers read/analyze, create, edit, fix, and validate flows, with strong rules around preserving original sheets, formulas, and formatting.
 - `technical-proposal-writing`: a language-agnostic writing guide for technical proposals that favors direct claims, consistent terminology, and paragraph-driven structure over template boilerplate.
 - `excalidraw-diagram-generator`: turns natural language requests into Excalidraw-compatible diagrams such as flowcharts, architecture diagrams, sequence diagrams, and ER diagrams.
 - `obsidian-daily-note-todo`: locates an Obsidian vault, resolves today's daily note from vault settings, creates the note if missing, and appends a Tasks-compatible todo.
@@ -113,7 +135,9 @@ More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
 - `analyzing-codex-token-usage`: builds daily, weekly, and monthly Codex token usage reports from local state DB metadata plus rollout `token_count` deltas, with timezone-explicit windows and spike analysis.
 - `asr-transcript-summary`: turns noisy ASR meeting transcripts into executive-style summaries with language-aware output, action-item extraction, decision capture, and theme-based discussion regrouping.
 - `requirements-architect-analyzer`: converts scattered requirement notes and interview transcripts into structured requirement-and-architecture reports centered on business entities, state machines, module priorities, and explicit architecture constraints.
+- `philosophy-humanities-cognitive-architect`: an interdisciplinary reasoning skill for philosophy, ethics, cognition, and science-humanities synthesis. It emphasizes definition cleaning, scientific and philosophical cross-verification, and dense analytic prose instead of metaphor-heavy essays.
 - `personification`: a writing-style skill that reduces templated assistant phrasing, preserves authorial voice, and auto-selects reply language from user context while keeping the skill file itself in English.
+- `pptx-generator`: a PowerPoint workflow for reading decks, editing template-based presentations through XML workflows, and generating new presentations from scratch with PptxGenJS plus an embedded slide design system.
 - `caveman`: an ultra-compressed communication mode that reduces token usage ~75% by stripping articles, filler, pleasantries, and hedging. Supports six intensity levels — `lite` (professional but tight), `full` (default, classic caveman fragments), `ultra` (abbreviated + causal arrows), `wenyan-lite` (semi-classical), `wenyan-full` (文言文 terseness), and `wenyan-ultra` (maximum compression with classical feel). Automatically drops caveman mode for security warnings and irreversible actions, then resumes after the critical part.
 
 ## Commit

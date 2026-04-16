@@ -40,12 +40,20 @@ Skills are reusable task-specific workflows stored in `skills/` directory. Each 
 | [deep-research](./skills/deep-research/SKILL.md) | Multi-source research with citations |
 | [commit](./skills/commit/SKILL.md) | Conventional commit creation |
 | [find-docs](./skills/find-docs/SKILL.md) | Current library documentation lookup |
+| [biomedical-clinical-strategy-consultant](./skills/biomedical-clinical-strategy-consultant/SKILL.md) | Biomedical and clinical evidence-based consulting |
 | [chart-visualization](./skills/chart-visualization/SKILL.md) | Chart and map rendering |
 | [excalidraw-diagram-generator](./skills/excalidraw-diagram-generator/SKILL.md) | Excalidraw diagram generation |
+| [esl-coder](./skills/esl-coder/SKILL.md) | Pair programming with English tutoring for non-native speakers |
+| [financial-investment-strategy-consultant](./skills/financial-investment-strategy-consultant/SKILL.md) | Financial and investment strategy consulting |
+| [minimax-docx](./skills/minimax-docx/SKILL.md) | DOCX document creation, editing, and formatting |
+| [minimax-pdf](./skills/minimax-pdf/SKILL.md) | High-quality PDF creation, filling, and reformatting |
+| [minimax-xlsx](./skills/minimax-xlsx/SKILL.md) | Excel and spreadsheet creation, editing, and validation |
 | [obsidian-daily-note-todo](./skills/obsidian-daily-note-todo/SKILL.md) | Obsidian daily notes integration |
 | [codex-daily-summary](./skills/codex-daily-summary/SKILL.md) | Codex work logging |
 | [analyzing-codex-token-usage](./skills/analyzing-codex-token-usage/SKILL.md) | Token usage reports |
+| [philosophy-humanities-cognitive-architect](./skills/philosophy-humanities-cognitive-architect/SKILL.md) | Philosophy and humanities cognitive consulting |
 | [personification](./skills/personification/SKILL.md) | Human-tone writing adapter |
+| [pptx-generator](./skills/pptx-generator/SKILL.md) | PowerPoint presentation generation and editing |
 | [caveman](./skills/caveman/SKILL.md) | Ultra-compressed communication, 6 intensity levels |
 | [technical-proposal-writing](./skills/technical-proposal-writing/SKILL.md) | Technical proposal style guide |
 | [ascii-art-diagrams](./skills/ascii-art-diagrams/SKILL.md) | Text diagram guide with ASCII-safe defaults and optional Unicode layout mode |

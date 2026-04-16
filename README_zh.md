@@ -40,12 +40,20 @@ AI 智能体的能力、技能和 MCP 服务的集中管理仓库。
 | [deep-research](./skills/deep-research/SKILL.md) | 带引用的多源研究 |
 | [commit](./skills/commit/SKILL.md) | Conventional Commit 创建 |
 | [find-docs](./skills/find-docs/SKILL.md) | 当前库文档查询 |
+| [biomedical-clinical-strategy-consultant](./skills/biomedical-clinical-strategy-consultant/SKILL.md) | 生物医学与临床循证咨询 |
 | [chart-visualization](./skills/chart-visualization/SKILL.md) | 图表和地图渲染 |
 | [excalidraw-diagram-generator](./skills/excalidraw-diagram-generator/SKILL.md) | Excalidraw 图表生成 |
+| [esl-coder](./skills/esl-coder/SKILL.md) | 面向非母语开发者的英语结对编程辅导 |
+| [financial-investment-strategy-consultant](./skills/financial-investment-strategy-consultant/SKILL.md) | 金融与投资策略咨询 |
+| [minimax-docx](./skills/minimax-docx/SKILL.md) | DOCX 文档创建、编辑与排版 |
+| [minimax-pdf](./skills/minimax-pdf/SKILL.md) | 高质量 PDF 创建、填写与重排版 |
+| [minimax-xlsx](./skills/minimax-xlsx/SKILL.md) | Excel 与表格文件创建、编辑与校验 |
 | [obsidian-daily-note-todo](./skills/obsidian-daily-note-todo/SKILL.md) | Obsidian 日记集成 |
 | [codex-daily-summary](./skills/codex-daily-summary/SKILL.md) | Codex 工作日志 |
 | [analyzing-codex-token-usage](./skills/analyzing-codex-token-usage/SKILL.md) | Token 使用报告 |
+| [philosophy-humanities-cognitive-architect](./skills/philosophy-humanities-cognitive-architect/SKILL.md) | 哲学与人文认知咨询 |
 | [personification](./skills/personification/SKILL.md) | 人性化写作适配器 |
+| [pptx-generator](./skills/pptx-generator/SKILL.md) | PowerPoint 演示文稿生成与编辑 |
 | [caveman](./skills/caveman/SKILL.md) | 超压缩交流模式，6 种强度级别 |
 | [technical-proposal-writing](./skills/technical-proposal-writing/SKILL.md) | 技术提案风格指南 |
 | [ascii-art-diagrams](./skills/ascii-art-diagrams/SKILL.md) | 文本图表规范，默认使用 ASCII-safe 模式，Unicode 仅作增强排版 |
