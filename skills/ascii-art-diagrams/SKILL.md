@@ -16,6 +16,7 @@ Default to plain ASCII. Treat Unicode box-drawing as an optional enhancement mod
 Use this skill when creating:
 - Flow charts in markdown or chat
 - Decision trees in docs or code reviews
+- Data comparison tables, metric summaries, or before/after tradeoff views
 - File trees and hierarchies
 - Small call-flow or state-flow diagrams
 - Text boxes for notes or warnings
@@ -42,6 +43,7 @@ Best for:
 
 Allowed characters:
 - Boxes and nodes: `[ ] ( )`
+- Tables: `+ - |`
 - Vertical flow: `|`
 - Arrowheads: `v ^ < >`
 - Branches: `+-->`
@@ -105,7 +107,46 @@ Avoid Unicode when:
 - The diagram contains long labels
 - The output may appear in proportional fonts
 
-## Rule 2: Flow Diagrams Should Be Linear First
+## Rule 2: Use ASCII Tables for Data Comparison
+
+When the task compares metrics, options, before/after states, costs, savings, or
+tradeoffs, prefer an ASCII table over a flow diagram.
+
+Use tables for:
+- Numeric comparisons
+- Option matrices
+- Before/after summaries
+- Pros/cons with repeated dimensions
+- Ranked lists with the same fields per row
+
+Keep table cells short. Move long caveats or interpretation into bullets below
+the table instead of widening the table.
+
+Preferred pattern:
+
+```text
++----------------+----------+----------+
+| Case           | Before   | After    |
++----------------+----------+----------+
+| Small edit     | baseline | -30-60%  |
+| Bug triage     | baseline | -50-75%  |
+| Large logs     | baseline | -80-95%  |
++----------------+----------+----------+
+```
+
+Avoid using a flow diagram for comparison-only answers:
+
+```text
+[Before]
+   |
+   v
+[After]
+```
+
+That shape hides the dimensions being compared. Use a table unless there is also
+a real sequence, branch, or state transition to explain.
+
+## Rule 3: Flow Diagrams Should Be Linear First
 
 Model the main path vertically. Add side branches only for real decisions.
 
@@ -131,7 +172,7 @@ Guidelines:
 - Keep node text short and action-oriented
 - Avoid crossing return lines unless they add real value
 
-## Rule 3: Tree Structures Should Use Plain Connectors
+## Rule 4: Tree Structures Should Use Plain Connectors
 
 For trees, prefer ASCII-safe connectors:
 
@@ -147,7 +188,7 @@ root
 
 Use Unicode tree glyphs only in Unicode mode and only when the environment is controlled.
 
-## Rule 4: Boxes Are Secondary, Not Default
+## Rule 5: Boxes Are Secondary, Not Default
 
 Do not wrap everything in a box.
 
@@ -176,9 +217,9 @@ Unicode box example:
 └──────────────────────────────────┘
 ```
 
-## Rule 5: When Using Boxes, Keep Width Rules Explicit
+## Rule 6: When Using Boxes and Tables, Keep Width Rules Explicit
 
-Only box diagrams need strict width verification.
+Boxes and ASCII tables need strict width verification.
 
 ### ASCII boxes
 
@@ -202,9 +243,21 @@ All lines must have the same character count.
 └──────────────────────┘
 ```
 
-If you are not using a box, do not force artificial horizontal padding just to make lines line up.
+### ASCII tables
 
-## Rule 6: Avoid Mixing Dense Connectors With Dense Text
+All border and row lines must have the same character count.
+
+```text
++--------+-------+
+| Metric | Value |
++--------+-------+
+| Saved  | 96.7% |
++--------+-------+
+```
+
+If you are not using a box or table, do not force artificial horizontal padding just to make lines line up.
+
+## Rule 7: Avoid Mixing Dense Connectors With Dense Text
 
 Do not combine complicated connector art with long prose on the same line.
 
@@ -225,7 +278,7 @@ Better:
 
 Short labels keep diagrams scannable.
 
-## Rule 7: Use Labels Sparingly
+## Rule 8: Use Labels Sparingly
 
 Use simple branch labels such as:
 - `Yes`
@@ -237,7 +290,7 @@ Use simple branch labels such as:
 
 Avoid sentence-length branch labels inside the connector path. Put longer explanation in nearby prose instead.
 
-## Rule 8: Verification Rules
+## Rule 9: Verification Rules
 
 ### For non-box ASCII diagrams
 
@@ -247,9 +300,9 @@ Verify by inspection:
 - Indentation is consistent
 - No line wraps in the target context
 
-### For box diagrams
+### For boxes and tables
 
-Verify width with tooling when the box matters.
+Verify width with tooling when the box or table matters.
 
 Example command:
 
@@ -266,7 +319,22 @@ All lines must report the same character count.
 
 This check is recommended for ASCII boxes and required for Unicode boxes.
 
-## Rule 9: Long Text Handling
+When validating an example already written in a file, check the exact line range:
+
+```bash
+awk 'NR>=128 && NR<=134 {print length($0) ":" $0}' path/to/file.md
+```
+
+Every reported length in the range should match. Use `nl -ba path/to/file.md`
+first if you need stable line numbers. Prefer this over eyeballing tables after
+editing a skill, README, or markdown report.
+
+For ASCII tables, also verify:
+- Numeric columns use consistent units
+- Long values are moved to notes below the table
+- The table does not wrap in the target context
+
+## Rule 10: Long Text Handling
 
 When labels get too long:
 - Shorten node text to the action or decision
@@ -275,7 +343,7 @@ When labels get too long:
 
 Do not widen diagrams indefinitely. Wide diagrams fail on mobile and in narrow panes.
 
-## Rule 10: Environment Assumptions
+## Rule 11: Environment Assumptions
 
 Assume the rendering environment is hostile unless you know otherwise.
 
@@ -321,6 +389,17 @@ root
 +-- child-b
 ```
 
+### Default comparison table
+
+```text
++-----------+--------+--------+
+| Scenario  | Before | After  |
++-----------+--------+--------+
+| Small     | 100%   | 40-70% |
+| Large     | 100%   | 5-30%  |
++-----------+--------+--------+
+```
+
 ### ASCII note box
 
 ```text
@@ -342,6 +421,7 @@ root
 ## Common Mistakes
 
 - Choosing Unicode by default when ASCII would be clearer
+- Using a flow diagram when a comparison table would be clearer
 - Turning a simple flow into a decorative box maze
 - Letting labels become full sentences
 - Making diagrams too wide for chat or mobile
