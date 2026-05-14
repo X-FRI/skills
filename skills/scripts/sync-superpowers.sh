@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+skills_root="$(cd "$script_dir/.." && pwd)"
+repo_root="$(git -C "$skills_root" rev-parse --show-toplevel)"
 cd "$repo_root"
 
 remote_name="${1:-obra}"
@@ -14,8 +16,15 @@ if ! git remote get-url "$remote_name" >/dev/null 2>&1; then
   exit 1
 fi
 
-git subtree pull --prefix=vendor/superpowers "$remote_name" "$remote_ref" --squash
-rsync -a --delete vendor/superpowers/skills/ superpowers/
+tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/superpowers-upstream.XXXXXX")"
+trap 'rm -rf "$tmp_dir"' EXIT
+
+git fetch "$remote_name" "$remote_ref"
+git archive --format=tar "FETCH_HEAD" -o "$tmp_dir/upstream.tar"
+tar -xf "$tmp_dir/upstream.tar" -C "$tmp_dir"
+
+rsync -a --delete --exclude upstream.tar "$tmp_dir/" "$skills_root/vendor/superpowers/"
+rsync -a --delete "$skills_root/vendor/superpowers/skills/" "$skills_root/superpowers/"
 
 echo
 echo "Synced local superpowers/ from vendor/superpowers/skills"
