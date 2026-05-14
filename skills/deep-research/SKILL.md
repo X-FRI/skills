@@ -65,6 +65,25 @@ Before searching, define these internally. Show them only when helpful.
 
 Ask a clarification only when a missing boundary would materially change the research. Otherwise state reasonable assumptions in the answer.
 
+## Clarification Pass
+
+Before researching, identify missing information that would materially change source selection, scope, or the final recommendation.
+
+If clarification is needed, ask at most 3 questions. For each question, provide suggested choices so the user can answer quickly. Include one recommended default when reasonable.
+
+Use this shape:
+
+```markdown
+Before I start, these choices would materially change the research:
+
+1. **Question:** [What boundary needs clarification?]
+   - **Recommended default:** [Default choice and why]
+   - **Options:** [A / B / C]
+   - **Why it matters:** [How this changes source selection, scope, or recommendation]
+```
+
+Only block on clarification when proceeding would likely produce the wrong research. If the missing information is low-impact, state the assumed default and continue.
+
 ## Source Strategy
 
 Use the strongest source types available for the task:
