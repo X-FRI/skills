@@ -27,7 +27,7 @@
 - `codex-daily-summary/`：从当天创建的 Codex thread 中提取证据，生成时间线式日报，并写入当天 Obsidian daily note 的待办区块下方。
 - `analyzing-codex-token-usage/`：基于本地 SQLite 元数据和 rollout token 事件生成 Codex token 用量报告，并保证统计口径准确。
 - `asr-transcript-summary/`：将杂乱的 ASR 会议转写整理为结构化高管摘要，提取动作项、决策与按主题归纳的讨论结论。
-- `requirements-architect-analyzer/`：将碎片化访谈和产品需求整理为面向开发者的需求与架构报告，突出核心实体、状态机、优先级和架构约束。
+- `requirements-architect-analyzer/`：将碎片化访谈和产品需求整理为面向开发者的需求与架构报告，突出核心实体、状态机、优先级、架构约束，并可追加 issue 正文形态的实现简报。
 - `gh-cli/`：GitHub CLI 操作参考 skill。
 - `philosophy-humanities-cognitive-architect/`：面向哲学、伦理、认知与跨学科思辨问题的人文认知咨询 skill。
 - `personification/`：写作风格类 skill，用于生成更自然、更少 AI 腔、并支持自动识别输出语言的回复。
@@ -133,7 +133,7 @@
 - `codex-daily-summary`：收集本地自然日内创建的 Codex thread，从本地 thread 记录中提取证据，判断主语言，并将时间线式日报写入当天 Obsidian daily note。
 - `analyzing-codex-token-usage`：基于本地 state DB 元数据与 rollout `token_count` 增量，生成按天、周、月统计的 Codex token 用量报告，并支持趋势与 spike 分析。
 - `asr-transcript-summary`：将噪声较多的 ASR 会议转写整理为高管风格摘要，支持按语言输出、提取动作项、沉淀关键决策，并按主题重组讨论内容。
-- `requirements-architect-analyzer`：把分散的需求记录和访谈文本整理成结构化的需求与架构分析报告，聚焦业务核心、关键实体、状态机、模块优先级以及明确的架构约束。
+- `requirements-architect-analyzer`：把分散的需求记录和访谈文本整理成结构化的需求与架构分析报告，聚焦业务核心、关键实体、状态机、模块优先级、明确的架构约束，并可输出按纵向切片组织的实现简报。
 - `philosophy-humanities-cognitive-architect`：一个用于哲学、伦理、认知与科学-人文综合推理的思辨 skill。它强调术语清洗、科学与哲学双重校验，以及高密度分析性散文，而不是依赖隐喻和抒情表达。
 - `personification`：一个写作风格 skill，用于减少模板化助手措辞、保留作者感，并在 `SKILL.md` 保持英文的同时根据用户上下文自动选择实际输出语言。
 - `pptx-generator`：一个 PowerPoint 工作流 skill，用于读取演示文稿、通过 XML 流程编辑模板化 deck，以及结合 PptxGenJS 和内建设计系统从零生成新 PPT。

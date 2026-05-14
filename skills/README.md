@@ -27,7 +27,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 - `codex-daily-summary/`: builds an evidence-based daily work summary from Codex threads and inserts it below the todo section in today's Obsidian daily note.
 - `analyzing-codex-token-usage/`: builds local Codex token usage reports with exact period accounting from SQLite metadata and rollout token events.
 - `asr-transcript-summary/`: summarizes messy ASR meeting transcripts into structured executive notes with action items, decisions, and theme-based discussion review.
-- `requirements-architect-analyzer/`: turns fragmented interviews and product notes into developer-facing requirement reports with entities, state machines, priorities, and architecture constraints.
+- `requirements-architect-analyzer/`: turns fragmented interviews and product notes into developer-facing requirement reports with entities, state machines, priorities, architecture constraints, and optional issue-shaped implementation briefs.
 - `gh-cli/`: GitHub CLI operational reference skill.
 - `philosophy-humanities-cognitive-architect/`: philosophy and humanities synthesis skill for deep conceptual, ethical, and interdisciplinary reasoning.
 - `personification/`: writing-style skill for more natural, less AI-sounding replies with automatic output-language detection.
@@ -134,7 +134,7 @@ More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
 - `codex-daily-summary`: gathers Codex threads created during the local day, extracts evidence from local thread records, detects the dominant language, and writes a timeline-style daily summary into today's Obsidian daily note.
 - `analyzing-codex-token-usage`: builds daily, weekly, and monthly Codex token usage reports from local state DB metadata plus rollout `token_count` deltas, with timezone-explicit windows and spike analysis.
 - `asr-transcript-summary`: turns noisy ASR meeting transcripts into executive-style summaries with language-aware output, action-item extraction, decision capture, and theme-based discussion regrouping.
-- `requirements-architect-analyzer`: converts scattered requirement notes and interview transcripts into structured requirement-and-architecture reports centered on business entities, state machines, module priorities, and explicit architecture constraints.
+- `requirements-architect-analyzer`: converts scattered requirement notes and interview transcripts into structured requirement-and-architecture reports centered on business entities, state machines, module priorities, explicit architecture constraints, and optional vertical-slice implementation briefs.
 - `philosophy-humanities-cognitive-architect`: an interdisciplinary reasoning skill for philosophy, ethics, cognition, and science-humanities synthesis. It emphasizes definition cleaning, scientific and philosophical cross-verification, and dense analytic prose instead of metaphor-heavy essays.
 - `personification`: a writing-style skill that reduces templated assistant phrasing, preserves authorial voice, and auto-selects reply language from user context while keeping the skill file itself in English.
 - `pptx-generator`: a PowerPoint workflow for reading decks, editing template-based presentations through XML workflows, and generating new presentations from scratch with PptxGenJS plus an embedded slide design system.
