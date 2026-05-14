@@ -15,7 +15,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 - `ascii-art-diagrams/`: text-diagram guide that defaults to ASCII-safe flow and tree patterns, with Unicode box-drawing reserved for controlled rendering contexts.
 - `commit/`: creates repository-consistent Conventional Commits and auto-detects commit-message language from recent history.
 - `discovering-project-context/`: builds a fast, evidence-grounded project brief for unfamiliar repositories.
-- `deep-research/`: runs explicit deep-research workflows for evidence-driven, multi-source synthesis with standard/fast modes and structured citations.
+- `deep-research/`: runs evidence-driven, multi-source research workflows with standard/fast modes, validation thresholds, domain evidence rules, and adaptable citation formats.
 - `esl-coder/`: pair-programmer and English-tutor skill for non-native speakers that adds concise phrasing correction and simple English explanations.
 - `financial-investment-strategy-consultant/`: quantitative finance and private-wealth consulting skill for macro, portfolio, valuation, and risk questions.
 - `minimax-docx/`: OpenXML-based DOCX skill for creating new Word documents, editing existing files, and applying structured template formatting.
@@ -122,7 +122,7 @@ More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
 - `ascii-art-diagrams`: a text-diagram guide that treats plain ASCII as the default for portability and uses Unicode box-drawing only when box borders or visual grouping add real value in a known monospace-friendly environment.
 - `commit`: a commit-writing workflow that inspects the current diff, selects one dominant Conventional Commit type, and keeps commit-message language aligned with recent repository history unless the user overrides it.
 - `discovering-project-context`: a repository discovery workflow that scans the highest-signal docs, manifests, runtime files, code directories, and recent git history to produce a fast but grounded project map.
-- `deep-research`: an explicit deep-research workflow for multi-stage evidence collection, cross-checking, temporal validation, and citation-ready synthesis with standard and fast modes.
+- `deep-research`: a research workflow for multi-source evidence collection, cross-checking, temporal validation, and citation-ready synthesis with standard and fast modes.
 - `esl-coder`: a bilingual pair-programming and English-tutoring skill for non-native speakers. It adds a single natural-English rewrite of the user's prompt, keeps technical explanations in simple English, and can switch between strict, bilingual, and explain modes.
 - `financial-investment-strategy-consultant`: a finance consulting skill for portfolio construction, macro analysis, valuation, and risk management. It pushes the model to quantify risk/return, check KYC-style missing variables, and frame advice through probabilistic reasoning instead of market fluff.
 - `minimax-docx`: a DOCX production skill built around OpenXML workflows. It routes document work into create, fill-edit, and format-apply pipelines so formal Word outputs can be generated or modified without losing document structure.
@@ -164,14 +164,14 @@ What it does:
 
 ## Deep Research
 
-`deep-research` is designed for requests that explicitly ask for "deep research", "深入调研", or "深度研究" instead of a quick answer.
+`deep-research` is designed for requests that explicitly ask for "deep research", "深入调研", or "深度研究", and for questions that clearly need evidence-driven, multi-source research for a decision, report, due diligence pass, or contested/current-state analysis.
 
 What it does:
 
 - Runs a staged research workflow that separates framing, evidence collection, validation, synthesis, and output construction.
 - Supports two modes: standard deep research for broad coverage and fast deep research for narrower, lower-cost but still validated results.
 - Enforces temporal checks for time-sensitive claims such as latest versions, leadership roles, policies, and current events.
-- Requires structured citation fields on key findings, including at least source, date, and evidence strength.
+- Requires traceable support for key findings, using the citation style that best fits the output: inline links, footnotes, source columns, or compact reference lists.
 - Distinguishes facts, analysis, inference, consensus, disagreement, and uncertainty to avoid overconfident summaries.
 
 Typical use cases:
