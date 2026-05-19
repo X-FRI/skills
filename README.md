@@ -52,7 +52,7 @@ Skills are reusable task-specific workflows stored in `skills/` directory. Each 
 | [codex-daily-summary](./skills/codex-daily-summary/SKILL.md) | Codex work logging |
 | [analyzing-codex-token-usage](./skills/analyzing-codex-token-usage/SKILL.md) | Token usage reports |
 | [philosophy-humanities-cognitive-architect](./skills/philosophy-humanities-cognitive-architect/SKILL.md) | Philosophy and humanities cognitive consulting |
-| [personification](./skills/personification/SKILL.md) | Human-tone writing adapter |
+| [clarity](./skills/clarity/SKILL.md) | Reader-friendly writing editor |
 | [pptx-generator](./skills/pptx-generator/SKILL.md) | PowerPoint presentation generation and editing |
 | [caveman](./skills/caveman/SKILL.md) | Ultra-compressed communication, 6 intensity levels |
 | [technical-proposal-writing](./skills/technical-proposal-writing/SKILL.md) | Technical proposal style guide |

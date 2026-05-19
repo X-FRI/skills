@@ -30,7 +30,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 - `requirements-architect-analyzer/`: turns fragmented interviews and product notes into developer-facing requirement reports with entities, state machines, priorities, architecture constraints, and optional issue-shaped implementation briefs.
 - `gh-cli/`: GitHub CLI operational reference skill.
 - `philosophy-humanities-cognitive-architect/`: philosophy and humanities synthesis skill for deep conceptual, ethical, and interdisciplinary reasoning.
-- `personification/`: writing-style skill for more natural, less AI-sounding replies with automatic output-language detection.
+- `clarity/`: writing editor for explicit rewrite or polishing requests, focused on reader effort, precision, coherence, and removing templated phrasing.
 - `pptx-generator/`: PowerPoint skill for reading decks, editing template-based presentations, and generating slides from scratch with PptxGenJS.
 - `caveman/`: ultra-compressed communication mode with six intensity levels (lite/full/ultra/wenyan-lite/wenyan-full/wenyan-ultra) that cuts token usage ~75% while preserving technical accuracy.
 - `ui-ux-pro-max/`: UI/UX-focused skill with data and scripts.
@@ -45,6 +45,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 ├── ascii-art-diagrams/
 ├── biomedical-clinical-strategy-consultant/
 ├── chart-visualization/
+├── clarity/
 ├── context7-cli/
 ├── commit/
 ├── caveman/
@@ -110,7 +111,7 @@ More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
 - Domain-specific: `gh-cli`, `ui-ux-pro-max`, `find-skills`, `excalidraw-diagram-generator`, `obsidian-daily-note-todo`, `discovering-project-context`, `deep-research`, `commit`, `asr-transcript-summary`, `requirements-architect-analyzer`, `biomedical-clinical-strategy-consultant`, `financial-investment-strategy-consultant`, `philosophy-humanities-cognitive-architect`, `minimax-docx`, `minimax-pdf`, `minimax-xlsx`, `pptx-generator`
 - Visualization: `chart-visualization`
 - Text diagrams: `ascii-art-diagrams`
-- Writing-style: `personification`, `caveman`, `esl-coder`
+- Writing-style: `clarity`, `caveman`, `esl-coder`
 
 ## Newly Added Skills
 
@@ -136,7 +137,7 @@ More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
 - `asr-transcript-summary`: turns noisy ASR meeting transcripts into executive-style summaries with language-aware output, action-item extraction, decision capture, and theme-based discussion regrouping.
 - `requirements-architect-analyzer`: converts scattered requirement notes and interview transcripts into structured requirement-and-architecture reports centered on business entities, state machines, module priorities, explicit architecture constraints, and optional vertical-slice implementation briefs.
 - `philosophy-humanities-cognitive-architect`: an interdisciplinary reasoning skill for philosophy, ethics, cognition, and science-humanities synthesis. It emphasizes definition cleaning, scientific and philosophical cross-verification, and dense analytic prose instead of metaphor-heavy essays.
-- `personification`: a writing-style skill that reduces templated assistant phrasing, preserves authorial voice, and auto-selects reply language from user context while keeping the skill file itself in English.
+- `clarity`: a writing editor that preserves useful structure and authorial voice while reducing reader effort, vague claims, translated AI tone, and pseudo-professional wording.
 - `pptx-generator`: a PowerPoint workflow for reading decks, editing template-based presentations through XML workflows, and generating new presentations from scratch with PptxGenJS plus an embedded slide design system.
 - `caveman`: an ultra-compressed communication mode that reduces token usage ~75% by stripping articles, filler, pleasantries, and hedging. Supports six intensity levels — `lite` (professional but tight), `full` (default, classic caveman fragments), `ultra` (abbreviated + causal arrows), `wenyan-lite` (semi-classical), `wenyan-full` (文言文 terseness), and `wenyan-ultra` (maximum compression with classical feel). Automatically drops caveman mode for security warnings and irreversible actions, then resumes after the critical part.
 
@@ -358,16 +359,17 @@ Related skills:
 
 - `codex-daily-summary`: use this instead when the user wants a semantic work summary rather than token accounting
 
-## Personification
+## Clarity
 
-`personification` is designed for requests like "write this in a more human way", "reduce the AI tone", "make the reply feel more natural", or "keep the answer personal without becoming roleplay".
+`clarity` is designed for explicit writing tasks like "rewrite this so readers can follow it", "make this email clearer", "polish this comment", or "keep my voice but remove the templated tone".
 
 What it does:
 
-- Pushes writing away from stock assistant phrasing and toward prose that feels authored.
-- Suppresses common AI-writing artifacts such as formulaic openings, canned transitions, self-referential assistant language, and overly polished generic wording.
-- Prefers paragraph-driven flow, direct judgment, and natural rhetorical movement over rigid template structure.
-- Preserves analytical depth and factual clarity instead of trading substance for style.
+- Preserves facts, intent, useful politeness, and necessary structure.
+- Removes stock assistant phrasing, empty claims about analysis, translated AI tone, and pseudo-professional wording.
+- Keeps Chinese prose ordinary when the task does not call for consulting or diagnosis-style vocabulary.
+- Improves precision and coherence instead of only changing surface tone.
+- Avoids the common failure mode of making every rewrite shorter, colder, or more performatively direct.
 
 How it works:
 
@@ -379,8 +381,8 @@ How it works:
 Why it exists:
 
 - Many "sound more human" prompts are too vague to produce repeatable behavior.
-- This skill turns that vague request into concrete constraints on phrasing, structure, and rhetorical habits.
-- It improves readability by removing machine-like tone without requiring identity simulation or fake personal experience.
+- This skill treats naturalness as editing: make the text easier for the intended reader to understand, and remove what sounds manufactured.
+- It improves readability without roleplay, fake biography, fake emotion, or blanket terseness.
 
 Boundaries:
 

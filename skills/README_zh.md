@@ -30,7 +30,7 @@
 - `requirements-architect-analyzer/`：将碎片化访谈和产品需求整理为面向开发者的需求与架构报告，突出核心实体、状态机、优先级、架构约束，并可追加 issue 正文形态的实现简报。
 - `gh-cli/`：GitHub CLI 操作参考 skill。
 - `philosophy-humanities-cognitive-architect/`：面向哲学、伦理、认知与跨学科思辨问题的人文认知咨询 skill。
-- `personification/`：写作风格类 skill，用于生成更自然、更少 AI 腔、并支持自动识别输出语言的回复。
+- `clarity/`：写作编辑 skill，用于明确的改写和润色请求，重点降低读者理解成本，处理不精确、不连贯、模板腔和伪专业词。
 - `caveman/`：超压缩交流模式 skill，支持 lite/full/ultra/wenyan-lite/wenyan-full/wenyan-ultra 六种强度，在保留技术准确性的同时将 token 使用量削减约 75%。
 - `ui-ux-pro-max/`：UI/UX 设计与实现相关 skill，包含数据与脚本。
 - `vendor/superpowers/`：通过 `git subtree` 跟踪的上游 `obra/superpowers` 仓库，用作本地 `superpowers/` 的同步来源。
@@ -44,6 +44,7 @@
 ├── ascii-art-diagrams/
 ├── biomedical-clinical-strategy-consultant/
 ├── chart-visualization/
+├── clarity/
 ├── context7-cli/
 ├── commit/
 ├── caveman/
@@ -109,7 +110,7 @@
 - 专项类：`gh-cli`、`ui-ux-pro-max`、`find-skills`、`excalidraw-diagram-generator`、`obsidian-daily-note-todo`、`discovering-project-context`、`deep-research`、`commit`、`asr-transcript-summary`、`requirements-architect-analyzer`、`biomedical-clinical-strategy-consultant`、`financial-investment-strategy-consultant`、`philosophy-humanities-cognitive-architect`、`minimax-docx`、`minimax-pdf`、`minimax-xlsx`、`pptx-generator`
 - 可视化类：`chart-visualization`
 - 文本图表类：`ascii-art-diagrams`
-- 写作风格类：`personification`、`caveman`、`esl-coder`
+- 写作风格类：`clarity`、`caveman`、`esl-coder`
 
 ## 新增 Skills
 
@@ -135,7 +136,7 @@
 - `asr-transcript-summary`：将噪声较多的 ASR 会议转写整理为高管风格摘要，支持按语言输出、提取动作项、沉淀关键决策，并按主题重组讨论内容。
 - `requirements-architect-analyzer`：把分散的需求记录和访谈文本整理成结构化的需求与架构分析报告，聚焦业务核心、关键实体、状态机、模块优先级、明确的架构约束，并可输出按纵向切片组织的实现简报。
 - `philosophy-humanities-cognitive-architect`：一个用于哲学、伦理、认知与科学-人文综合推理的思辨 skill。它强调术语清洗、科学与哲学双重校验，以及高密度分析性散文，而不是依赖隐喻和抒情表达。
-- `personification`：一个写作风格 skill，用于减少模板化助手措辞、保留作者感，并在 `SKILL.md` 保持英文的同时根据用户上下文自动选择实际输出语言。
+- `clarity`：一个写作编辑 skill，用于保留有用结构和作者语气，同时降低读者理解成本，去掉模糊表达、翻译腔和伪专业表达。
 - `pptx-generator`：一个 PowerPoint 工作流 skill，用于读取演示文稿、通过 XML 流程编辑模板化 deck，以及结合 PptxGenJS 和内建设计系统从零生成新 PPT。
 - `caveman`：超压缩交流模式，通过去除冠词、填充词、客套语和保守措辞将 token 使用量削减约 75%。支持六种强度级别——`lite`（专业精简）、`full`（默认，经典 caveman 风格）、`ultra`（缩写+因果箭头）、`wenyan-lite`（半文言）、`wenyan-full`（文言文极致精简）和 `wenyan-ultra`（古典感极限压缩）。安全警告和不可逆操作自动退出 caveman 模式，操作完成后恢复。
 
@@ -357,16 +358,17 @@
 
 - `codex-daily-summary`：如果用户要的是“做了什么工作的语义总结”，而不是 token 统计，应使用这个 skill
 
-## Personification
+## Clarity
 
-`personification` 适用于“把这段话写得更像真人”“降低 AI 腔”“让回复更自然一些”或“保留个人表达感，但不要变成角色扮演”这类请求。
+`clarity` 适用于明确的写作任务，例如“把这段话改得更好懂”“让这封邮件更清楚”“润色这条评论”或“保留我的语气，但去掉模板感”。
 
 它的作用：
 
-- 把写作从标准助手模板往“有人认真写出来的文字”方向拉。
-- 压制常见 AI 文风痕迹，例如套话式开头、机械过渡、自我指涉助手口吻，以及过度光滑的泛化措辞。
-- 优先使用段落驱动的自然推进、直接判断和更自然的修辞节奏，而不是僵硬的模板结构。
-- 在调整文风的同时保留分析深度和事实清晰度，不拿内容质量去换“有人味”。
+- 保留事实、意图、有用的礼貌铺垫和必要结构。
+- 去掉标准助手套话、空泛的“已分析/已考虑”表述、翻译腔和伪专业词。
+- 在中文里优先使用普通说法，不默认套用咨询腔或诊断腔。
+- 优先改善精确性和连贯性，而不是只改表面语气。
+- 避免把所有文本都改得更短、更冷、更像代码 review。
 
 它的工作方式：
 
@@ -378,8 +380,8 @@
 它存在的价值：
 
 - 很多“更像真人一点”的提示过于空泛，无法稳定产出可复用结果。
-- 这个 skill 把模糊要求落成了具体的措辞、结构和修辞约束。
-- 它通过去除机器感来提升可读性，但不依赖伪造身份、伪造经历或表演式人格。
+- 这个 skill 把自然写作当成编辑问题：让目标读者更容易读懂，保留有帮助的部分，删掉制造出来的腔调。
+- 它提升可读性，但不依赖角色扮演、伪造经历、伪造情绪或一味压缩。
 
 边界：
 

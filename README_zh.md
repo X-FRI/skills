@@ -52,7 +52,7 @@ AI 智能体的能力、技能和 MCP 服务的集中管理仓库。
 | [codex-daily-summary](./skills/codex-daily-summary/SKILL.md) | Codex 工作日志 |
 | [analyzing-codex-token-usage](./skills/analyzing-codex-token-usage/SKILL.md) | Token 使用报告 |
 | [philosophy-humanities-cognitive-architect](./skills/philosophy-humanities-cognitive-architect/SKILL.md) | 哲学与人文认知咨询 |
-| [personification](./skills/personification/SKILL.md) | 人性化写作适配器 |
+| [clarity](./skills/clarity/SKILL.md) | 面向读者的清晰写作编辑器 |
 | [pptx-generator](./skills/pptx-generator/SKILL.md) | PowerPoint 演示文稿生成与编辑 |
 | [caveman](./skills/caveman/SKILL.md) | 超压缩交流模式，6 种强度级别 |
 | [technical-proposal-writing](./skills/technical-proposal-writing/SKILL.md) | 技术提案风格指南 |
