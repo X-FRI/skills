@@ -69,6 +69,8 @@ A NestJS-based MCP server that exposes skills as MCP tools.
 **Tools:**
 - `list_skills` - List all available skills
 - `get_skill` - Get skill content by name
+- `list_skill_files` - List readable support files for a skill
+- `get_skill_file` - Read a support file from a skill directory
 
 **Start the server:**
 ```bash

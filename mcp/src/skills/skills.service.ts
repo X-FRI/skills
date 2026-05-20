@@ -1,14 +1,62 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, extname, join, relative, resolve } from "node:path";
 import { Inject } from "@nestjs/common";
 import { SKILLS_MODULE_OPTIONS, SkillsModuleOptions } from "../common/constants";
-import type { LoadedSkill, SkillDetail, SkillListItem } from "../common/types";
+import type {
+  LoadedSkill,
+  SkillDetail,
+  SkillFileDetail,
+  SkillFileList,
+  SkillFileListItem,
+  SkillListItem,
+} from "../common/types";
 
 /**
  * 用于匹配技能文件头部 YAML frontmatter 的正则表达式。
  */
 const FRONTMATTER_PATTERN = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/;
+
+/**
+ * 单个辅助文件的最大读取大小，避免一次 MCP 调用撑爆上下文。
+ */
+const MAX_SKILL_FILE_SIZE_BYTES = 256 * 1024;
+
+/**
+ * 默认通过 MCP 暴露的文本文件扩展名。
+ */
+const READABLE_FILE_TYPES = new Map<string, string>([
+  [".md", "text/markdown"],
+  [".mdx", "text/markdown"],
+  [".txt", "text/plain"],
+  [".json", "application/json"],
+  [".yaml", "application/yaml"],
+  [".yml", "application/yaml"],
+  [".sh", "text/x-shellscript"],
+  [".ts", "text/typescript"],
+  [".tsx", "text/typescript"],
+  [".js", "text/javascript"],
+  [".jsx", "text/javascript"],
+  [".mjs", "text/javascript"],
+  [".cjs", "text/javascript"],
+  [".css", "text/css"],
+  [".html", "text/html"],
+]);
+
+/**
+ * 递归列文件时跳过的目录，避免暴露依赖、构建产物和 VCS 元数据。
+ */
+const IGNORED_DIRECTORIES = new Set([
+  ".git",
+  "dist",
+  "build",
+  "coverage",
+  "node_modules",
+]);
 
 /**
  * skills 本地注册表服务。
@@ -68,6 +116,65 @@ export class SkillsService {
       name: skill.name,
       description: skill.description,
       content: skill.content,
+    };
+  }
+
+  /**
+   * 列出单个 skill 目录下可通过 MCP 读取的辅助文本文件。
+   *
+   * `SKILL.md` 本身仍由 `get_skill` 返回；这里仅返回 references、scripts、
+   * templates 等辅助文件。
+   *
+   * @param name - skill 名称。
+   * @returns 可读取辅助文件列表。
+   */
+  listSkillFiles(name: string): SkillFileList {
+    const skill = this.resolveSkill(name);
+    const skillDir = dirname(skill.sourcePath);
+
+    return {
+      name: skill.name,
+      files: this.collectReadableFiles(skillDir),
+    };
+  }
+
+  /**
+   * 读取单个 skill 辅助文件。
+   *
+   * @param name - skill 名称。
+   * @param filePath - 相对于 skill 目录的文件路径。
+   * @returns 文件内容与元数据。
+   */
+  getSkillFile(name: string, filePath: string): SkillFileDetail {
+    const skill = this.resolveSkill(name);
+    const skillDir = dirname(skill.sourcePath);
+    const normalizedPath = this.normalizeSkillFilePath(skillDir, filePath);
+
+    if (normalizedPath === "SKILL.md") {
+      throw new BadRequestException(
+        "SKILL.md is returned by get_skill; request a support file instead.",
+      );
+    }
+
+    const absolutePath = join(skillDir, normalizedPath);
+
+    if (!existsSync(absolutePath) || !statSync(absolutePath).isFile()) {
+      throw new NotFoundException(
+        `未找到 skill ${skill.name} 的辅助文件 ${normalizedPath}。`,
+      );
+    }
+
+    const fileInfo = this.getReadableFileInfo(skillDir, absolutePath);
+    if (!fileInfo) {
+      throw new BadRequestException(
+        `Skill file ${normalizedPath} is not an allowed readable text file.`,
+      );
+    }
+
+    return {
+      name: skill.name,
+      ...fileInfo,
+      content: readFileSync(absolutePath, "utf8"),
     };
   }
 
@@ -187,5 +294,139 @@ export class SkillsService {
       name,
       description,
     };
+  }
+
+  /**
+   * 按名称获取 skill，不存在时抛出统一错误。
+   */
+  private resolveSkill(name: string): LoadedSkill {
+    const normalizedName = name.trim();
+    const skill = this.skillRegistry.get(normalizedName);
+
+    if (!skill) {
+      throw new NotFoundException(`未找到名为 ${normalizedName} 的 skill。`);
+    }
+
+    return skill;
+  }
+
+  /**
+   * 递归收集 skill 目录中的可读辅助文件。
+   */
+  private collectReadableFiles(skillDir: string): SkillFileListItem[] {
+    const files: SkillFileListItem[] = [];
+
+    const visit = (currentDir: string) => {
+      for (const entry of readdirSync(currentDir, { withFileTypes: true })) {
+        if (entry.name.startsWith(".")) {
+          continue;
+        }
+
+        const absolutePath = join(currentDir, entry.name);
+
+        if (entry.isDirectory()) {
+          if (IGNORED_DIRECTORIES.has(entry.name)) {
+            continue;
+          }
+
+          visit(absolutePath);
+          continue;
+        }
+
+        if (!entry.isFile()) {
+          continue;
+        }
+
+        const fileInfo = this.getReadableFileInfo(skillDir, absolutePath);
+        if (fileInfo) {
+          files.push(fileInfo);
+        }
+      }
+    };
+
+    visit(skillDir);
+
+    return files.sort((left, right) =>
+      left.path.localeCompare(right.path, "en"),
+    );
+  }
+
+  /**
+   * 返回可读辅助文件元数据；不可读文件返回 undefined。
+   */
+  private getReadableFileInfo(
+    skillDir: string,
+    absolutePath: string,
+  ): SkillFileListItem | undefined {
+    const relativePath = relative(skillDir, absolutePath).replace(/\\/g, "/");
+
+    if (
+      relativePath === "SKILL.md" ||
+      !this.isReadableRelativePath(relativePath)
+    ) {
+      return undefined;
+    }
+
+    const contentType = READABLE_FILE_TYPES.get(extname(relativePath));
+    if (!contentType) {
+      return undefined;
+    }
+
+    const stat = statSync(absolutePath);
+    if (stat.size > MAX_SKILL_FILE_SIZE_BYTES) {
+      return undefined;
+    }
+
+    return {
+      path: relativePath,
+      size: stat.size,
+      type: contentType,
+    };
+  }
+
+  /**
+   * 规范化用户传入的相对路径，并阻止越过 skill 目录。
+   */
+  private normalizeSkillFilePath(skillDir: string, filePath: string): string {
+    const requestedPath = filePath.trim();
+
+    if (
+      !requestedPath ||
+      requestedPath.startsWith("/") ||
+      requestedPath.includes("\0")
+    ) {
+      throw new BadRequestException("Invalid skill file path.");
+    }
+
+    const absoluteSkillDir = resolve(skillDir);
+    const absolutePath = resolve(absoluteSkillDir, requestedPath);
+    const relativePath = relative(absoluteSkillDir, absolutePath);
+
+    if (
+      !relativePath ||
+      relativePath === ".." ||
+      relativePath.startsWith("../") ||
+      relativePath.startsWith("..\\") ||
+      relativePath.startsWith("/") ||
+      relativePath.includes("\0")
+    ) {
+      throw new BadRequestException("Invalid skill file path.");
+    }
+
+    return relativePath.replace(/\\/g, "/");
+  }
+
+  /**
+   * 检查相对路径是否属于可通过 MCP 暴露的辅助文件范围。
+   */
+  private isReadableRelativePath(relativePath: string): boolean {
+    return relativePath
+      .split("/")
+      .every(
+        (segment) =>
+          segment &&
+          !segment.startsWith(".") &&
+          !IGNORED_DIRECTORIES.has(segment),
+      );
   }
 }
