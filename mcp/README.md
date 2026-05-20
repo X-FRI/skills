@@ -5,7 +5,7 @@
 ## 功能
 
 - `list_skills`: 返回所有可用的 skills 摘要列表
-- `get_skill`: 按名称获取单个 skill 的完整内容
+- `get_skill`: 按名称获取单个 skill 的完整内容和可读辅助文件树
 - `list_skill_files`: 按名称获取单个 skill 目录下可读取的辅助文件列表
 - `get_skill_file`: 读取单个 skill 目录下的辅助文本文件
 

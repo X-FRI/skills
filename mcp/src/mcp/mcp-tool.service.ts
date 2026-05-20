@@ -56,7 +56,7 @@ export class McpToolService {
   @Tool({
     name: "get_skill",
     description:
-      "Load the main SKILL.md for one skill. Use before applying a skill. Returns only the main skill content; if it mentions references, scripts, templates, assets, or other support files, call list_skill_files next.",
+      "Load the main SKILL.md for one skill. Use before applying a skill. Also returns a readable support file tree and exact file paths, so call get_skill_file directly when a referenced support file is needed.",
     parameters: mcpGetSkillInputSchema,
     outputSchema: mcpSkillDetailSchema,
   })
@@ -67,7 +67,7 @@ export class McpToolService {
   @Tool({
     name: "list_skill_files",
     description:
-      "List readable support files for one skill, excluding SKILL.md. Use after get_skill when the main skill refers to references, scripts, templates, examples, assets, or when more detail is needed before using the skill.",
+      "List readable support files for one skill, excluding SKILL.md. Use when you only need the support file tree or need to refresh file paths without reloading the main skill content.",
     parameters: mcpListSkillFilesInputSchema,
     outputSchema: mcpSkillFileListSchema,
   })
@@ -78,7 +78,7 @@ export class McpToolService {
   @Tool({
     name: "get_skill_file",
     description:
-      "Read one support file from a skill directory. Use after list_skill_files to load a specific reference, script, template, example, or asset needed to follow the skill. The path must be relative to that skill directory.",
+      "Read one support file from a skill directory. Use a path returned by get_skill or list_skill_files to load a specific reference, script, template, example, or asset needed to follow the skill.",
     parameters: mcpGetSkillFileInputSchema,
     outputSchema: mcpSkillFileDetailSchema,
   })

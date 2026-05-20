@@ -38,6 +38,83 @@ test("lists readable files inside a skill directory", () => {
 
     assert.deepEqual(service.listSkillFiles("sample-skill"), {
       name: "sample-skill",
+      tree: {
+        name: "sample-skill",
+        type: "directory",
+        children: [
+          {
+            name: "notes.txt",
+            type: "file",
+            path: "notes.txt",
+            size: 11,
+            contentType: "text/plain",
+          },
+          {
+            name: "references",
+            type: "directory",
+            children: [
+              {
+                name: "guide.md",
+                type: "file",
+                path: "references/guide.md",
+                size: 18,
+                contentType: "text/markdown",
+              },
+            ],
+          },
+        ],
+      },
+      files: [
+        {
+          path: "notes.txt",
+          size: 11,
+          type: "text/plain",
+        },
+        {
+          path: "references/guide.md",
+          size: 18,
+          type: "text/markdown",
+        },
+      ],
+    });
+  } finally {
+    rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
+test("includes readable support file tree when loading a skill", () => {
+  const rootDir = createFixture();
+
+  try {
+    const service = new SkillsService({ rootDir });
+
+    assert.deepEqual(service.getSkillByName("sample-skill").supportFiles, {
+      tree: {
+        name: "sample-skill",
+        type: "directory",
+        children: [
+          {
+            name: "notes.txt",
+            type: "file",
+            path: "notes.txt",
+            size: 11,
+            contentType: "text/plain",
+          },
+          {
+            name: "references",
+            type: "directory",
+            children: [
+              {
+                name: "guide.md",
+                type: "file",
+                path: "references/guide.md",
+                size: 18,
+                contentType: "text/markdown",
+              },
+            ],
+          },
+        ],
+      },
       files: [
         {
           path: "notes.txt",

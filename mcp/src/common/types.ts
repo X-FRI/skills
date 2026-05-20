@@ -18,15 +18,6 @@ export const mcpListSkillsSchema = z.object({
 /**
  * MCP 单个 skill 详情结果 schema。
  */
-export const mcpSkillDetailSchema = mcpSkillListItemSchema.extend({
-  content: z
-    .string()
-    .describe("去掉 frontmatter 后的 Markdown skill 正文内容。"),
-});
-
-/**
- * skill 辅助文件摘要 schema。
- */
 export const mcpSkillFileListItemSchema = z.object({
   path: z
     .string()
@@ -42,15 +33,61 @@ export const mcpSkillFileListItemSchema = z.object({
 });
 
 /**
+ * skill 辅助文件树 schema。
+ */
+export const mcpSkillSupportFileTreeNodeSchema = z.lazy(() =>
+  z.discriminatedUnion("type", [
+    z.object({
+      name: z.string().describe("Directory name."),
+      type: z.literal("directory"),
+      children: z
+        .array(mcpSkillSupportFileTreeNodeSchema)
+        .describe("Child directories and files."),
+    }),
+    z.object({
+      name: z.string().describe("File name."),
+      type: z.literal("file"),
+      path: z
+        .string()
+        .describe("Relative file path. Pass this exact value to get_skill_file."),
+      size: z.number().int().nonnegative().describe("File size in bytes."),
+      contentType: z.string().describe("Inferred text content type."),
+    }),
+  ]),
+);
+
+export const mcpSkillSupportFilesSchema = z.object({
+  tree: mcpSkillSupportFileTreeNodeSchema.describe(
+    "Structured directory tree of readable support files. Traverse file nodes and use file.path as get_skill_file input.",
+  ),
+  files: z
+    .array(mcpSkillFileListItemSchema)
+    .describe(
+      "Readable support files for this skill. Pass one of these exact paths to get_skill_file.",
+    ),
+});
+
+/**
+ * MCP 单个 skill 详情结果 schema。
+ */
+export const mcpSkillDetailSchema = mcpSkillListItemSchema.extend({
+  content: z
+    .string()
+    .describe("去掉 frontmatter 后的 Markdown skill 正文内容。"),
+  supportFiles: mcpSkillSupportFilesSchema.describe(
+    "Readable support files discovered in the same skill directory. Use tree to browse and files[].path as exact get_skill_file input.",
+  ),
+});
+
+/**
  * MCP skill 辅助文件列表结果 schema。
  */
 export const mcpSkillFileListSchema = z.object({
   name: z.string().describe("skill 名称。"),
-  files: z
-    .array(mcpSkillFileListItemSchema)
-    .describe(
-      "Readable support files for this skill. If empty, the skill is self-contained or has no readable support files.",
-    ),
+  tree: mcpSkillSupportFilesSchema.shape.tree,
+  files: mcpSkillSupportFilesSchema.shape.files.describe(
+    "Readable support files for this skill. If empty, the skill is self-contained or has no readable support files.",
+  ),
 });
 
 /**
@@ -99,7 +136,7 @@ export const mcpGetSkillFileInputSchema = z.object({
     .trim()
     .min(1)
     .describe(
-      "Relative file path from list_skill_files. Do not guess paths; list files first unless the SKILL.md gives an exact path.",
+      "Relative file path returned by get_skill supportFiles.files or list_skill_files files. Do not guess paths.",
     ),
 });
 

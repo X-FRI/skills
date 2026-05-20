@@ -16,6 +16,26 @@ import type {
   SkillListItem,
 } from "../common/types";
 
+type SkillSupportFileTreeNode =
+  | {
+      name: string;
+      type: "directory";
+      children: SkillSupportFileTreeNode[];
+    }
+  | {
+      name: string;
+      type: "file";
+      path: string;
+      size: number;
+      contentType: string;
+    };
+
+type WorkingDirectoryNode = {
+  name: string;
+  type: "directory";
+  children: Map<string, WorkingDirectoryNode | SkillSupportFileTreeNode>;
+};
+
 /**
  * 用于匹配技能文件头部 YAML frontmatter 的正则表达式。
  */
@@ -116,6 +136,7 @@ export class SkillsService {
       name: skill.name,
       description: skill.description,
       content: skill.content,
+      supportFiles: this.getSkillSupportFiles(skill),
     };
   }
 
@@ -130,11 +151,11 @@ export class SkillsService {
    */
   listSkillFiles(name: string): SkillFileList {
     const skill = this.resolveSkill(name);
-    const skillDir = dirname(skill.sourcePath);
+    const supportFiles = this.getSkillSupportFiles(skill);
 
     return {
       name: skill.name,
-      files: this.collectReadableFiles(skillDir),
+      ...supportFiles,
     };
   }
 
@@ -311,6 +332,18 @@ export class SkillsService {
   }
 
   /**
+   * 构建单个 skill 的辅助文件树与可读文件列表。
+   */
+  private getSkillSupportFiles(skill: LoadedSkill) {
+    const files = this.collectReadableFiles(dirname(skill.sourcePath));
+
+    return {
+      tree: this.buildSupportFileTree(skill.name, files),
+      files,
+    };
+  }
+
+  /**
    * 递归收集 skill 目录中的可读辅助文件。
    */
   private collectReadableFiles(skillDir: string): SkillFileListItem[] {
@@ -428,5 +461,89 @@ export class SkillsService {
           !segment.startsWith(".") &&
           !IGNORED_DIRECTORIES.has(segment),
       );
+  }
+
+  /**
+   * 将可读辅助文件列表转换为结构化目录树。
+   */
+  private buildSupportFileTree(
+    skillName: string,
+    files: SkillFileListItem[],
+  ): SkillSupportFileTreeNode {
+    const root: WorkingDirectoryNode = {
+      name: skillName,
+      type: "directory",
+      children: new Map(),
+    };
+
+    for (const file of files) {
+      let current = root;
+      const segments = file.path.split("/");
+
+      segments.forEach((segment, index) => {
+        const isFile = index === segments.length - 1;
+
+        if (isFile) {
+          current.children.set(segment, {
+            name: segment,
+            type: "file",
+            path: file.path,
+            size: file.size,
+            contentType: file.type,
+          });
+          return;
+        }
+
+        const existingNode = current.children.get(segment);
+        if (existingNode?.type === "directory") {
+          current = existingNode as WorkingDirectoryNode;
+          return;
+        }
+
+        const directoryNode: WorkingDirectoryNode = {
+          name: segment,
+          type: "directory",
+          children: new Map(),
+        };
+        current.children.set(segment, directoryNode);
+        current = directoryNode;
+      });
+    }
+
+    return this.serializeSupportFileTree(root);
+  }
+
+  /**
+   * 将构建阶段使用的 Map 目录树转换为 JSON 可序列化节点。
+   */
+  private serializeSupportFileTree(
+    node: WorkingDirectoryNode,
+  ): SkillSupportFileTreeNode {
+    const children: SkillSupportFileTreeNode[] = [...node.children.values()]
+      .map((childNode): SkillSupportFileTreeNode => {
+        if (
+          childNode.type === "directory" &&
+          childNode.children instanceof Map
+        ) {
+          return this.serializeSupportFileTree(
+            childNode as WorkingDirectoryNode,
+          );
+        }
+
+        return childNode as SkillSupportFileTreeNode;
+      })
+      .sort((left, right) => {
+        if (left.type !== right.type) {
+          return left.type === "file" ? -1 : 1;
+        }
+
+        return left.name.localeCompare(right.name, "en");
+      });
+
+    return {
+      name: node.name,
+      type: "directory",
+      children,
+    };
   }
 }

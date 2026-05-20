@@ -68,7 +68,7 @@ AI 智能体的能力、技能和 MCP 服务的集中管理仓库。
 
 **工具：**
 - `list_skills` - 列出所有可用技能
-- `get_skill` - 按名称获取技能内容
+- `get_skill` - 按名称获取技能内容和可读辅助文件树
 - `list_skill_files` - 列出单个 skill 的可读辅助文件
 - `get_skill_file` - 读取单个 skill 目录下的辅助文本文件
 
