@@ -9,6 +9,7 @@
 - `superpowers/`：核心流程与工程实践类 skills（如 brainstorming、debugging、planning、TDD、verification、code review）。该目录持续与上游 `obra/superpowers` 的 skills 保持对齐。
 - `find-skills/`：用于发现和安装更多 skills。
 - `find-docs/`：基于 Context7 的最新库与框架文档检索 skill。
+- `improve-codebase-architecture/`：继承自 `github.com/mattpocock/skills` 的架构审查 skill，用于发现可深化模块、过浅模块、泄漏 seam 与测试性改进机会。本地版本新增证据门槛、轻量 Markdown 输出、信心标签，以及缺少文档时的降级流程。
 - `biomedical-clinical-strategy-consultant/`：面向复杂医学、药理学和生物医学研究问题的循证咨询 skill。
 - `context7-cli/`：ctx7 CLI 参考 skill，覆盖文档查询、skill 管理与 MCP 配置。
 - `chart-visualization/`：面向协议的图表渲染 skill，用于选择图表类型、根据参考文档组织渲染参数，并说明图表与地图生成所需的 HTTP 请求契约。
@@ -56,6 +57,7 @@
 ├── find-docs/
 ├── find-skills/
 ├── gh-cli/
+├── improve-codebase-architecture/
 ├── minimax-docx/
 ├── minimax-pdf/
 ├── minimax-xlsx/
@@ -107,7 +109,8 @@
 - 协作类：`requesting-code-review`、`receiving-code-review`、`dispatching-parallel-agents`、`subagent-driven-development`
 - 交付类：`finishing-a-development-branch`、`using-git-worktrees`
 - 文档与配置类：`find-docs`、`context7-cli`、`technical-proposal-writing`
-- 专项类：`gh-cli`、`ui-ux-pro-max`、`find-skills`、`excalidraw-diagram-generator`、`obsidian-daily-note-todo`、`discovering-project-context`、`deep-research`、`commit`、`asr-transcript-summary`、`requirements-architect-analyzer`、`biomedical-clinical-strategy-consultant`、`financial-investment-strategy-consultant`、`philosophy-humanities-cognitive-architect`、`minimax-docx`、`minimax-pdf`、`minimax-xlsx`、`pptx-generator`
+- 架构类：`improve-codebase-architecture`、`discovering-project-context`、`requirements-architect-analyzer`
+- 专项类：`gh-cli`、`ui-ux-pro-max`、`find-skills`、`excalidraw-diagram-generator`、`obsidian-daily-note-todo`、`deep-research`、`commit`、`asr-transcript-summary`、`biomedical-clinical-strategy-consultant`、`financial-investment-strategy-consultant`、`philosophy-humanities-cognitive-architect`、`minimax-docx`、`minimax-pdf`、`minimax-xlsx`、`pptx-generator`
 - 可视化类：`chart-visualization`
 - 文本图表类：`ascii-art-diagrams`
 - 写作风格类：`clarity`、`caveman`、`esl-coder`
@@ -115,6 +118,11 @@
 ## 新增 Skills
 
 - `find-docs`：聚焦 Context7 文档查询流程，用于解析库 ID 并检索最新文档与代码示例。
+- `improve-codebase-architecture`：一个继承自 `github.com/mattpocock/skills` 的架构审查工作流。它保留上游围绕 `Module`、`Interface`、`Seam`、`Adapter`、`Depth`、`Leverage`、`Locality` 来深化 shallow module 的核心框架，并在本地加入以下改进：
+  - 证据门槛：每个候选建议必须有具体源码观察支撑
+  - Markdown 优先：快速审查默认输出 Markdown，正式视觉审查才使用 HTML report
+  - 信心标签：区分代码证据、领域贴合度、测试收益和实现风险
+  - 缺失文档降级：缺少 `CONTEXT.md` 或 ADR 时，从 README、schema、routes、tests 和 git history 推断临时领域词汇
 - `biomedical-clinical-strategy-consultant`：一个面向复杂医学、药理学和生物医学研究问题的循证咨询 skill。它强调量化证据、脚注式溯源，以及面向临床决策支持或研究分析的段落化输出。
 - `context7-cli`：更完整的 ctx7 CLI skill，覆盖文档访问、AI skill 的安装/搜索/生成，以及 Context7 MCP 配置。
 - `chart-visualization`：一个图表渲染工作流，会根据数据形态选择合适的图表类型，读取对应 reference 组织参数，并把结果转换为协议层 HTTP 请求，而不是依赖本地 JavaScript 运行时。

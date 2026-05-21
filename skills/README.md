@@ -9,6 +9,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 - `superpowers/`: core process and engineering workflow skills (brainstorming, debugging, planning, TDD, verification, code review, etc.). This directory is kept aligned with upstream `obra/superpowers` skills.
 - `find-skills/`: helps discover and install additional skills.
 - `find-docs/`: Context7-based lookup for current library and framework documentation.
+- `improve-codebase-architecture/`: architecture review skill inherited from `github.com/mattpocock/skills` for finding deepening opportunities, shallow modules, leaking seams, and testability improvements. The local version adds evidence gates, lightweight Markdown output, confidence labels, and missing-docs fallback behavior.
 - `biomedical-clinical-strategy-consultant/`: evidence-first biomedical and clinical consulting skill for complex medical, pharmacological, and translational-research questions.
 - `context7-cli/`: ctx7 CLI reference for docs queries, skill management, and MCP setup.
 - `chart-visualization/`: protocol-first chart rendering skill that selects chart types, shapes render specs from references, and documents the HTTP request contract for chart and map generation.
@@ -57,6 +58,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 ├── find-docs/
 ├── find-skills/
 ├── gh-cli/
+├── improve-codebase-architecture/
 ├── minimax-docx/
 ├── minimax-pdf/
 ├── minimax-xlsx/
@@ -108,7 +110,8 @@ More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
 - Collaboration: `requesting-code-review`, `receiving-code-review`, `dispatching-parallel-agents`, `subagent-driven-development`
 - Delivery: `finishing-a-development-branch`, `using-git-worktrees`
 - Documentation and setup: `find-docs`, `context7-cli`, `technical-proposal-writing`
-- Domain-specific: `gh-cli`, `ui-ux-pro-max`, `find-skills`, `excalidraw-diagram-generator`, `obsidian-daily-note-todo`, `discovering-project-context`, `deep-research`, `commit`, `asr-transcript-summary`, `requirements-architect-analyzer`, `biomedical-clinical-strategy-consultant`, `financial-investment-strategy-consultant`, `philosophy-humanities-cognitive-architect`, `minimax-docx`, `minimax-pdf`, `minimax-xlsx`, `pptx-generator`
+- Architecture: `improve-codebase-architecture`, `discovering-project-context`, `requirements-architect-analyzer`
+- Domain-specific: `gh-cli`, `ui-ux-pro-max`, `find-skills`, `excalidraw-diagram-generator`, `obsidian-daily-note-todo`, `deep-research`, `commit`, `asr-transcript-summary`, `biomedical-clinical-strategy-consultant`, `financial-investment-strategy-consultant`, `philosophy-humanities-cognitive-architect`, `minimax-docx`, `minimax-pdf`, `minimax-xlsx`, `pptx-generator`
 - Visualization: `chart-visualization`
 - Text diagrams: `ascii-art-diagrams`
 - Writing-style: `clarity`, `caveman`, `esl-coder`
@@ -116,6 +119,11 @@ More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
 ## Newly Added Skills
 
 - `find-docs`: a focused Context7 workflow for resolving library IDs and querying up-to-date docs and code examples.
+- `improve-codebase-architecture`: an architecture review workflow inherited from `github.com/mattpocock/skills`. It keeps the upstream focus on deepening shallow modules through `Module`, `Interface`, `Seam`, `Adapter`, `Depth`, `Leverage`, and `Locality` vocabulary, then adds local guardrails:
+  - evidence gates requiring concrete source observations before a candidate is included
+  - Markdown-first output for quick reviews, with HTML report mode reserved for formal visual reviews
+  - confidence labels that separate code evidence, domain fit, testability gain, and implementation risk
+  - fallback domain-vocabulary inference when `CONTEXT.md` or ADRs are missing
 - `biomedical-clinical-strategy-consultant`: an evidence-first consulting skill for complex medical, pharmacological, and biomedical-research questions. It enforces quantified evidence, footnoted traceability, and paragraph-based output for clinical decision support or research analysis.
 - `context7-cli`: a broader ctx7 CLI skill covering documentation access, AI skill install/search/generation, and Context7 MCP setup.
 - `chart-visualization`: a chart-rendering workflow that selects a chart type from the user's data shape, fills the matching reference schema, and turns the result into a protocol-level HTTP request instead of depending on a local JavaScript runtime.
