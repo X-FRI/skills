@@ -44,6 +44,7 @@ AI 智能体的能力、技能和 MCP 服务的集中管理仓库。
 | [biomedical-clinical-strategy-consultant](./skills/biomedical-clinical-strategy-consultant/SKILL.md) | 生物医学与临床循证咨询 |
 | [chart-visualization](./skills/chart-visualization/SKILL.md) | 图表和地图渲染 |
 | [excalidraw-diagram-generator](./skills/excalidraw-diagram-generator/SKILL.md) | Excalidraw 图表生成 |
+| [high-fidelity-book-distillation](./skills/high-fidelity-book-distillation/SKILL.md) | 非虚构类书籍的高保真提炼、对比与实用框架提取 |
 | [esl-coder](./skills/esl-coder/SKILL.md) | 面向非母语开发者的英语结对编程辅导 |
 | [financial-investment-strategy-consultant](./skills/financial-investment-strategy-consultant/SKILL.md) | 金融与投资策略咨询 |
 | [minimax-docx](./skills/minimax-docx/SKILL.md) | DOCX 文档创建、编辑与排版 |

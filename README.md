@@ -44,6 +44,7 @@ Skills are reusable task-specific workflows stored in `skills/` directory. Each 
 | [biomedical-clinical-strategy-consultant](./skills/biomedical-clinical-strategy-consultant/SKILL.md) | Biomedical and clinical evidence-based consulting |
 | [chart-visualization](./skills/chart-visualization/SKILL.md) | Chart and map rendering |
 | [excalidraw-diagram-generator](./skills/excalidraw-diagram-generator/SKILL.md) | Excalidraw diagram generation |
+| [high-fidelity-book-distillation](./skills/high-fidelity-book-distillation/SKILL.md) | Non-fiction book distillation, comparison, and practical framework extraction |
 | [esl-coder](./skills/esl-coder/SKILL.md) | Pair programming with English tutoring for non-native speakers |
 | [financial-investment-strategy-consultant](./skills/financial-investment-strategy-consultant/SKILL.md) | Financial and investment strategy consulting |
 | [minimax-docx](./skills/minimax-docx/SKILL.md) | DOCX document creation, editing, and formatting |

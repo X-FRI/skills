@@ -13,6 +13,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 - `biomedical-clinical-strategy-consultant/`: evidence-first biomedical and clinical consulting skill for complex medical, pharmacological, and translational-research questions.
 - `context7-cli/`: ctx7 CLI reference for docs queries, skill management, and MCP setup.
 - `chart-visualization/`: protocol-first chart rendering skill that selects chart types, shapes render specs from references, and documents the HTTP request contract for chart and map generation.
+- `high-fidelity-book-distillation/`: turns non-fiction books into structured knowledge systems with argument maps, evidence evaluation, source pointers, and practical frameworks.
 - `ascii-art-diagrams/`: text-diagram guide that defaults to ASCII-safe flow and tree patterns, with Unicode box-drawing reserved for controlled rendering contexts.
 - `commit/`: creates repository-consistent Conventional Commits and auto-detects commit-message language from recent history.
 - `discovering-project-context/`: builds a fast, evidence-grounded project brief for unfamiliar repositories.
@@ -55,6 +56,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 ├── esl-coder/
 ├── excalidraw-diagram-generator/
 ├── financial-investment-strategy-consultant/
+├── high-fidelity-book-distillation/
 ├── find-docs/
 ├── find-skills/
 ├── gh-cli/
@@ -114,6 +116,7 @@ More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
 - Domain-specific: `gh-cli`, `ui-ux-pro-max`, `find-skills`, `excalidraw-diagram-generator`, `obsidian-daily-note-todo`, `deep-research`, `commit`, `asr-transcript-summary`, `biomedical-clinical-strategy-consultant`, `financial-investment-strategy-consultant`, `philosophy-humanities-cognitive-architect`, `minimax-docx`, `minimax-pdf`, `minimax-xlsx`, `pptx-generator`
 - Visualization: `chart-visualization`
 - Text diagrams: `ascii-art-diagrams`
+- Learning: `high-fidelity-book-distillation`
 - Writing-style: `clarity`, `caveman`, `esl-coder`
 
 ## Newly Added Skills
