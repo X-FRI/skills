@@ -1,6 +1,6 @@
 ---
 name: deep-research
-description: Use when the user explicitly asks for deep research / 深度研究 / 深入调研, or when they clearly need evidence-driven, multi-source research for a decision, report, due diligence, current-state analysis, or contested/high-stakes question. Produces validated synthesis with traceable citations.
+description: Use when the user explicitly asks for deep research / 深度研究 / 深入调研, or when they need evidence-driven, multi-source research for a decision, report, due diligence, current-state analysis, technical comparison, recommendation, or contested/high-stakes question.
 ---
 
 # Deep Research
@@ -21,6 +21,20 @@ Use this skill when one of these is true:
 Do not use this skill for quick definitions, simple factual lookups, ordinary coding questions, casual opinions, or cases where one authoritative source fully resolves the question.
 
 If the user's wording is ambiguous, infer the lightest mode that will still protect accuracy.
+
+## Execution Gate
+
+When this skill is activated, do not answer from memory alone.
+
+Use available research tools to gather fresh evidence unless the user-provided materials already contain enough source evidence to answer the question. At minimum:
+
+- Search or inspect multiple source families appropriate to the task.
+- Open and read the key sources used for central claims.
+- Prefer primary, official, original, or user-provided sources for the claims that drive the conclusion.
+- Record source date, data period, version, or effective date when it matters.
+- Treat snippets, search-result summaries, AI summaries, and repeated secondary articles as leads, not evidence.
+
+If tool access is unavailable, source access is blocked, or the user asks for an offline answer, state that limitation before giving conclusions and lower confidence accordingly.
 
 ## Choose A Mode
 
@@ -51,6 +65,18 @@ Minimum standard:
 - Cross-check important facts, numbers, dates, roles, and versions.
 - Treat material contradictions directly.
 - Final output includes findings, analysis, uncertainty, implications, and references.
+
+### Stop Conditions
+
+Stop collecting sources when the research question is answerable at the needed confidence level:
+
+- Central claims are supported by primary or strong sources where available.
+- Key numbers, dates, versions, roles, and definitions have been checked.
+- Obvious counterqueries or likely objections have been searched.
+- Material contradictions have been explained or marked unresolved.
+- Additional searching mostly returns duplicate secondary summaries.
+
+Do not stop just because the source count target was reached. Do not continue just to inflate the source count when the added sources are derivative or low value.
 
 ## Research Frame
 
@@ -108,6 +134,16 @@ Apply these priority rules when relevant:
 - News/current events: distinguish event date, publication date, update time, and what is confirmed versus alleged.
 - Company/product research: prefer official docs, pricing pages, filings, support docs, changelogs, status pages, and credible user/industry evidence.
 
+## High-Stakes Advice Boundaries
+
+For medical, legal, financial, compliance, or safety-sensitive topics:
+
+- Treat the output as research synthesis or educational analysis unless the user provides enough context for a bounded professional-style decision memo.
+- Do not present individualized diagnosis, treatment, legal advice, tax advice, investment allocation, or safety instructions as a definitive recommendation.
+- State the missing variables that would materially change the answer, such as jurisdiction, patient population, time horizon, risk tolerance, tax status, existing obligations, or operating environment.
+- Separate what the evidence says from what a professional decision would require.
+- Prefer conditional language: "the evidence supports X under these assumptions" rather than "you should do X."
+
 ## Search Workflow
 
 ### 1. Map
@@ -122,6 +158,8 @@ Apply these priority rules when relevant:
 - Open and read important sources beyond snippets.
 - Capture claim, source, date, evidence type, limitation, and relevance.
 - Seek counterevidence or criticism for major claims.
+
+For current, technical, legal, medical, financial, or policy topics, include at least one query aimed at primary sources and one query aimed at criticism, contradiction, limitations, or recent changes.
 
 ### 3. Validate
 
@@ -279,11 +317,13 @@ Use when alternatives are central.
 ## References
 ```
 
-Adapt headings freely. Do not force an academic paper shape when a memo, table, or short brief is more useful.
+Adapt headings freely. Do not force an academic paper shape when a memo, table, or short brief is more useful. Translate template headings into the user's language unless the user asks for a different language.
 
 ## Citation Rules
 
 Every key finding needs traceable support.
+
+Place citations close to the claims they support. Do not rely only on a final References list for central findings, numbers, dates, legal/policy conclusions, version claims, medical claims, financial claims, or recommendations.
 
 Use the citation style that is clearest for the context:
 
@@ -303,10 +343,13 @@ For each important source, include enough metadata to audit it:
 
 Do not overquote. Quote only short passages when wording matters; otherwise paraphrase and cite.
 
+If a claim is based on synthesis rather than a single source, cite the main sources and say that the conclusion is synthesized from them.
+
 ## Language And Math
 
 Match the user's language and expertise.
 
+- Translate output headings into the user's language unless preserving the English term improves precision.
 - Explain technical terms when the target audience needs it.
 - Skip basic definitions for expert audiences.
 - Use analogies only when they reduce cognitive load.
@@ -319,11 +362,14 @@ Before finalizing, verify:
 
 - The answer directly addresses the research question.
 - Scope, assumptions, and time window are clear.
+- Fresh evidence was gathered or a source-access limitation was disclosed.
 - Central claims have citations.
+- Citations are near the claims they support, not only in a final source list.
 - Source quality is proportional to the stakes.
 - Important dates, versions, numbers, and roles were checked.
 - Disagreement and uncertainty are visible.
 - Recommendations are tied to evidence and assumptions.
+- High-stakes advice is conditional and does not exceed the available context.
 - Access limits or weak evidence are disclosed.
 - The output format serves the user's purpose instead of showcasing process.
 
@@ -332,11 +378,14 @@ Before finalizing, verify:
 Avoid:
 
 - Turning deep research into a link dump.
+- Answering from memory after activating deep research.
 - Writing a long background section before answering.
 - Treating snippet text as if the source was read.
+- Citing sources only at the end while leaving key findings unsupported in context.
 - Counting repeated secondary reports as independent confirmation.
 - Ignoring primary sources.
 - Hiding uncertainty to sound decisive.
 - Using fast mode to bypass validation.
+- Giving individualized medical, legal, financial, compliance, or safety advice without the needed context.
 - Forgetting dates on current or versioned claims.
 - Forcing footnotes or academic headings where a brief or matrix would be clearer.
