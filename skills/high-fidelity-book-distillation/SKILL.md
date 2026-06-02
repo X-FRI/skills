@@ -1,6 +1,6 @@
 ---
 name: high-fidelity-book-distillation
-description: Distill non-fiction books into high-fidelity learning guides, argument maps, application manuals, reading routes, and knowledge-system notes through source-grounded synthesis and optional interactive reader calibration.
+description: "Use when the user asks for a non-fiction book summary, 高保真读书笔记, 拆书, 导读, argument map, chapter study guide, application manual, reading route, critical evaluation, multi-book synthesis, or interactive book-learning dialogue."
 ---
 
 # High-Fidelity Book Distillation
@@ -42,6 +42,14 @@ author's argument structure
 + absorption and output path
 ```
 
+## Default Interaction Model
+
+For ordinary book distillation, do not start by asking the user to choose among output modes such as overview, learning guide, action manual, reading route, or critical evaluation. These are compatible dimensions. Default to a comprehensive high-fidelity guide that includes the useful parts of all of them when the request calls for depth.
+
+Use output-clarification questions only when the user's request is genuinely ambiguous and a reasonable default would likely be wrong.
+
+Interactive learning is different from output calibration. Socratic questions should usually come after the first guide, as an optional deeper-learning follow-up. If the user explicitly asks for an interactive reading session, guided study, or "ask me questions" mode, enter the learning dialogue directly.
+
 ## Copyright and Source Boundaries
 
 Do not reproduce long passages from copyrighted books.
@@ -72,7 +80,7 @@ If the user asks for a guide that makes the original unnecessary, reframe the ta
 
 This skill is split across support files. Load only what the task needs:
 
-- `references/workflow.md`: use when executing any book distillation — contains the 20-step extraction workflow, interactive interview guides, book-type classification, and post-draft refinement.
+- `references/workflow.md`: use when executing any book distillation — contains the default comprehensive guide flow, optional Socratic learning dialogue, book-type classification, and post-draft refinement.
 - `references/output-templates.md`: use when drafting the final output — contains template structures for learning guides, chapter studies, comparative syntheses, application manuals, and reading routes.
 - `references/domain-rules.md`: use when distilling financial, investment, medical, legal, or safety-sensitive books.
 - `references/prompts.md`: use when offering reusable prompt templates to the user.
@@ -81,8 +89,8 @@ This skill is split across support files. Load only what the task needs:
 
 Before writing:
 
-1. Identify the reader's goal and interaction level using `references/workflow.md` (sections 1-6).
-2. Classify the book type and choose the output mode using `references/workflow.md` (sections 7-8) and `references/output-templates.md`.
+1. Identify the reader's goal and whether the user asked for ordinary guide mode or interactive learning dialogue using `references/workflow.md` (sections 1-6).
+2. Classify the book type and choose the output emphasis using `references/workflow.md` (sections 7-8) and `references/output-templates.md`.
 3. For finance, medical, or safety-sensitive books, load `references/domain-rules.md`.
 4. For user-facing prompt templates, load `references/prompts.md`.
 
@@ -146,7 +154,8 @@ Before finalizing the output, check:
 - Does it include a before / after shift when useful?
 - Does it help the reader place the book inside a broader knowledge system?
 - Does it include retention or output prompts when the user wants to remember or use the book?
-- If an interactive interview was used, does the final output reflect the user's stated motivation and use case?
+- For ordinary guide mode, did it avoid forcing the user to choose among compatible output dimensions?
+- If a learning dialogue was used, did the questions deepen the reader's understanding instead of asking about output preferences?
+- If a learning dialogue was offered after the guide, is it optional and focused on Socratic understanding, not another output menu?
 - Is the prose clear, ordinary, and precise?
 - Is the output useful without pretending to be the book itself?
-

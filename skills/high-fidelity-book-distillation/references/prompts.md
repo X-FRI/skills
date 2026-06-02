@@ -14,10 +14,16 @@ Turn the following book into a high-fidelity learning guide. Do not reproduce th
 Turn this book into an absorption-oriented guide. Focus on what changes for the reader after reading it. Include reading motivation, the misconception the book corrects, core concepts, argument map, insight moments, before/after shift, practical actions, knowledge-system placement, reading route, review prompts, and output prompts. Do not reproduce long passages.
 ```
 
-## Reader-Calibrated Distillation
+## Comprehensive Guide With Optional Learning Dialogue
 
 ```text
-Before summarizing the book, interview me briefly to understand why I am reading it, what problem I want to solve, what I already know, and what output I need. Then produce a reader-calibrated high-fidelity distillation with argument map, core concepts, evidence, caveats, application ideas, reading route, and output prompts.
+Turn this book into a comprehensive high-fidelity guide. Include the author's central argument, problem, argument map, core concepts, evidence, caveats, application ideas, reading route, retention prompts, and what still requires reading the original. After the guide, ask whether I want to continue with a Socratic learning dialogue. If so, ask one question at a time to deepen my understanding of the book's argument, concepts, evidence, limits, applications, and misuse risks.
+```
+
+## Socratic Learning Dialogue
+
+```text
+Guide me through this book with a Socratic learning dialogue. First give me a minimal book model: the problem the book addresses, the author's central claim, the key concept or distinction I must understand, the main limitation or misuse risk, and one original reading pointer if available. Then ask me one question at a time. Use my answers to identify what is right, incomplete, confused, or worth extending before asking the next question.
 ```
 
 ## Chapter-by-Chapter Study Guide

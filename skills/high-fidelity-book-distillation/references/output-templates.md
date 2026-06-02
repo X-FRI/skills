@@ -107,6 +107,10 @@ Tell the user which chapters, examples, arguments, or explanations are still wor
 ## Self-Test Questions
 
 Ask questions that reveal whether the user understood the book.
+
+## Optional Socratic Learning Follow-Up
+
+Invite the reader to continue with one-at-a-time learning questions. State the first question you would ask. The question should test understanding of the book's central argument, concepts, evidence, limits, application, or misuse risks. Do not ask the reader to choose another output format.
 ```
 
 ## Absorption-Oriented Book Guide
@@ -301,41 +305,32 @@ Use this structure when the user asks how to read the book efficiently:
 ## Notes to Take While Reading
 ```
 
-## Interactive Calibration Prompt
+## Optional Learning Dialogue Follow-Up
 
-Use this when the user wants a serious distillation but the reader's motivation is unclear:
+Use this after an ordinary comprehensive guide when the user may want deeper understanding:
 
 ```markdown
-Before I distill the book, I want to calibrate the output so it is useful to you:
+如果你想继续，我可以进入苏格拉底式深入学习：我会一次只问一个问题，根据你的回答继续追问，帮助你检查是否真正理解了这本书的中心论点、关键概念、证据强弱、应用边界和误用风险。
 
-1. Why are you reading this book now?
-   - Quick understanding
-   - Deep study
-   - Solving a concrete problem
-   - Writing or teaching
-   - Building a knowledge system
-   - Decision-making
-   - Other
+如果继续，我会先问这个问题：
 
-2. What is your current sticking point or question in this topic?
+[Book-specific Socratic question]
+```
 
-3. How familiar are you with this topic?
-   - New to it
-   - Know some concepts
-   - Have read similar books
-   - Have practiced it
-   - Need professional-level synthesis
+## Direct Learning Dialogue Opening
 
-4. What should the final output become?
-   - Structured overview
-   - High-fidelity learning guide
-   - Action manual
-   - Critical review
-   - Reading route
-   - Essay or teaching outline
-   - Knowledge-base note
+Use this when the user explicitly asks for interactive learning before a full guide:
 
-5. Should I mostly reconstruct the author's argument, or also critique it?
+```markdown
+我先给出一个最小书本模型，然后用一个问题开始。
 
-If you prefer not to answer, I can proceed with a balanced high-fidelity guide.
+- 这本书要解决的问题：
+- 作者的中心主张：
+- 必须先理解的关键概念或区分：
+- 主要张力、限制或误用风险：
+- 原书回读点：
+
+第一个问题：
+
+[Book-specific Socratic question]
 ```

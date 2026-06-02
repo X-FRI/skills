@@ -18,28 +18,25 @@ Common goals include:
 - Knowledge-base construction.
 - Writing a book note, essay, lecture, or teaching outline.
 
-Then identify the reader's motivation.
+Then infer the reader's motivation when possible:
 
-Ask or infer:
+- Why the reader is reading this book now.
+- What problem, decision, project, or curiosity the reader brings to the book.
+- What should change after reading: understanding, behavior, writing, teaching, decision-making, or knowledge-system building.
+- Which parts of the book are likely high-value for this reader.
+- Which parts can be skimmed or skipped.
 
-- Why is the reader reading this book now?
-- What problem, decision, project, or curiosity does the reader bring to the book?
-- What should change after reading: understanding, behavior, writing, teaching, decision-making, or knowledge-system building?
-- Which parts of the book are likely high-value for this reader?
-- Which parts can be skimmed or skipped?
+Do not begin ordinary guide requests by asking the user to choose among compatible output modes. A serious guide can include argument reconstruction, practical application, critical evaluation, reading route, retention prompts, and knowledge-system placement in the same answer.
 
-If the user has already provided enough context, do not ask unnecessary questions.
+If the user says "全部都要" or asks for depth, treat that as a request for the comprehensive guide, not as a reason to ask more output-preference questions.
 
-If the goal is unclear and the output depends on it, ask one concise clarification question.
+Ask one concise clarification question only when a reasonable default would likely be wrong. Useful clarification questions are about missing source or context, not mutually compatible output types:
 
-Useful questions:
+- "Should I rely only on the material you provided, or may I also use general knowledge about the book?"
+- "Is there a concrete situation, decision, or project you want me to keep in mind while interpreting the book?"
+- "Do you want an ordinary comprehensive guide first, or should we start directly with an interactive learning dialogue?"
 
-- "Do you want a quick brief, a detailed learning guide, or a practical action manual?"
-- "Should I focus on understanding the author's argument or applying the ideas?"
-- "Should this be a neutral summary or a critical evaluation?"
-- "Do you want source pointers by chapter, section, page, or Kindle location if available?"
-
-If the user asks a simple question like "这本书讲了什么", proceed with a balanced orientation brief and include the likely reading value.
+If the user asks a simple question like "这本书讲了什么", proceed with a balanced comprehensive orientation brief and include an optional Socratic follow-up at the end.
 
 ## 2. Inspect the Available Source
 
@@ -66,199 +63,146 @@ If the source is long, process it in batches:
 4. Produce the final guide.
 5. Add reading pointers, application tools, caveats, and review prompts.
 
-## 3. Use Interactive Distillation When It Improves the Output
+## 3. Separate Output Clarification From Learning Dialogue
 
-Use interactive distillation when the user's goal is vague but the book may be used for learning, writing, teaching, decision-making, behavior change, or knowledge-system construction.
+Output clarification is for deciding what to produce when the user's request is unclear. Learning dialogue is for helping the reader think more deeply about the book.
 
-The purpose of the interview is not to ask generic preferences. Ask only questions that reveal information the model cannot infer from the book itself and that will materially improve the output.
+Do not use learning dialogue to ask output-preference questions. Avoid questions where "全部都要" is a reasonable answer, such as:
 
-Ask what only the reader can answer:
+- "Do you want overview, application, critical evaluation, or reading route?"
+- "Should I focus on theory or practice?"
+- Detailed-versus-brief preference questions when the request already implies depth.
 
-- Why the reader is reading the book.
-- What problem, project, or decision the reader brings.
-- What the reader already knows or misunderstands.
-- What output the reader wants to create.
-- What kind of change the reader wants after reading.
-- Where the book should fit in the reader's knowledge system.
+For ordinary guide requests, proceed with the comprehensive default.
 
-Avoid vague questions such as:
+For explicit learning-dialogue requests, first provide a minimal book model, then ask one Socratic question.
 
-- "Do you want it detailed or brief?"
-- "What should I focus on?"
-- "Do you want theory or practice?"
+Minimal book model:
 
-Prefer concrete choices:
+- The problem the book is trying to solve.
+- The author's central claim.
+- The key concept or distinction the reader must understand.
+- The main tension, caveat, or possible misuse.
+- One original reading pointer if available.
 
-- "Are you reading this to quickly understand, apply, critique, write about, teach, or place in a knowledge system?"
-- "Is your main problem not knowing what to do, knowing but not doing, lacking examples, or lacking a framework?"
-- "Should the output become a learning guide, action manual, reading route, critical review, article outline, or knowledge-base note?"
+Then ask one question that requires the reader to reason, explain, test, apply, or challenge the idea.
 
-## 4. Choose the Interaction Level
+## 4. Choose the Interaction Path
 
-Do not over-question. Pick the lightest interaction that can improve the answer.
+Choose the lightest path that serves the request.
 
-### Level 1: Light Calibration
+### Ordinary Comprehensive Guide
 
-Use when the user asks a broad question like "What is this book about?"
+Use as the default for summary, guide, high-fidelity distillation, 拆书, 导读, 精读, or "这本书讲了什么" requests.
 
-Ask at most one question, or proceed with a default.
+Do not ask the user to choose among output modes first. Include the important dimensions together:
 
-Example:
+- Central argument.
+- Core concepts.
+- Evidence and examples.
+- Practical implications.
+- Limitations and misuse risks.
+- Reading route.
+- Retention or output prompts when useful.
+- What still requires the original book.
+
+### Post-Guide Socratic Follow-Up
+
+After the first guide, optionally invite deeper learning.
+
+Use this pattern:
 
 ```text
-Do you want a quick overview, a practical application version, or a critical evaluation? If you do not choose, I will give a balanced overview with core argument, key concepts, and what is worth reading in the original.
+如果你想继续，我可以进入苏格拉底式深入学习：我会一次只问一个问题，根据你的回答继续追问，帮助你检查是否真正理解了这本书的中心论点、关键概念、证据强弱、应用边界和误用风险。
+
+如果继续，我会先问这个问题：[book-specific question]
 ```
 
-### Level 2: Standard Interview
+Do not present a long follow-up menu unless the user asks for options.
 
-Use for most serious distillation requests.
+### Direct Learning Dialogue
 
-Ask 3-5 questions:
+Use when the user explicitly asks for an interactive reading session, guided study, Socratic questions, "问我问题", "带我读", "像 brainstorming 一样", or similar.
 
-```text
-Before I distill the book, I want to calibrate the output so it is useful to you:
+Flow:
 
-1. Why are you reading this book now?
-   - Quick understanding
-   - Deep study
-   - Solving a concrete problem
-   - Writing or teaching
-   - Building a knowledge system
-   - Decision-making
-   - Other
+1. Build the minimal book model.
+2. Ask one Socratic question.
+3. Wait for the user's answer.
+4. Respond by identifying what is right, incomplete, confused, or worth extending.
+5. Ask the next question only after responding to the user's answer.
 
-2. What is your current sticking point or question in this topic?
+Never ask several learning questions at once. The point is not to collect preferences. The point is to make the reader think.
 
-3. How familiar are you with this topic?
-   - New to it
-   - Know some concepts
-   - Have read similar books
-   - Have practiced it
-   - Need professional-level synthesis
+## 5. Ask Socratic Questions by Book Type
 
-4. What should the final output become?
-   - Structured overview
-   - High-fidelity learning guide
-   - Action manual
-   - Critical review
-   - Reading route
-   - Essay or teaching outline
-   - Knowledge-base note
-
-5. Should I mostly reconstruct the author's argument, or also critique it?
-```
-
-### Level 3: Deep Co-Creation Interview
-
-Use when the user wants a high-stakes, high-depth output such as a course, essay, research note, strategy memo, or theme-reading synthesis.
-
-Ask in batches, not all at once.
-
-Batch 1: Motivation
-
-- Why this book, and why now?
-- What do you hope will change after reading it?
-- What question must the summary answer for you?
-
-Batch 2: Prior Knowledge
-
-- What do you already know about this topic?
-- What similar books, authors, theories, or methods have you encountered?
-- What do you currently believe, doubt, or disagree with?
-
-Batch 3: Use Case
-
-- Will you use this for self-study, writing, teaching, decision-making, consulting, product work, or personal change?
-- What final artifact do you want: article, lecture, checklist, SOP, knowledge note, decision memo, or practice plan?
-
-Batch 4: Application
-
-- Is there a concrete scenario where you want to apply the book?
-- What would count as a useful action after reading?
-
-Batch 5: Evaluation
-
-- Do you want the book's claims checked for evidence quality, weak reasoning, outdated assumptions, or misuse risks?
-- Do you want adjacent books or follow-up reading?
-
-## 5. Ask Adaptive Questions by Book Type
-
-Ask different questions for different kinds of books.
+Ask different learning questions for different kinds of books. These are question patterns, not menus. Use one at a time.
 
 ### Practical or Method Books
 
-Ask:
+Use questions like:
 
-- What concrete problem do you want to solve with this book?
-- Are you stuck because you do not know what to do, or because you know but do not do it?
-- Should I turn the method into steps, a checklist, or a 30-day plan?
-- Do you want misuse cases and adaptation rules?
+- What exact problem does this method solve, and what problem does it leave unsolved?
+- What does the author assume about the person or environment using this method?
+- Where would this method fail if copied mechanically?
+- Which step is easiest to misunderstand in real use?
 
 ### Behavior-Driven Books
 
-Ask:
+Use questions like:
 
-- What behavior, habit, or decision pattern are you trying to understand or change?
-- What have you tried before?
-- Do you want explanation, behavior design, or practice plan?
+- What gap between knowing and doing does the book expose?
+- Which behavior does the author think is driven more by environment than intention?
+- Where might the reader mistake motivation for system design?
+- What would make the proposed behavior change collapse after the first week?
 
 ### Evidence-Driven Books
 
-Ask:
+Use questions like:
 
-- Are you reading for understanding or decision-making?
-- What decision, market, country, or context matters?
-- Should I separate facts, evidence, interpretation, and author opinion?
+- Which major claim is most dependent on evidence rather than interpretation?
+- Is this example functioning as proof, illustration, or persuasion?
+- What evidence would weaken the author's conclusion?
+- Which claim depends on country, era, market structure, culture, or measurement choices?
 
 ### Philosophy, Humanities, or Social Thought
 
-Ask:
+Use questions like:
 
-- What question are you bringing to this book?
-- Do you want concept explanation, argument reconstruction, intellectual history, or critical objections?
-- What is your current view on the issue?
+- What misconception, opponent, or inherited assumption is the author trying to correct?
+- Which distinction must the reader accept for the argument to work?
+- What would the strongest objection say?
+- What changes in how the reader understands self, society, morality, politics, culture, or meaning?
 
 ### Story-Driven Non-Fiction
 
-Ask:
+Use questions like:
 
-- Are you reading for factual narrative, lessons, character study, or decision patterns?
-- Should I separate transferable lessons from luck, timing, and context?
-- Do you want timeline, character map, or theme analysis?
+- What is this story supposed to prove, and what does it only illustrate?
+- Which lesson depends on luck, timing, personality, or survivorship?
+- What should the reader avoid overlearning from this case?
+- Where does the narrative create emotional conviction without enough generalizable evidence?
 
 ### Learning, Reading, or Writing Books
 
-Ask:
+Use questions like:
 
-- What is your current workflow?
-- Where does it break down?
-- Do you want the book turned into a process, template, practice plan, or knowledge-base structure?
+- What part of the reader's workflow does the book actually change?
+- Which practice is meant to improve memory, and which is meant to improve output?
+- Where would copying the system mechanically fail?
+- What would count as evidence that the method changed the reader's thinking rather than only their notes?
 
-## 6. Use Post-Draft Follow-Up
+## 6. Use Post-Guide Follow-Up
 
-After the first output, offer a second-pass refinement menu when useful.
-
-Example:
-
-```text
-If you want to continue, I can do one of these next:
-
-1. Compress this into a one-page memory version.
-2. Expand it into a high-fidelity learning guide.
-3. Convert it into an action manual.
-4. Turn it into a reading article outline.
-5. Build a teaching or presentation outline.
-6. Create review cards or self-test questions.
-7. Critique the author's argument.
-8. Place the book into a broader knowledge system.
-9. Create a reading route for the original book.
-```
+After the first output, prefer a Socratic learning invitation over another output menu.
 
 High-quality distillation often improves through this loop:
 
 ```text
-first synthesis -> reader feedback -> targeted second distillation
+first comprehensive guide -> optional Socratic question -> reader answer -> targeted correction or extension -> next question
 ```
+
+Use post-guide follow-up to deepen the reader's understanding, not to ask again what kind of artifact they want.
 
 ## 7. Classify the Book Type
 
@@ -374,9 +318,11 @@ Extract:
 - What can go wrong when the method is copied mechanically.
 - How the method connects to output, memory, knowledge systems, and action.
 
-## 8. Choose the Output Mode
+## 8. Choose the Output Emphasis
 
-Choose the output mode based on the user's request and likely need.
+Choose the output emphasis based on the user's request and likely need. This is an internal routing decision, not a user-facing menu.
+
+Do not ask the user to choose among these modes when they are compatible. For serious ordinary guide requests, default to the high-fidelity learning guide and include useful elements from application manual, critical evaluation, reading route, and retention tools.
 
 ### One-Page Brief
 
