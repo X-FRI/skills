@@ -16,6 +16,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 - `high-fidelity-book-distillation/`: turns non-fiction books into structured knowledge systems with argument maps, evidence evaluation, source pointers, and practical frameworks.
 - `ascii-art-diagrams/`: text-diagram guide that defaults to ASCII-safe flow and tree patterns, with Unicode box-drawing reserved for controlled rendering contexts.
 - `commit/`: creates repository-consistent Conventional Commits and auto-detects commit-message language from recent history.
+- `testing-value-guideline/`: test-quality guideline for writing, reviewing, pruning, and refactoring tests so they protect public contracts instead of implementation details.
 - `discovering-project-context/`: builds a fast, evidence-grounded project brief for unfamiliar repositories.
 - `deep-research/`: runs evidence-driven, multi-source research workflows with standard/fast modes, validation thresholds, domain evidence rules, and adaptable citation formats.
 - `esl-coder/`: pair-programmer and English-tutor skill for non-native speakers that adds concise phrasing correction and simple English explanations.
@@ -69,6 +70,7 @@ A local collection of reusable skills (`SKILL.md`) that provide task-specific wo
 ├── pptx-generator/
 ├── requirements-architect-analyzer/
 ├── technical-proposal-writing/
+├── testing-value-guideline/
 ├── superpowers/
 │   └── <skill-name>/SKILL.md
 ├── vendor/
@@ -108,7 +110,7 @@ More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
 ## Common Skill Categories
 
 - Process: `using-superpowers`, `brainstorming`, `writing-plans`, `executing-plans`
-- Quality: `test-driven-development`, `systematic-debugging`, `verification-before-completion`
+- Quality: `test-driven-development`, `testing-value-guideline`, `systematic-debugging`, `verification-before-completion`
 - Collaboration: `requesting-code-review`, `receiving-code-review`, `dispatching-parallel-agents`, `subagent-driven-development`
 - Delivery: `finishing-a-development-branch`, `using-git-worktrees`
 - Documentation and setup: `find-docs`, `context7-cli`, `technical-proposal-writing`
@@ -133,6 +135,7 @@ More detail lives in [SUPERPOWERS_SYNC.md](./SUPERPOWERS_SYNC.md).
   It also includes `chart-visualization/SKILL_MOBILE_VERSION.md`, a self-contained single-file variant for constrained or mobile runtimes.
 - `ascii-art-diagrams`: a text-diagram guide that treats plain ASCII as the default for portability and uses Unicode box-drawing only when box borders or visual grouping add real value in a known monospace-friendly environment.
 - `commit`: a commit-writing workflow that inspects the current diff, selects one dominant Conventional Commit type, and keeps commit-message language aligned with recent repository history unless the user overrides it.
+- `testing-value-guideline`: a framework-agnostic testing-value guide illustrated with Vitest examples. It focuses tests on public contracts, observable behavior, meaningful risks, strong assertions, real boundaries for mocks, and removal or rewriting of tests that only lock implementation details.
 - `discovering-project-context`: a repository discovery workflow that scans the highest-signal docs, manifests, runtime files, code directories, and recent git history to produce a fast but grounded project map.
 - `deep-research`: a research workflow for multi-source evidence collection, cross-checking, temporal validation, and citation-ready synthesis with standard and fast modes.
 - `esl-coder`: a bilingual pair-programming and English-tutoring skill for non-native speakers. It adds a single natural-English rewrite of the user's prompt, keeps technical explanations in simple English, and can switch between strict, bilingual, and explain modes.

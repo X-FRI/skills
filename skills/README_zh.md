@@ -15,6 +15,7 @@
 - `chart-visualization/`：面向协议的图表渲染 skill，用于选择图表类型、根据参考文档组织渲染参数，并说明图表与地图生成所需的 HTTP 请求契约。
 - `ascii-art-diagrams/`：文本图表规范 skill，默认使用 ASCII-safe 流程图和树结构写法，只在受控渲染环境下使用 Unicode 盒线字符。
 - `commit/`：用于生成并执行符合仓库约定的 Conventional Commit，并根据最近历史自动判定 commit message 语言。
+- `testing-value-guideline/`：测试价值规范 skill，用于编写、审查、删减和重构测试，让测试保护公开契约，而不是锁死实现细节。
 - `discovering-project-context/`：用于在陌生仓库中快速建立基于证据的项目全局认知。
 - `deep-research/`：用于执行多来源证据研究流程，支持标准/快速模式、验证阈值、领域证据规则与可调整的引用格式。
 - `esl-coder/`：面向非母语开发者的英语结对编程辅导 skill，提供简洁英文改写与简单英语解释。
@@ -66,6 +67,7 @@
 ├── pptx-generator/
 ├── requirements-architect-analyzer/
 ├── technical-proposal-writing/
+├── testing-value-guideline/
 ├── superpowers/
 │   └── <skill-name>/SKILL.md
 ├── vendor/
@@ -105,7 +107,7 @@
 ## 常见技能分类
 
 - 流程类：`using-superpowers`、`brainstorming`、`writing-plans`、`executing-plans`
-- 质量类：`test-driven-development`、`systematic-debugging`、`verification-before-completion`
+- 质量类：`test-driven-development`、`testing-value-guideline`、`systematic-debugging`、`verification-before-completion`
 - 协作类：`requesting-code-review`、`receiving-code-review`、`dispatching-parallel-agents`、`subagent-driven-development`
 - 交付类：`finishing-a-development-branch`、`using-git-worktrees`
 - 文档与配置类：`find-docs`、`context7-cli`、`technical-proposal-writing`
@@ -129,6 +131,7 @@
   同目录还提供 `chart-visualization/SKILL_MOBILE_VERSION.md`，用于受限环境或移动端的单文件分发版本。
 - `ascii-art-diagrams`：一个文本图表规范，会把纯 ASCII 作为默认方案以保证可移植性，只有在已知使用等宽友好环境且确实需要边框分组时，才使用 Unicode 盒线字符。
 - `commit`：一个提交写作工作流，会检查当前 diff，选择单一主导的 Conventional Commit 类型，并在用户未显式指定时根据最近的仓库提交历史自动判定 commit message 语言。
+- `testing-value-guideline`：一个框架无关的测试价值规范，使用 Vitest 作为示例说明。它要求测试聚焦公开契约、可观察行为、明确风险、强断言、真实外部边界上的 mock，并删除或重写只锁死实现细节的低价值测试。
 - `discovering-project-context`：一个项目发现工作流，会优先扫描高信号文档、项目清单、运行与交付配置、主代码目录以及最近 git 历史，快速生成有依据的项目地图。
 - `deep-research`：一个多来源证据研究工作流，覆盖证据收集、交叉验证、时效校验与可引用综合输出，并支持标准模式与快速模式。
 - `esl-coder`：一个面向非母语开发者的双语结对编程与英语辅导 skill。它会先给出一条更自然的英文表达，再用简单英语解释技术内容，并支持 `strict`、`bilingual`、`explain` 三种模式切换。
