@@ -40,6 +40,7 @@ AI 智能体的能力、技能和 MCP 服务的集中管理仓库。
 | [deep-research](./skills/deep-research/SKILL.md) | 带引用的多源研究 |
 | [commit](./skills/commit/SKILL.md) | Conventional Commit 创建 |
 | [find-docs](./skills/find-docs/SKILL.md) | 当前库文档查询 |
+| [frontend-design](./skills/frontend-design/SKILL.md) | 框架无关的前端设计与 UI 打磨 |
 | [improve-codebase-architecture](./skills/improve-codebase-architecture/SKILL.md) | 继承自 `github.com/mattpocock/skills` 的架构深化审查，并加入本地证据与输出模式改进 |
 | [biomedical-clinical-strategy-consultant](./skills/biomedical-clinical-strategy-consultant/SKILL.md) | 生物医学与临床循证咨询 |
 | [chart-visualization](./skills/chart-visualization/SKILL.md) | 图表和地图渲染 |

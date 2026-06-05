@@ -40,6 +40,7 @@ Skills are reusable task-specific workflows stored in `skills/` directory. Each 
 | [deep-research](./skills/deep-research/SKILL.md) | Multi-source research with citations |
 | [commit](./skills/commit/SKILL.md) | Conventional commit creation |
 | [find-docs](./skills/find-docs/SKILL.md) | Current library documentation lookup |
+| [frontend-design](./skills/frontend-design/SKILL.md) | Framework-neutral frontend design and UI polish |
 | [improve-codebase-architecture](./skills/improve-codebase-architecture/SKILL.md) | Architecture deepening review inherited from `github.com/mattpocock/skills`, with local evidence and output-mode improvements |
 | [biomedical-clinical-strategy-consultant](./skills/biomedical-clinical-strategy-consultant/SKILL.md) | Biomedical and clinical evidence-based consulting |
 | [chart-visualization](./skills/chart-visualization/SKILL.md) | Chart and map rendering |
